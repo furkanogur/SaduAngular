@@ -1,4 +1,3 @@
-import { ArrayType } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -11,6 +10,7 @@ export class AlertDialogComponent implements OnInit {
   dialogBaslik: string;
   dialogMesaj: string;
   dialogIslem: boolean;
+  
   constructor(
     public dialogRef: MatDialogRef<AlertDialogComponent>
   ) { }

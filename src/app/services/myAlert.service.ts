@@ -7,9 +7,9 @@ import { AlertDialogComponent } from '../components/dialogs/alert-dialog/alert-d
   providedIn: 'root'
 })
 export class MyAlertService {
-  private alertDialogRef: MatDialogRef<AlertDialogComponent>;
+  public dialogRef: MatDialogRef<AlertDialogComponent>;
   constructor(
-    private matDialog: MatDialog
+    public matDialog: MatDialog
   ) { }
 
   AlertUygula(s: Sonuc) {
@@ -20,15 +20,15 @@ export class MyAlertService {
       baslik = "Hata";
     }
 
-    this.alertDialogRef = this.matDialog.open(AlertDialogComponent, {
+    this.dialogRef = this.matDialog.open(AlertDialogComponent, {
       width: '300px'
     });
-    this.alertDialogRef.componentInstance.dialogBaslik = baslik;
-    this.alertDialogRef.componentInstance.dialogMesaj = s.mesaj;
-    this.alertDialogRef.componentInstance.dialogIslem = s.islem;
+    this.dialogRef.componentInstance.dialogBaslik = baslik;
+    this.dialogRef.componentInstance.dialogMesaj = s.mesaj;
+    this.dialogRef.componentInstance.dialogIslem = s.islem;
 
-    this.alertDialogRef.afterClosed().subscribe(d => {
-      this.alertDialogRef = null;
+    this.dialogRef.afterClosed().subscribe(d => {
+      this.dialogRef = null;
     });
   }
 
