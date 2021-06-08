@@ -1,0 +1,54 @@
+<div class="container">
+    <h1>Üyeler</h1>
+    <mat-form-field appearance="outline">
+        <input matInput placeholder="Aranacak Bir Değer Giriniz" (keyup)="UyeFiltrele($event)">
+    </mat-form-field>
+    <button mat-fab color="primary">
+      <mat-icon aria-label="label" matTooltip="Üye Ekle">person_add</mat-icon>
+    </button>
+    <p>&nbsp;</p>
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+        <ng-container matColumnDef="KullaniciAdi">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Kullanıcı Adı
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.KullaniciAdi}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Sifre">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Şifre
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.Sifre}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Email
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.Email}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="islemler">
+            <mat-header-cell *matHeaderCellDef> İşlemler
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit">
+
+                <button mat-icon-button matTooltip="Detaylar">
+                <mat-icon aria-label="label" >info</mat-icon>
+              </button>
+                <button mat-icon-button matTooltip="Üye Düzenle">
+                <mat-icon aria-label="label"  color="accent">manage_accounts</mat-icon>
+              </button>
+                <button mat-icon-button matTooltip="Üye Sil">
+                <mat-icon aria-label="label"  color="warn">person_remove</mat-icon>
+              </button>
+
+            </mat-cell>
+        </ng-container>
+
+
+
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+    </mat-paginator>
+
+</div>

@@ -1,3 +1,5 @@
+import { UrunComponent } from './components/Urun/Urun.component';
+import { UyeComponent } from './components/Uye/Uye.component';
 import { ApiService } from './services/api.service';
 
 import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
@@ -20,6 +22,8 @@ import { MainNavComponent } from './components/main-nav/main-nav.component';
     AppComponent,
     HomeComponent,
     MainNavComponent,
+    UyeComponent,
+    UrunComponent,
 
 
     //Dialoglar
