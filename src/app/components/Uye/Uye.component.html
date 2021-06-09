@@ -4,25 +4,35 @@
         <input matInput placeholder="Aranacak Bir Değer Giriniz" (keyup)="UyeFiltrele($event)">
     </mat-form-field>
     <button mat-fab color="primary">
-      <mat-icon aria-label="label" matTooltip="Üye Ekle">person_add</mat-icon>
+      <mat-icon aria-label="label" matTooltip="Üye Ekle" (click)="Ekle()">person_add</mat-icon>
     </button>
     <p>&nbsp;</p>
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
         <ng-container matColumnDef="KullaniciAdi">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Kullanıcı Adı
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit"> {{kayit.KullaniciAdi}} </mat-cell>
         </ng-container>
+
         <ng-container matColumnDef="Sifre">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Şifre
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit"> {{kayit.Sifre}} </mat-cell>
         </ng-container>
+
         <ng-container matColumnDef="Email">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Email
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit"> {{kayit.Email}} </mat-cell>
         </ng-container>
+
+        <ng-container matColumnDef="admin">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Admin
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.admin}} </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="islemler">
             <mat-header-cell *matHeaderCellDef> İşlemler
             </mat-header-cell>
@@ -31,10 +41,10 @@
                 <button mat-icon-button matTooltip="Detaylar">
                 <mat-icon aria-label="label" >info</mat-icon>
               </button>
-                <button mat-icon-button matTooltip="Üye Düzenle">
+                <button mat-icon-button matTooltip="Üye Düzenle" (click)="Duzenle(kayit)">
                 <mat-icon aria-label="label"  color="accent">manage_accounts</mat-icon>
               </button>
-                <button mat-icon-button matTooltip="Üye Sil">
+                <button mat-icon-button matTooltip="Üye Sil" (click)="Sil(kayit)">
                 <mat-icon aria-label="label"  color="warn">person_remove</mat-icon>
               </button>
 

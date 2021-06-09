@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
+import { UyeDialogComponent } from './components/dialogs/uye-dialog/uye-dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MainNavComponent } from './components/main-nav/main-nav.component';
     //Dialoglar
     AlertDialogComponent,
     ConfirmDialogComponent,
+    UyeDialogComponent
 
 
 
@@ -44,6 +46,7 @@ import { MainNavComponent } from './components/main-nav/main-nav.component';
   entryComponents: [
     AlertDialogComponent,
     ConfirmDialogComponent,
+    UyeDialogComponent,
 
   ],
   providers: [MyAlertService, ApiService],

@@ -3,4 +3,5 @@ export class Uye{
     KullaniciAdi:string;
     Sifre:string;
     Email:string;
+    admin:boolean;
 }
