@@ -1,9 +1,10 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-        <mat-toolbar>Menu</mat-toolbar>
+        <mat-toolbar> <img src="../../../assets/logo.png" alt="">&nbsp; İSİM</mat-toolbar>
         <mat-nav-list>
-            <a mat-list-item [routerLink]="['/uye']">Uyeler</a>
-            <a mat-list-item [routerLink]="['/urun']">Urunler</a>
+            <a mat-list-item>Anasayfa</a>
+            <a mat-list-item [routerLink]="['/uye']">Üyeler</a>
+            <a mat-list-item [routerLink]="['/urun']">Ürunler</a>
 
         </mat-nav-list>
 
