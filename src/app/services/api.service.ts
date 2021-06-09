@@ -1,3 +1,4 @@
+import { TedarikciUrunler } from './../models/TedarikciUrunler';
 import { Urunler } from './../models/Urunler';
 import { Uye } from './../models/Uye';
 
@@ -47,5 +48,22 @@ export class ApiService {
     }
     UrunSil(urunId:string){
       return this.http.delete(this.apiUrl+"urunsil/"+urunId);
+    }
+
+    //tedarikçi
+    TedarikUrunListe(uyeTedId:string){
+      return this.http.get(this.apiUrl+"tedarikuyeliste/"+uyeTedId);
+    }
+    UrunTedarikListe(urunTedId:string){
+      return this.http.get(this.apiUrl+"tedarikurunliste/"+urunTedId);
+    }
+    TedarikciEkle(kayit:TedarikciUrunler){
+      return this.http.post(this.apiUrl+"tedarikciekle",kayit)
+    }
+    TedarikUrunSil(tuId:string){
+      return this.http.delete(this.apiUrl+"tedarikurunsil/"+tuId)
+    }
+    TedarikUrunDuzenle(tedarik:TedarikciUrunler){
+      return this.http.put(this.apiUrl+"tedarikurunduzenle",tedarik);
     }
 }

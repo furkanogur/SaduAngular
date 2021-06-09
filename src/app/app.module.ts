@@ -1,3 +1,4 @@
+import { TedarikDialogComponent } from './components/dialogs/tedarik-dialog/tedarik-dialog.component';
 import { UrunComponent } from './components/Urun/Urun.component';
 import { UyeComponent } from './components/Uye/Uye.component';
 import { ApiService } from './services/api.service';
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { UyeDialogComponent } from './components/dialogs/uye-dialog/uye-dialog.component';
+import { UrunListeComponent } from './components/urunListe/urunListe.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +27,14 @@ import { UyeDialogComponent } from './components/dialogs/uye-dialog/uye-dialog.c
     MainNavComponent,
     UyeComponent,
     UrunComponent,
+    UrunListeComponent,
 
 
     //Dialoglar
     AlertDialogComponent,
     ConfirmDialogComponent,
-    UyeDialogComponent
+    UyeDialogComponent,
+    TedarikDialogComponent,
 
 
 
@@ -47,6 +51,7 @@ import { UyeDialogComponent } from './components/dialogs/uye-dialog/uye-dialog.c
     AlertDialogComponent,
     ConfirmDialogComponent,
     UyeDialogComponent,
+    TedarikDialogComponent
 
   ],
   providers: [MyAlertService, ApiService],

@@ -4,4 +4,5 @@ export class Uye{
     Sifre:string;
     Email:string;
     admin:boolean;
+    UyeUrunSayisi:number;
 }

@@ -20,7 +20,7 @@ export class UyeComponent implements OnInit {
   dialogRef: MatDialogRef<UyeDialogComponent>
   confirmDialogRef:MatDialogRef<ConfirmDialogComponent>
   dataSource: any;
-  displayedColumns = ['KullaniciAdi', 'Sifre', 'Email', 'admin', 'islemler']
+  displayedColumns = ['KullaniciAdi', 'Sifre', 'Email','UyeUrunSayisi', 'admin', 'islemler']
   //sıralama
   @ViewChild(MatSort) sort: MatSort;
   //sayfalama

@@ -3,6 +3,7 @@ import { UrunComponent } from './components/Urun/Urun.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { UrunListeComponent } from './components/urunListe/urunListe.component';
 
 
 const routes: Routes = [
@@ -17,8 +18,8 @@ const routes: Routes = [
     path: 'urun',
     component: UrunComponent
   },{
-    path: '',
-    component: HomeComponent
+    path: 'urunlistele/:uyeId',
+    component: UrunListeComponent
   },
 ];
 

@@ -27,6 +27,12 @@
             <mat-cell *matCellDef="let kayit"> {{kayit.Email}} </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="UyeUrunSayisi">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Üyenin Ürünleri
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.UyeUrunSayisi}} </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="admin">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Admin
             </mat-header-cell>
@@ -38,7 +44,7 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit">
 
-                <button mat-icon-button matTooltip="Detaylar">
+                <button mat-icon-button matTooltip="Detaylar" [routerLink]="['/urunlistele',kayit.uyeId]">
                 <mat-icon aria-label="label" >info</mat-icon>
               </button>
                 <button mat-icon-button matTooltip="Üye Düzenle" (click)="Duzenle(kayit)">

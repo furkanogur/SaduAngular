@@ -4,4 +4,5 @@ export class Urunler{
     Aciklama: string;
     Aktiflik: true;
     Fiyat: number;
+    UrunUyeSayisi:number;
 }
