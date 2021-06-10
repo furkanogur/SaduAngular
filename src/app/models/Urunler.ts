@@ -2,7 +2,8 @@ export class Urunler{
     urunId: string;
     Adi: string;
     Aciklama: string;
-    Aktiflik: true;
+    Aktiflik: boolean;
     Fiyat: number;
     UrunUyeSayisi:number;
+    UyeId:string;
 }

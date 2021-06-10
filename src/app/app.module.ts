@@ -1,3 +1,4 @@
+import { IletisimDialogComponent } from './components/dialogs/iletisim-dialog/iletisim-dialog.component';
 import { TedarikDialogComponent } from './components/dialogs/tedarik-dialog/tedarik-dialog.component';
 import { UrunComponent } from './components/Urun/Urun.component';
 import { UyeComponent } from './components/Uye/Uye.component';
@@ -35,7 +36,7 @@ import { UrunListeComponent } from './components/urunListe/urunListe.component';
     ConfirmDialogComponent,
     UyeDialogComponent,
     TedarikDialogComponent,
-
+    IletisimDialogComponent
 
 
   ],
@@ -51,7 +52,8 @@ import { UrunListeComponent } from './components/urunListe/urunListe.component';
     AlertDialogComponent,
     ConfirmDialogComponent,
     UyeDialogComponent,
-    TedarikDialogComponent
+    TedarikDialogComponent,
+    IletisimDialogComponent
 
   ],
   providers: [MyAlertService, ApiService],

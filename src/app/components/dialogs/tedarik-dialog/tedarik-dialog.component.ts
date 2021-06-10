@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TedarikciUrunler } from 'src/app/models/TedarikciUrunler';
+import { Urunler } from 'src/app/models/Urunler';
 import { ApiService } from 'src/app/services/api.service';
 import { MyAlertService } from 'src/app/services/myAlert.service';
 
@@ -12,7 +13,7 @@ import { MyAlertService } from 'src/app/services/myAlert.service';
 })
 export class TedarikDialogComponent implements OnInit {
   dialogBaslik:string; 
-  yeniKayit:TedarikciUrunler;
+  yeniKayit:Urunler;
   islem:string;
   frm:FormGroup;
   constructor(
@@ -26,12 +27,12 @@ export class TedarikDialogComponent implements OnInit {
   ) {this.islem=data.islem;
     this.yeniKayit=data.kayit;
     if(this.islem=='ekle'){
-        this.dialogBaslik="Üye Ekle"
+        this.dialogBaslik="Urun Ekle"
 
     }
 
     if(this.islem=='duzenle'){
-      this.dialogBaslik="Üye Düzenle"
+      this.dialogBaslik="Urun Düzenle"
 
   }
 this.frm=this.FormOlustur();
@@ -44,6 +45,9 @@ this.frm=this.FormOlustur();
   FormOlustur(){
     return this.frmBuild.group({
       Aktiflik:[this.yeniKayit.Aktiflik],
+      Adi:[this.yeniKayit.Adi],
+      Aciklama:[this.yeniKayit.Aciklama],
+      Fiyat:[this.yeniKayit.Fiyat],
     
     })
   }

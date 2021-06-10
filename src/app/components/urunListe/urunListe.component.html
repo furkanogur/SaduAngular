@@ -7,6 +7,7 @@
     <button mat-fab color="primary" [routerLink]="['/uye']">
     <mat-icon aria-label="label">arrow_back</mat-icon>
   </button>
+    <p></p>
 
 
 
@@ -14,37 +15,34 @@
         <ng-container matColumnDef="Adi">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Ürünün Adı
             </mat-header-cell>
-            <mat-cell *matCellDef="let kayit"> {{kayit.urunBilgi.Adi}} </mat-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.Adi}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="Aciklama">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Açıklama
             </mat-header-cell>
-            <mat-cell *matCellDef="let kayit"> {{kayit.urunBilgi.Aciklama}} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="Aktiflik">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Aktiflik
-            </mat-header-cell>
-            <mat-cell *matCellDef="let kayit"> {{kayit.urunBilgi.Aktiflik}} </mat-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.Aciklama}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="Fiyat">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Fiyat
             </mat-header-cell>
-            <mat-cell *matCellDef="let kayit"> {{kayit.urunBilgi.Fiyat}} </mat-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.Fiyat | currency: '₺'}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Aktiflik">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Aktiflik
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.Aktiflik}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="UrunUyeSayisi">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Urun Uye Sayisi
-            </mat-header-cell>
-            <mat-cell *matCellDef="let kayit"> {{kayit.urunBilgi.UrunUyeSayisi}} </mat-cell>
-        </ng-container>
 
         <ng-container matColumnDef="islemler">
             <mat-header-cell *matHeaderCellDef> İşlemler
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit">
+                <button mat-icon-button color="accent">
+                    <mat-icon aria-label="label" (click)="Duzenle(kayit)">edit</mat-icon>
+                  </button>
                 <button mat-icon-button color="warn">
           <mat-icon aria-label="label" (click)="Sil(kayit)">delete</mat-icon>
         </button>
@@ -59,5 +57,36 @@
     </mat-table>
     <mat-paginator [pageSizeOptions]="[5,10,25,100]" showFirstLastButtons>
     </mat-paginator>
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <p>&nbsp;</p>
+            <mat-card>
+                <mat-card-header>
+                    <div mat-card-avatar>(RESİM BELKİ)</div>
+                    <mat-card-title>İletişim Bilgileri</mat-card-title>
+                    <mat-card-subtitle>{{secUye?.Email}} </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p><b>İsim : </b > {{secIletisim?.Ad}}</p>
+                    <p><b>Soy isim : </b>{{secIletisim?.Soyad}}</p>
+                    <p><b>Adres : </b>{{secIletisim?.Adres}}</p>
+                    <p><b>telefon : </b>{{secIletisim?.Telefon}}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-icon-button color="primary">
+                        <mat-icon aria-label="label" (click)="IletisimEkle(secUye?.uyeId)">add</mat-icon>
+                      </button>&nbsp;
+                    <button mat-icon-button color="accent">
+                        <mat-icon aria-label="label" (click)="iletisimDuzenle(secIletisim)">edit</mat-icon>
+                      </button>&nbsp;
+                    <button mat-icon-button color="warn">
+                        <mat-icon aria-label="label" >delete</mat-icon>
+                      </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
 
 </div>

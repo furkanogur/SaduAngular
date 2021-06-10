@@ -1,3 +1,4 @@
+import { Iletisim } from './../models/Iletisim';
 import { TedarikciUrunler } from './../models/TedarikciUrunler';
 import { Urunler } from './../models/Urunler';
 import { Uye } from './../models/Uye';
@@ -53,17 +54,38 @@ export class ApiService {
     //tedarikçi
     TedarikUrunListe(uyeTedId:string){
       return this.http.get(this.apiUrl+"tedarikuyeliste/"+uyeTedId);
+   }
+   
+    // UrunTedarikListe(urunTedId:string){
+    //   return this.http.get(this.apiUrl+"tedarikurunliste/"+urunTedId);
+    // }
+    // TedarikciEkle(kayit:TedarikciUrunler){
+    //   return this.http.post(this.apiUrl+"tedarikciekle",kayit)
+    // }
+    // TedarikUrunSil(tuId:string){
+    //   return this.http.delete(this.apiUrl+"tedarikurunsil/"+tuId)
+    // }
+    // TedarikUrunDuzenle(urun:Urunler){
+    //   return this.http.put(this.apiUrl+"urunduzenle",urun);
+    // }
+
+
+
+    //iletisim
+
+    IletisimListe(){
+      return this.http.get(this.apiUrl+"iletisimliste");
     }
-    UrunTedarikListe(urunTedId:string){
-      return this.http.get(this.apiUrl+"tedarikurunliste/"+urunTedId);
+    IletisimById(uyeId:string){
+      return this.http.get(this.apiUrl+"iletisimbyid/"+uyeId);
     }
-    TedarikciEkle(kayit:TedarikciUrunler){
-      return this.http.post(this.apiUrl+"tedarikciekle",kayit)
+    IletisimEkle(iletisim:Iletisim){
+      return this.http.post(this.apiUrl+"iletisimekle",iletisim);
     }
-    TedarikUrunSil(tuId:string){
-      return this.http.delete(this.apiUrl+"tedarikurunsil/"+tuId)
+    IletisimDuzenle(iletisim:Iletisim){
+      return this.http.put(this.apiUrl+"iletisimduzenle",iletisim);
     }
-    TedarikUrunDuzenle(tedarik:TedarikciUrunler){
-      return this.http.put(this.apiUrl+"tedarikurunduzenle",tedarik);
+    IletisimSil(uyeId:string){
+      return this.http.delete(this.apiUrl+"iletisimsil/"+uyeId);
     }
 }

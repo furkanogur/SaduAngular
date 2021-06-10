@@ -9,41 +9,41 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./uye-dialog.component.css']
 })
 export class UyeDialogComponent implements OnInit {
-dialogBaslik:string; 
-yeniKayit:Uye;
-islem:string;
-frm:FormGroup;
+  dialogBaslik: string;
+  yeniKayit: Uye;
+  islem: string;
+  frm: FormGroup;
   constructor(
-    public dialogRef:MatDialogRef<UyeDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data:any,
-    public frmBuild:FormBuilder,
+    public dialogRef: MatDialogRef<UyeDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public frmBuild: FormBuilder,
 
 
   ) {
-    this.islem=data.islem;
-    this.yeniKayit=data.kayit;
-    if(this.islem=='ekle'){
-        this.dialogBaslik="Üye Ekle"
+    this.islem = data.islem;
+    this.yeniKayit = data.kayit;
+    if (this.islem == 'ekle') {
+      this.dialogBaslik = "Üye Ekle"
 
     }
 
-    if(this.islem=='duzenle'){
-      this.dialogBaslik="Üye Düzenle"
+    if (this.islem == 'duzenle') {
+      this.dialogBaslik = "Üye Düzenle"
 
+    }
+    this.frm = this.FormOlustur();
   }
-this.frm=this.FormOlustur();
-   }
 
   ngOnInit() {
 
   }
 
-  FormOlustur(){
+  FormOlustur() {
     return this.frmBuild.group({
-      KullaniciAdi:[this.yeniKayit.KullaniciAdi],
-      Sifre:[this.yeniKayit.Sifre],
-      Email:[this.yeniKayit.Email],
-      admin:[this.yeniKayit.admin],
+      KullaniciAdi: [this.yeniKayit.KullaniciAdi],
+      Sifre: [this.yeniKayit.Sifre],
+      Email: [this.yeniKayit.Email],
+      admin: [this.yeniKayit.admin],
     })
   }
 
