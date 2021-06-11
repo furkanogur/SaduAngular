@@ -1,3 +1,4 @@
+import { UyeListeComponent } from './components/uyeListe/uyeListe.component';
 import { UyeComponent } from './components/Uye/Uye.component';
 import { UrunComponent } from './components/Urun/Urun.component';
 import { HomeComponent } from './components/home/home.component';
@@ -20,6 +21,10 @@ const routes: Routes = [
   },{
     path: 'urunlistele/:uyeId',
     component: UrunListeComponent
+  },
+  {
+    path: 'uyelistele/:urunId',
+    component: UyeListeComponent
   },
 ];
 

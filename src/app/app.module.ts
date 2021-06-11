@@ -1,3 +1,4 @@
+import { UyeListeComponent } from './components/uyeListe/uyeListe.component';
 import { UrunfotoDialogComponent } from './components/dialogs/urunfoto-dialog/urunfoto-dialog.component';
 import { FotoyukleDialogComponent } from './components/dialogs/fotoyukle-dialog/fotoyukle-dialog.component';
 import { IletisimDialogComponent } from './components/dialogs/iletisim-dialog/iletisim-dialog.component';
@@ -31,6 +32,7 @@ import { UrunListeComponent } from './components/urunListe/urunListe.component';
     UyeComponent,
     UrunComponent,
     UrunListeComponent,
+    UyeListeComponent,
 
 
     //Dialoglar
