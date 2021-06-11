@@ -6,7 +6,7 @@
 
     <button mat-fab color="primary" [routerLink]="['/uye']">
     <mat-icon aria-label="label">arrow_back</mat-icon>
-  </button>
+  </button>&nbsp;
     <p></p>
 
 
@@ -44,7 +44,7 @@
                     <mat-icon aria-label="label" (click)="Duzenle(kayit)">edit</mat-icon>
                   </button>
                 <button mat-icon-button color="warn">
-          <mat-icon aria-label="label" (click)="Sil(kayit)">delete</mat-icon>
+          <mat-icon aria-label="label" (click)="UrunSil(kayit)">delete</mat-icon>
         </button>
             </mat-cell>
 
@@ -82,7 +82,7 @@
                         <mat-icon aria-label="label" (click)="iletisimDuzenle(secIletisim)">edit</mat-icon>
                       </button>&nbsp;
                     <button mat-icon-button color="warn">
-                        <mat-icon aria-label="label" >delete</mat-icon>
+                        <mat-icon aria-label="label" (click)="iletisimSil(secIletisim)">delete</mat-icon>
                       </button>
                 </mat-card-actions>
             </mat-card>

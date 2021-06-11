@@ -24,6 +24,7 @@ export class UrunListeComponent implements OnInit {
   uyeId: string;
   urunler: Urunler[];
   secUye: Uye;
+  secUrun:Urunler;
 
   secIletisim:Iletisim;
   dataSource: any;
@@ -49,6 +50,7 @@ export class UrunListeComponent implements OnInit {
         this.UyeGetir();
         this.KayitListele();
         this.IletisimGetir();
+        console.log(this.secUrun)
       }
     })
   }
@@ -169,7 +171,22 @@ export class UrunListeComponent implements OnInit {
   }
 
 
-  Sil(kayit: Urunler) {
+  iletisimSil(kayit: Iletisim) {
+    this.confirmDialogRef = this.matDialog.open(ConfirmDialogComponent, {
+      width: '400px'
+    });
+    this.confirmDialogRef.componentInstance.dialogMesaj = kayit.Ad +" "+ kayit.Soyad + " Adlı Kişinin İletişim Bilgileri Silinecektir Onaylıyor Musunuz?";
+    this.confirmDialogRef.afterClosed().subscribe(d => {
+      if (d) {
+        this.apiServis.IletisimSil(kayit.iletisimId).subscribe((s: Sonuc) => {
+          console.log(s);
+          this.IletisimGetir();
+        });
+      }
+    });
+  }
+
+  UrunSil(kayit: Urunler) {
     this.confirmDialogRef = this.matDialog.open(ConfirmDialogComponent, {
       width: '400px'
     });
@@ -183,5 +200,6 @@ export class UrunListeComponent implements OnInit {
       }
     });
   }
+
 
 }
