@@ -1,3 +1,5 @@
+import { UrunfotoDialogComponent } from './components/dialogs/urunfoto-dialog/urunfoto-dialog.component';
+import { FotoyukleDialogComponent } from './components/dialogs/fotoyukle-dialog/fotoyukle-dialog.component';
 import { IletisimDialogComponent } from './components/dialogs/iletisim-dialog/iletisim-dialog.component';
 import { TedarikDialogComponent } from './components/dialogs/tedarik-dialog/tedarik-dialog.component';
 import { UrunComponent } from './components/Urun/Urun.component';
@@ -36,7 +38,9 @@ import { UrunListeComponent } from './components/urunListe/urunListe.component';
     ConfirmDialogComponent,
     UyeDialogComponent,
     TedarikDialogComponent,
-    IletisimDialogComponent
+    IletisimDialogComponent,
+    FotoyukleDialogComponent,
+    UrunfotoDialogComponent,
 
 
   ],
@@ -53,7 +57,10 @@ import { UrunListeComponent } from './components/urunListe/urunListe.component';
     ConfirmDialogComponent,
     UyeDialogComponent,
     TedarikDialogComponent,
-    IletisimDialogComponent
+    IletisimDialogComponent,
+    IletisimDialogComponent,
+    UrunfotoDialogComponent
+
 
   ],
   providers: [MyAlertService, ApiService],

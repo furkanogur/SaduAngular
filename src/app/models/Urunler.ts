@@ -6,4 +6,5 @@ export class Urunler{
     Fiyat: number;
     UrunUyeSayisi:number;
     UyeId:string;
+    UrunFoto:string;
 }

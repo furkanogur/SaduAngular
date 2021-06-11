@@ -1,3 +1,5 @@
+import { UrunFoto } from './../models/UrunFoto';
+import { UyeFoto } from './../models/UyeFoto';
 import { Iletisim } from './../models/Iletisim';
 import { TedarikciUrunler } from './../models/TedarikciUrunler';
 import { Urunler } from './../models/Urunler';
@@ -11,6 +13,7 @@ import { Injectable } from '@angular/core';
 })
 export class ApiService {
   apiUrl = "https://localhost:44384/api/";
+  siteUrl = "https://localhost:44384/";
 
   constructor(
     public http: HttpClient
@@ -26,6 +29,9 @@ export class ApiService {
     }
     UyeEkle(uye:Uye){
       return this.http.post(this.apiUrl+"uyeekle",uye);
+    }
+    UyeFotoGuncelle(uyefoto:UyeFoto){
+      return this.http.post(this.apiUrl+"uyefotoguncelle",uyefoto);
     }
     UyeDuzenle(uye:Uye){
       return this.http.put(this.apiUrl+"uyeduzenle",uye);
@@ -49,6 +55,10 @@ export class ApiService {
     }
     UrunSil(urunId:string){
       return this.http.delete(this.apiUrl+"urunsil/"+urunId);
+    }
+
+    UrunFotoGuncelle(urunfoto:UrunFoto){
+      return this.http.post(this.apiUrl+"urunfotoguncelle",urunfoto);
     }
 
     //tedarikçi

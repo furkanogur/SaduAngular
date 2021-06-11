@@ -1,3 +1,5 @@
+import { UyeFoto } from './../../models/UyeFoto';
+import { FotoyukleDialogComponent } from './../dialogs/fotoyukle-dialog/fotoyukle-dialog.component';
 import { ConfirmDialogComponent } from './../dialogs/confirm-dialog/confirm-dialog.component';
 import { MyAlertService } from './../../services/myAlert.service';
 import { Sonuc } from './../../models/Sonuc';
@@ -9,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { UyeDialogComponent } from '../dialogs/uye-dialog/uye-dialog.component';
+import { Iletisim } from 'src/app/models/Iletisim';
 
 @Component({
   selector: 'app-Uye',
@@ -16,11 +19,14 @@ import { UyeDialogComponent } from '../dialogs/uye-dialog/uye-dialog.component';
   styleUrls: ['./Uye.component.scss']
 })
 export class UyeComponent implements OnInit {
+  uyeId: string;
   uyeler: Uye[];
+  secIletisim: Iletisim;
   dialogRef: MatDialogRef<UyeDialogComponent>
-  confirmDialogRef:MatDialogRef<ConfirmDialogComponent>
+  confirmDialogRef: MatDialogRef<ConfirmDialogComponent>
+  fotoDialogRef: MatDialogRef<FotoyukleDialogComponent>
   dataSource: any;
-  displayedColumns = ['KullaniciAdi', 'Sifre', 'Email','UyeUrunSayisi', 'admin', 'islemler']
+  displayedColumns = ['UyeFoto', 'KullaniciAdi', 'Sifre', 'Email', 'UyeUrunSayisi', 'admin', 'islemler']
   //sıralama
   @ViewChild(MatSort) sort: MatSort;
   //sayfalama
@@ -47,6 +53,12 @@ export class UyeComponent implements OnInit {
     });
   }
 
+  IletisimGetir() {
+    this.apiServis.IletisimById(this.uyeId).subscribe((d: Iletisim) => {
+      this.secIletisim = d;
+    })
+  }
+
   UyeFiltrele(e) {
     var deger = e.target.value;
     this.dataSource.filter = deger.trim().toLowerCase();
@@ -67,6 +79,7 @@ export class UyeComponent implements OnInit {
     });
     this.dialogRef.afterClosed().subscribe(d => {
       if (d) {
+        d.UyeFoto= "profil.jpg"
         this.apiServis.UyeEkle(d).subscribe((s: Sonuc) => {
           this.alert.AlertUygula(s);
           if (s.islem) {
@@ -105,17 +118,17 @@ export class UyeComponent implements OnInit {
 
   }
 
-  Sil(kayit:Uye){
-    this.confirmDialogRef=this.matDialog.open(ConfirmDialogComponent,{
-      width:'500px',
+  Sil(kayit: Uye) {
+    this.confirmDialogRef = this.matDialog.open(ConfirmDialogComponent, {
+      width: '500px',
 
     })
 
-    this.confirmDialogRef.componentInstance.dialogMesaj=kayit.Email+"  - Emaili de belirtilen üye silinecektir Onaylıyor musunuz?"
+    this.confirmDialogRef.componentInstance.dialogMesaj = kayit.Email + "  - Emaili de belirtilen üye silinecektir Onaylıyor musunuz?"
 
-    this.confirmDialogRef.afterClosed().subscribe(d=>{
-      if(d){
-        this.apiServis.UyeSil(kayit.uyeId).subscribe((s:Sonuc)=>{
+    this.confirmDialogRef.afterClosed().subscribe(d => {
+      if (d) {
+        this.apiServis.UyeSil(kayit.uyeId).subscribe((s: Sonuc) => {
           this.alert.AlertUygula(s);
           this.UyeListele();
         })
@@ -124,6 +137,24 @@ export class UyeComponent implements OnInit {
 
   }
 
-  
+  FotoGuncelle(kayit: Uye) {
+    this.fotoDialogRef = this.matDialog.open(FotoyukleDialogComponent, {
+      width: '400',
+      data: kayit
+    });
+    this.fotoDialogRef.afterClosed().subscribe(d => {
+      if (d) {
+        d.uyeId = kayit.uyeId;
+        this.apiServis.UyeFotoGuncelle(d).subscribe((s: Sonuc) => {
+          this.alert.AlertUygula(s);
+          if (s.islem) {
+            this.UyeListele();
+          }
+        })
+      }
+    })
+  }
+
+
 
 }

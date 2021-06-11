@@ -9,6 +9,16 @@
     <p>&nbsp;</p>
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
+        <ng-container matColumnDef="UyeFoto">
+            <mat-header-cell *matHeaderCellDef> Fotoğraf
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit">
+
+                <img [src]="apiServis.siteUrl+'/Dosyalar/'+kayit.UyeFoto" alt="" style="width: 100px;" matTooltip="Fotoğrafı Güncellemek İçin Tıklayınız..." (click)="FotoGuncelle(kayit)">
+
+            </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="KullaniciAdi">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Kullanıcı Adı
             </mat-header-cell>

@@ -5,4 +5,5 @@ export class Uye{
     Email:string;
     admin:boolean;
     UyeUrunSayisi:number;
+    UyeFoto:string;
 }

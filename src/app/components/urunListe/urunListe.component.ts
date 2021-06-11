@@ -28,7 +28,7 @@ export class UrunListeComponent implements OnInit {
 
   secIletisim:Iletisim;
   dataSource: any;
-  displayedColumns = ['Adi', 'Aciklama','Fiyat','Aktiflik', 'islemler']
+  displayedColumns = ['UrunFoto','Adi', 'Aciklama','Fiyat','Aktiflik', 'islemler']
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   dialogRef: MatDialogRef<TedarikDialogComponent>

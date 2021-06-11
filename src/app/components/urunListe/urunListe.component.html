@@ -18,6 +18,16 @@
             <mat-cell *matCellDef="let kayit"> {{kayit.Adi}} </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="UrunFoto">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Fotoğraf
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit">
+
+                <img [src]="apiServis.siteUrl+'/Dosyalar/'+kayit.UrunFoto" alt="" style="width: 100px;">
+
+            </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="Aciklama">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Açıklama
             </mat-header-cell>
