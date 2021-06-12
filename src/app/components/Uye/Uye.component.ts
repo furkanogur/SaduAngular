@@ -46,9 +46,7 @@ export class UyeComponent implements OnInit {
     this.apiServis.UyeListe().subscribe((d: Uye[]) => {
       this.uyeler = d;
       this.dataSource = new MatTableDataSource(this.uyeler);
-      //sıralama
       this.dataSource.sort = this.sort;
-      //sayfalama
       this.dataSource.paginator = this.paginator;
     });
   }

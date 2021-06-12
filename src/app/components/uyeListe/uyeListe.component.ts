@@ -65,18 +65,4 @@ export class UyeListeComponent implements OnInit {
     })
   }
 
-  // UyeListele() {
-  //     this.apiServis.UyeById(this.uyeId).subscribe((d: Uye) => {
-  //       this.secUye = d;
-  //       console.log(this.secUye.KullaniciAdi)
-  //     });
-  //   }
-
-  // IletisimGetir() {
-  //     this.apiServis.IletisimById(this.uyeId).subscribe((d: Iletisim) => {
-  //       this.secIletisim = d;
-  //       console.log(this.secIletisim.Ad)
-  //     })
-  //   }
-
 }

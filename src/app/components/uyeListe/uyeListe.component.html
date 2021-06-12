@@ -1,29 +1,31 @@
 <div class="container">
     <h1>{{secUrun?.Adi}}</h1>
     <button mat-fab color="primary" [routerLink]="['/urun']">
-  <mat-icon aria-label="label">arrow_back</mat-icon>
-</button>&nbsp;
+        <mat-icon aria-label="label">arrow_back</mat-icon>
+    </button>&nbsp;
     <p></p>
 
 
 
     <mat-card class="example-card">
         <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
+
             <mat-card-title>{{secUrun?.Adi}}</mat-card-title>
             <mat-card-subtitle>{{secUye?.KullaniciAdi}}</mat-card-subtitle>
         </mat-card-header>
         <img [src]="apiServis.siteUrl+'/Dosyalar/'+secUrun?.UrunFoto" alt="">
         <mat-card-content>
             <p></p>
+            <h3>Açıklama</h3>
             <p>
                 {{secUrun?.Aciklama}}
             </p>
+            <p>Fiyat : {{secUrun?.Fiyat |currency : '₺'}}</p>
             <p></p>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
+            <button mat-raised-button color="accent">Satın Al</button>
+            <button mat-raised-button color="warn">Beğen (!! Test Aşamasında !!)</button>
         </mat-card-actions>
     </mat-card>
 
@@ -38,22 +40,11 @@
                     <mat-card-subtitle>{{secUye?.Email}} </mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
-                    <p><b>İsim : </b > {{secIletisim?.Ad}}</p>
+                    <p><b>İsim : </b> {{secIletisim?.Ad}}</p>
                     <p><b>Soy isim : </b>{{secIletisim?.Soyad}}</p>
                     <p><b>Adres : </b>{{secIletisim?.Adres}}</p>
                     <p><b>telefon : </b>{{secIletisim?.Telefon}}</p>
                 </mat-card-content>
-                <mat-card-actions>
-                    <button mat-icon-button color="primary">
-                        <mat-icon aria-label="label">add</mat-icon>
-                      </button>&nbsp;
-                    <button mat-icon-button color="accent">
-                        <mat-icon aria-label="label">edit</mat-icon>
-                      </button>&nbsp;
-                    <button mat-icon-button color="warn">
-                        <mat-icon aria-label="label">delete</mat-icon>
-                      </button>
-                </mat-card-actions>
             </mat-card>
         </div>
     </div>

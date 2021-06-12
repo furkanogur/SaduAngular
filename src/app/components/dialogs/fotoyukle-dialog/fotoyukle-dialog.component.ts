@@ -20,9 +20,11 @@ export class FotoyukleDialogComponent implements OnInit {
     public apiServis: ApiService
   ) {
     this.secUye = this.data
+    console.log(this.secUye)
   }
 
   ngOnInit() {
+    console.log(this.secUye)
   }
   FotoSec(e) {
     var fotolar = e.target.files;
