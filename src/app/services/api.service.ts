@@ -5,7 +5,7 @@ import { TedarikciUrunler } from './../models/TedarikciUrunler';
 import { Urunler } from './../models/Urunler';
 import { Uye } from './../models/Uye';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -98,4 +98,33 @@ export class ApiService {
     IletisimSil(uyeId:string){
       return this.http.delete(this.apiUrl+"iletisimsil/"+uyeId);
     }
+
+
+    //Oturum
+
+  tokenAl(email: string, parola: string) {
+    var data = "username=" + email + "&password=" + parola + "&grant_type=password";
+    var reqHeader = new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded" });
+    return this.http.post(this.apiUrl + "/token", data, { headers: reqHeader })
+  }
+
+  oturumKontrol() {
+    if (localStorage.getItem("token")) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  oturumKontrolAdmin() {
+
+    if (localStorage.getItem("uyeYetkileri") == '["Admin"]') {
+
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 }

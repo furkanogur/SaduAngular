@@ -1,3 +1,5 @@
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 import { UyeListeComponent } from './components/uyeListe/uyeListe.component';
 import { UyeComponent } from './components/Uye/Uye.component';
 import { UrunComponent } from './components/Urun/Urun.component';
@@ -25,6 +27,14 @@ const routes: Routes = [
   {
     path: 'uyelistele/:urunId',
     component: UyeListeComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
 ];
 

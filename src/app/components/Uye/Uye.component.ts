@@ -19,6 +19,7 @@ import { Iletisim } from 'src/app/models/Iletisim';
   styleUrls: ['./Uye.component.scss']
 })
 export class UyeComponent implements OnInit {
+  //UyeId: string = localStorage.getItem("uyeId");
   uyeId: string;
   uyeler: Uye[];
   secIletisim: Iletisim;

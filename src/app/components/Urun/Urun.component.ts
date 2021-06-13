@@ -105,6 +105,21 @@ export class UrunComponent implements OnInit {
 
   }
 
+  UrunSil(kayit: Urunler) {
+    this.confirmDialogRef = this.matDialog.open(ConfirmDialogComponent, {
+      width: '400px'
+    });
+    this.confirmDialogRef.componentInstance.dialogMesaj = kayit.Adi + " Ürünü Silinecektir Onaylıyor Musunuz?";
+    this.confirmDialogRef.afterClosed().subscribe(d => {
+      if (d) {
+        this.apiServis.UrunSil(kayit.urunId).subscribe((s: Sonuc) => {
+          console.log(s);
+          this.UrunListele();
+        });
+      }
+    });
+  }
+
 
   FotoGuncelle(kayit: Urunler,) {
     this.fotoDialogRef = this.matDialog.open(UrunfotoDialogComponent, {

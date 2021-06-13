@@ -1,0 +1,13 @@
+<div class="container">
+    <h2>Oturum Aç</h2>
+    <mat-form-field appearance="outline" style="width: 50%;">
+        <mat-label>E-Mail</mat-label>
+        <input matInput placeholder="E-Mail" type="text" #email>
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 50%;">
+        <mat-label>Parola</mat-label>
+        <input matInput placeholder="Parola" type="password" #parola>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="OturumAc(email.value,parola.value)">Oturum Aç</button>&nbsp;
+    <button mat-raised-button color="primary" [routerLink]="'/register'">Üye Ol</button>
+</div>

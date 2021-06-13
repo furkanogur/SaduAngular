@@ -1,0 +1,22 @@
+<div class="container">
+    <h2>Üye Ol</h2>
+
+</div>
+<form [formGroup]="frmGroup">
+    <mat-form-field>
+        <mat-label>Kullanıcı Adı</mat-label>
+        <input matInput placeholder="Kullanıcı Adı" type="text" formControlName="KullaniciAdi">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>E-Mail</mat-label>
+        <input matInput placeholder="E-Mail" type="text" formControlName="Email" #email>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Şifre</mat-label>
+        <input matInput placeholder="Şifre" type="text" formControlName="Sifre" #parola>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="KayitOl(frmGroup.value)">Kayıt Ol</button>&nbsp;
+</form>

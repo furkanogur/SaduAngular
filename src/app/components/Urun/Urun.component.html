@@ -5,7 +5,7 @@
         <input matInput placeholder="Aranacak Bir Değer Giriniz" (keyup)="UrunFiltrele($event)">
     </mat-form-field>
     <button mat-fab color="primary">
-      <mat-icon aria-label="label" matTooltip="Ürün Ekle" (click)="UrunEkle()">person_add</mat-icon>
+      <mat-icon aria-label="label" matTooltip="Ürün Ekle" (click)="UrunEkle()">add_shopping_cart</mat-icon><P>&nbsp;</P>
     </button>
     <mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="UrunFoto">
@@ -38,7 +38,7 @@
                 <button mat-icon-button color="accent" matTooltip="Ürün Düzenle">
                     <mat-icon aria-label="label" (click)="UrunDuzenle(kayit)">edit</mat-icon>
                 </button>
-                <button mat-icon-button color="warn" matTooltip="Ürün Sil">
+                <button mat-icon-button color="warn" matTooltip="Ürün Sil" (click)="UrunSil(kayit)">
                     <mat-icon aria-label="label">delete</mat-icon>
                 </button>
             </mat-cell>

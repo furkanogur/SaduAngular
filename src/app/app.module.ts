@@ -1,3 +1,5 @@
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 import { UrunDialogComponent } from './components/dialogs/urun-dialog/urun-dialog.component';
 import { UyeListeComponent } from './components/uyeListe/uyeListe.component';
 import { UrunfotoDialogComponent } from './components/dialogs/urunfoto-dialog/urunfoto-dialog.component';
@@ -34,6 +36,8 @@ import { UrunListeComponent } from './components/urunListe/urunListe.component';
     UrunComponent,
     UrunListeComponent,
     UyeListeComponent,
+    LoginComponent,
+    RegisterComponent,
 
 
     //Dialoglar
