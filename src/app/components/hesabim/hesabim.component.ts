@@ -60,6 +60,7 @@ export class HesabimComponent implements OnInit {
         this.UyeGetir();
         this.KayitListele();
         this.IletisimGetir();
+        this.KategoriListele();
       }
     })
   }
@@ -167,8 +168,17 @@ export class HesabimComponent implements OnInit {
 
   }
 
-  UyeUrunEkle() {
 
+
+
+  KategoriListele() {
+    this.apiServis.KategoriListe().subscribe((d:any= Kategoriler) => {
+      this.kategoriler = d;
+    })
+  }
+
+
+  UyeUrunEkle() {
     this.apiServis.KategoriListe().subscribe((d: any = Kategoriler) => {
       this.kategoriler = d;
     })

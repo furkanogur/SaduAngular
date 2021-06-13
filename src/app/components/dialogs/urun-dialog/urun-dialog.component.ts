@@ -10,6 +10,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./urun-dialog.component.scss']
 })
 export class UrunDialogComponent implements OnInit {
+  
   dialogBaslik: string;
   katbilgi:Kategoriler;
   uyeId:string;
@@ -22,10 +23,9 @@ export class UrunDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public frmBuild: FormBuilder,
   ) { 
-
+    this.katbilgi = data.katbilgi;
     this.islem = data.islem;
     this.yeniKayit = data.kayit;
-    this.katbilgi = data.katbilgi;
     this.yeniKatKayit=data.yeniKatKayit;
 
     if (this.islem == 'ekle') {
