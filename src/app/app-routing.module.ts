@@ -1,3 +1,4 @@
+import { HesabimComponent } from './components/hesabim/hesabim.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { UyeListeComponent } from './components/uyeListe/uyeListe.component';
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'hesabim',
+    component: HesabimComponent
   },
 ];
 

@@ -25,12 +25,12 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("uyeadi", d.uyeadi);
       localStorage.setItem("uyeYetkileri", d.uyeYetkileri);
       
-      // if (localStorage.getItem("uyeYetkileri") == '["Admin"]') {
-      //   location.href = ("/urunlistele");
-      // }
-      // else {
-      //   location.href = ("/");
-      // }
+      if (localStorage.getItem("uyeYetkileri") == '["Admin"]') {
+        location.href = ("/");
+      }
+      else {
+        location.href = ("/");
+      }
     }, err => {
       var s: Sonuc = new Sonuc();
       s.islem = false;

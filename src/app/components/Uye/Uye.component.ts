@@ -95,7 +95,8 @@ export class UyeComponent implements OnInit {
       width: '400px',
       data: {
         kayit: kayit,
-        islem: "duzenle"
+        islem: "duzenle",
+        hesabim:true
       }
     });
 

@@ -10,6 +10,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class UrunDialogComponent implements OnInit {
   dialogBaslik: string;
+  uyeId:string;
   yeniKayit: Urunler;
   islem: string;
   frm: FormGroup;
@@ -23,12 +24,10 @@ export class UrunDialogComponent implements OnInit {
     this.yeniKayit = data.kayit;
     if (this.islem == 'ekle') {
       this.dialogBaslik = "Üye Ekle"
-
     }
 
     if (this.islem == 'duzenle') {
       this.dialogBaslik = "Üye Düzenle"
-
     }
     this.frm = this.FormOlustur();
 
@@ -41,6 +40,7 @@ export class UrunDialogComponent implements OnInit {
     return this.frmBuild.group({
       Adi: [this.yeniKayit.Adi],
       Aciklama: [this.yeniKayit.Aciklama],
+      UyeId: [this.yeniKayit.UyeId],
       Aktiflik: [this.yeniKayit.Aktiflik],
       Fiyat: [this.yeniKayit.Fiyat],
     })

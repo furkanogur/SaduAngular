@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
 
 
   constructor(
-    public servis: ApiService,
+    public apiServis: ApiService,
     public frmbuilder: FormBuilder
   ) {
     this.frmGroup = new FormGroup({
@@ -29,18 +29,11 @@ export class RegisterComponent implements OnInit {
 
   }
   OturumAc(email: string, parola: string) {
-    this.servis.tokenAl(email, parola).subscribe((d: any) => {
+    this.apiServis.tokenAl(email, parola).subscribe((d: any) => {
       localStorage.setItem("token", d.access_token);
       localStorage.setItem("uyeId", d.uyeId);
       localStorage.setItem("uyeadi", d.uyeadi);
       localStorage.setItem("uyeYetkileri", d.uyeYetkileri);
-
-      // if (localStorage.getItem("uyeYetkileri") == '["Admin"]') {
-      //   location.href = ("/urunlistele");
-      // }
-      // else {
-      //   location.href = ("/");
-      // }
       location.href=("/");
     });
   }
@@ -53,7 +46,7 @@ export class RegisterComponent implements OnInit {
     uye.admin = false
     uye.UyeFoto= "profil.jpg"
     if (uye) {
-      this.servis.UyeEkle(uye).subscribe((s: Sonuc) => {
+      this.apiServis.UyeEkle(uye).subscribe((s: Sonuc) => {
         console.log(s);
         this.OturumAc(uye.Email, uye.Sifre)
       });

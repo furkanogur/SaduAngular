@@ -1,3 +1,4 @@
+import { HesabimComponent } from './components/hesabim/hesabim.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { UrunDialogComponent } from './components/dialogs/urun-dialog/urun-dialog.component';
@@ -38,6 +39,7 @@ import { UrunListeComponent } from './components/urunListe/urunListe.component';
     UyeListeComponent,
     LoginComponent,
     RegisterComponent,
+    HesabimComponent,
 
 
     //Dialoglar

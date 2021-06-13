@@ -1,27 +1,30 @@
-import { IletisimDialogComponent } from './../dialogs/iletisim-dialog/iletisim-dialog.component';
-import { Iletisim } from './../../models/Iletisim';
-import { TedarikDialogComponent } from './../dialogs/tedarik-dialog/tedarik-dialog.component';
-import { Urunler } from './../../models/Urunler';
+import { UyeDialogComponent } from './../dialogs/uye-dialog/uye-dialog.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Uye } from './../../models/Uye';
-import { ApiService } from './../../services/api.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { Iletisim } from 'src/app/models/Iletisim';
 import { Sonuc } from 'src/app/models/Sonuc';
+import { Urunler } from 'src/app/models/Urunler';
+import { Uye } from 'src/app/models/Uye';
+import { ApiService } from 'src/app/services/api.service';
 import { MyAlertService } from 'src/app/services/myAlert.service';
 import { ConfirmDialogComponent } from '../dialogs/confirm-dialog/confirm-dialog.component';
+import { IletisimDialogComponent } from '../dialogs/iletisim-dialog/iletisim-dialog.component';
+import { TedarikDialogComponent } from '../dialogs/tedarik-dialog/tedarik-dialog.component';
+import { UrunDialogComponent } from '../dialogs/urun-dialog/urun-dialog.component';
+import { UrunfotoDialogComponent } from '../dialogs/urunfoto-dialog/urunfoto-dialog.component';
 
 @Component({
-  selector: 'app-urunListe',
-  templateUrl: './urunListe.component.html',
-  styleUrls: ['./urunListe.component.css']
+  selector: 'app-hesabim',
+  templateUrl: './hesabim.component.html',
+  styleUrls: ['./hesabim.component.scss']
 })
-export class UrunListeComponent implements OnInit {
+export class HesabimComponent implements OnInit {
   kayitlar: Urunler[];
-  uyeId: string;
+  UyeId: string = localStorage.getItem("uyeId");
   urunler: Urunler[];
   secUye: Uye;
   secUrun:Urunler;
@@ -32,6 +35,9 @@ export class UrunListeComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   dialogRef: MatDialogRef<TedarikDialogComponent>
+  urunDialogRef: MatDialogRef<UrunDialogComponent>
+  uyeDialogRef: MatDialogRef<UyeDialogComponent>
+  fotoDialogRef: MatDialogRef<UrunfotoDialogComponent>;
   confirmDialogRef: MatDialogRef<ConfirmDialogComponent>
   dialogIletisimRef: MatDialogRef<IletisimDialogComponent>
   constructor(
@@ -46,7 +52,6 @@ export class UrunListeComponent implements OnInit {
     this.UrunListele();
     this.route.params.subscribe(p => {
       if (p) {
-        this.uyeId = p.uyeId;
         this.UyeGetir();
         this.KayitListele();
         this.IletisimGetir();
@@ -54,32 +59,62 @@ export class UrunListeComponent implements OnInit {
     })
   }
 
+  UrunFiltrele(e) {
+    var deger = e.target.value;
+    this.dataSource.filter = deger.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+
+  }
+
   UyeGetir() {
-    this.apiServis.UyeById(this.uyeId).subscribe((d: Uye) => {
+    this.apiServis.UyeById(this.UyeId).subscribe((d: Uye) => {
       this.secUye = d;
     })
   }
 
   IletisimGetir() {
-    this.apiServis.IletisimById(this.uyeId).subscribe((d: Iletisim) => {
+    this.apiServis.IletisimById(this.UyeId).subscribe((d: Iletisim) => {
       this.secIletisim = d;
     })
   }
 
-  //tedarik
+  //tedarik spesifik üyenin ürünleri
   KayitListele() {
-      this.apiServis.TedarikUrunListe(this.uyeId).subscribe((d: Urunler[]) => {
+      this.apiServis.TedarikUrunListe(this.UyeId).subscribe((d: Urunler[]) => {
       this.kayitlar = d;
       this.dataSource = new MatTableDataSource(d);
       this.dataSource.sort = this.sort
       this.dataSource.paginator = this.paginator
     })
   }
-
+// tüm ürünler
   UrunListele() {
     this.apiServis.UrunListe().subscribe((d: Urunler[]) => {
       this.urunler = d;
+      this.dataSource = new MatTableDataSource(this.urunler);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
     });
+  }
+
+  FotoGuncelle(kayit: Urunler,) {
+    this.fotoDialogRef = this.matDialog.open(UrunfotoDialogComponent, {
+      width: '400',
+      data:kayit
+    });
+    this.fotoDialogRef.afterClosed().subscribe(d => {
+      if (d) {
+        d.urunId = kayit.urunId;
+        this.apiServis.UrunFotoGuncelle(d).subscribe((s: Sonuc) => {
+          this.alert.AlertUygula(s);
+          if (s.islem) {
+            this.KayitListele();
+          }
+        })
+      }
+    })
   }
 
   Duzenle(kayit: Urunler) {
@@ -101,12 +136,35 @@ export class UrunListeComponent implements OnInit {
         this.apiServis.UrunDuzenle(kayit).subscribe((s: Sonuc) => {
           this.alert.AlertUygula(s);
           if (s.islem) {
-            this.UrunListele();
+            this.KayitListele();
           }
         });
       }
     });
 
+  }
+
+  UyeUrunEkle() {
+    var yeniKayit: Urunler = new Urunler();
+    this.urunDialogRef = this.matDialog.open(UrunDialogComponent, {
+      width: '400px',
+      data: {
+        kayit: yeniKayit,
+        islem: "ekle"
+      }
+    });
+    this.urunDialogRef.afterClosed().subscribe(d => {
+      if (d) {
+        d.UrunFoto = "urun.jpg"
+        d.UyeId = this.UyeId
+        this.apiServis.UrunEkle(d).subscribe((s: Sonuc) => {
+          this.alert.AlertUygula(s);
+          if (s.islem) {
+            this.KayitListele();
+          }
+        });
+      }
+    });
   }
 
 
@@ -200,5 +258,32 @@ export class UrunListeComponent implements OnInit {
     });
   }
 
+
+  UyeDuzenle(kayit: Uye) {
+    this.uyeDialogRef = this.matDialog.open(UyeDialogComponent, {
+      width: '400px',
+      data: {
+        kayit: kayit,
+        islem: "Hesabimduzenle",
+        hesabim:false
+      }
+    });
+
+    this.uyeDialogRef.afterClosed().subscribe(d => {
+      if (d) {
+
+        kayit.KullaniciAdi = d.KullaniciAdi
+        kayit.Sifre = d.Sifre
+
+        this.apiServis.UyeDuzenle(kayit).subscribe((s: Sonuc) => {
+          this.alert.AlertUygula(s);
+          if (s.islem) {
+            this.KayitListele();
+          }
+        });
+      }
+    });
+
+  }
 
 }

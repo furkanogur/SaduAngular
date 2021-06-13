@@ -11,11 +11,11 @@
             <mat-label>Şifre</mat-label>
             <input matInput placeholder="Şifre" formControlName="Sifre" name="Sifre" required type="text">
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" *ngIf="hesabim">
             <mat-label>Email</mat-label>
             <input matInput placeholder="Email" formControlName="Email" name="Email" required type="text">
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" *ngIf="hesabim">
             <mat-label>Admin</mat-label>
             <input matInput placeholder="Admin" formControlName="admin" name="admin" type="text">
         </mat-form-field>

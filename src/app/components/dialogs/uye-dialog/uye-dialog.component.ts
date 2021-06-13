@@ -1,3 +1,4 @@
+import { HesabimComponent } from './../../hesabim/hesabim.component';
 import { Uye } from './../../../models/Uye';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -10,6 +11,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class UyeDialogComponent implements OnInit {
   dialogBaslik: string;
+  hesabim:boolean;
   yeniKayit: Uye;
   islem: string;
   frm: FormGroup;
@@ -22,6 +24,7 @@ export class UyeDialogComponent implements OnInit {
   ) {
     this.islem = data.islem;
     this.yeniKayit = data.kayit;
+    this.hesabim = data.hesabim;
     if (this.islem == 'ekle') {
       this.dialogBaslik = "Üye Ekle"
 
@@ -30,6 +33,11 @@ export class UyeDialogComponent implements OnInit {
     if (this.islem == 'duzenle') {
       this.dialogBaslik = "Üye Düzenle"
 
+    }
+    if (this.islem == 'Hesabimduzenle') {
+      this.dialogBaslik = "Üye Düzenle"
+      this.hesabim = data.hesabim
+      
     }
     this.frm = this.FormOlustur();
   }

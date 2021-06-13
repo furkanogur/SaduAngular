@@ -17,6 +17,7 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./Urun.component.scss']
 })
 export class UrunComponent implements OnInit {
+  UyeId: string = localStorage.getItem("uyeId");
   urunler: Urunler[];
   urunId:string;
   dataSource: any;
@@ -29,10 +30,12 @@ export class UrunComponent implements OnInit {
   constructor(
     public apiServis: ApiService,
     public matDialog: MatDialog,
-    public alert: MyAlertService
+    public alert: MyAlertService,
+    
   ) { }
 
   ngOnInit() {
+    this.UyeId = localStorage.getItem("uyeId");
     this.UrunListele();
   }
 
@@ -53,8 +56,32 @@ export class UrunComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     })
   }
-//Ürün Ekle Sıkıntılı çükü üyeid lazım üyelik gelene kadar hata verecek
-  UrunEkle() {
+//Ürün Ekle Sıkıntılı çükü üyeid lazım üyelik gelene kadar hata verecek [admin için olabilir bu]
+  // UrunEkle() {
+  //   var yeniKayit: Urunler = new Urunler();
+  //   this.dialogRef = this.matDialog.open(UrunDialogComponent, {
+  //     width: '400px',
+  //     data: {
+  //       kayit: yeniKayit,
+  //       islem: "ekle"
+  //     }
+  //   });
+  //   this.dialogRef.afterClosed().subscribe(d => {
+  //     if (d) {
+  //       d.UrunFoto = "urun.jpg"
+  //       d.UyeId = "02df47e6-693b-4a08-afd7-3ffa6a707b96"
+  //       this.apiServis.UrunEkle(d).subscribe((s: Sonuc) => {
+  //         this.alert.AlertUygula(s);
+  //         if (s.islem) {
+  //           this.UrunListele();
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
+
+//üye ürün ekle olabilir test !!!
+  UyeUrunEkle() {
     var yeniKayit: Urunler = new Urunler();
     this.dialogRef = this.matDialog.open(UrunDialogComponent, {
       width: '400px',
@@ -66,7 +93,7 @@ export class UrunComponent implements OnInit {
     this.dialogRef.afterClosed().subscribe(d => {
       if (d) {
         d.UrunFoto = "urun.jpg"
-        d.UyeId = "02df47e6-693b-4a08-afd7-3ffa6a707b96"
+        d.UyeId = this.UyeId
         this.apiServis.UrunEkle(d).subscribe((s: Sonuc) => {
           this.alert.AlertUygula(s);
           if (s.islem) {
