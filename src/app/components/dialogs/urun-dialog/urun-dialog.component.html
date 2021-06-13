@@ -12,6 +12,12 @@
             <input matInput placeholder="Aciklama" formControlName="Aciklama" name="Aciklama" required type="text">
         </mat-form-field>
         <mat-form-field appearance="outline">
+            <mat-select formControlName="kategoriId" name="kategoriId">
+                <mat-option [value]="Kategori.kategoriId" name="kategoriId" *ngFor="let Kategori of katbilgi">{{Kategori.KatAdi}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
             <mat-label>Fiyat</mat-label>
             <input matInput placeholder="Fiyat" formControlName="Fiyat" name="Fiyat" required type="text">
         </mat-form-field>

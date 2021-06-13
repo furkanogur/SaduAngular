@@ -38,7 +38,6 @@ export class KategoriDialogComponent implements OnInit {
    }
 
   ngOnInit() {
-    console.log(this.ustKategori)
   }
 
   FormOlustur() {

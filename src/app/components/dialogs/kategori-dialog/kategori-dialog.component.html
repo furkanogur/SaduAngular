@@ -7,10 +7,6 @@
             <mat-label>Kategori Adı</mat-label>
             <input matInput placeholder="KatAdi" formControlName="KatAdi" name="KatAdi" required type="text">
         </mat-form-field>
-        <!-- <mat-form-field appearance="outline">
-            <mat-label>Üst Kategori Id</mat-label>
-            <input matInput placeholder="ustKategoriId" formControlName="ustKategoriId" name="ustKategoriId" type="text">
-        </mat-form-field> -->
         <mat-form-field appearance="outline">
             <mat-select formControlName="ustKategoriId" name="ustKategoriId">
                 <mat-option [value]="Kategori.UstKategoriBilgi?.kategoriId" *ngFor="let Kategori of ustKategori">{{Kategori.UstKategoriBilgi?.KatAdi}}

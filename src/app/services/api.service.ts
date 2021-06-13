@@ -1,3 +1,4 @@
+import { KategoriUrun } from './../models/KategoriUrun';
 import { Kategoriler } from './../models/Kategori';
 import { UrunFoto } from './../models/UrunFoto';
 import { UyeFoto } from './../models/UyeFoto';
@@ -145,6 +146,23 @@ export class ApiService {
   }
   KategoriSil(katId: string) {
     return this.http.delete(this.apiUrl + "kategorisil/" + katId);
+  }
+
+  //kategoriUrun (ARA TABLO)
+  UrunKategoriListe(urunKatId:string) {
+    return this.http.get(this.apiUrl + "urunkategoriliste/"+urunKatId);
+  }
+  KategoriUrunListe(katUrunId:string) {
+    return this.http.get(this.apiUrl + "kategoriurunliste/"+katUrunId);
+  }
+  KategoriUrunEkle(kategoriUrun: KategoriUrun) {
+    return this.http.post(this.apiUrl + "kategoriurunekle", kategoriUrun);
+  }
+  KategoriUrunDuzenle(kategoriUrun: KategoriUrun) {
+    return this.http.put(this.apiUrl + "kategoriurunduzenle", kategoriUrun);
+  }
+  KategoriUrunSil(katUrunId: string) {
+    return this.http.delete(this.apiUrl + "kategoriurunsil/" + katUrunId);
   }
 
 }

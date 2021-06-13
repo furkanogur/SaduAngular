@@ -17,6 +17,7 @@ import { TedarikDialogComponent } from '../dialogs/tedarik-dialog/tedarik-dialog
 import { UrunDialogComponent } from '../dialogs/urun-dialog/urun-dialog.component';
 import { UrunfotoDialogComponent } from '../dialogs/urunfoto-dialog/urunfoto-dialog.component';
 import { FotoyukleDialogComponent } from '../dialogs/fotoyukle-dialog/fotoyukle-dialog.component';
+import { Kategoriler } from 'src/app/models/Kategori';
 
 @Component({
   selector: 'app-hesabim',
@@ -26,13 +27,15 @@ import { FotoyukleDialogComponent } from '../dialogs/fotoyukle-dialog/fotoyukle-
 export class HesabimComponent implements OnInit {
   kayitlar: Urunler[];
   UyeId: string = localStorage.getItem("uyeId");
+  UrunId:string;
   urunler: Urunler[];
+  kategoriler: Kategoriler[];
   secUye: Uye;
-  secUrun:Urunler;
+  secUrun: Urunler;
 
-  secIletisim:Iletisim;
+  secIletisim: Iletisim;
   dataSource: any;
-  displayedColumns = ['UrunFoto','Adi', 'Aciklama','Fiyat','Aktiflik', 'islemler']
+  displayedColumns = ['UrunFoto', 'Adi', 'Aciklama', 'Fiyat', 'Aktiflik', 'islemler']
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   dialogRef: MatDialogRef<TedarikDialogComponent>
@@ -47,7 +50,7 @@ export class HesabimComponent implements OnInit {
     public route: ActivatedRoute,
     public matDialog: MatDialog,
     public alert: MyAlertService,
-  
+
   ) { }
 
   ngOnInit() {
@@ -84,14 +87,14 @@ export class HesabimComponent implements OnInit {
 
   //tedarik spesifik üyenin ürünleri
   KayitListele() {
-      this.apiServis.TedarikUrunListe(this.UyeId).subscribe((d: Urunler[]) => {
+    this.apiServis.TedarikUrunListe(this.UyeId).subscribe((d: Urunler[]) => {
       this.kayitlar = d;
       this.dataSource = new MatTableDataSource(d);
       this.dataSource.sort = this.sort
       this.dataSource.paginator = this.paginator
     })
   }
-// tüm ürünler
+  // tüm ürünler
   UrunListele() {
     this.apiServis.UrunListe().subscribe((d: Urunler[]) => {
       this.urunler = d;
@@ -104,7 +107,7 @@ export class HesabimComponent implements OnInit {
   FotoGuncelle(kayit: Urunler,) {
     this.fotoDialogRef = this.matDialog.open(UrunfotoDialogComponent, {
       width: '400',
-      data:kayit
+      data: kayit
     });
     this.fotoDialogRef.afterClosed().subscribe(d => {
       if (d) {
@@ -119,10 +122,10 @@ export class HesabimComponent implements OnInit {
     })
   }
 
-  UyeFotoGuncelle(kayit:Uye) {
+  UyeFotoGuncelle(kayit: Uye) {
     this.uyeFotoDialogRef = this.matDialog.open(FotoyukleDialogComponent, {
       width: '400',
-      data:kayit
+      data: kayit
     });
     this.uyeFotoDialogRef.afterClosed().subscribe(d => {
       if (d) {
@@ -165,46 +168,66 @@ export class HesabimComponent implements OnInit {
   }
 
   UyeUrunEkle() {
+
+    this.apiServis.KategoriListe().subscribe((d: any = Kategoriler) => {
+      this.kategoriler = d;
+    })
     var yeniKayit: Urunler = new Urunler();
+    var yeniKatKayit: Kategoriler = new Kategoriler();
     this.urunDialogRef = this.matDialog.open(UrunDialogComponent, {
       width: '400px',
       data: {
         kayit: yeniKayit,
-        islem: "ekle"
+        islem: "ekle",
+        katbilgi: this.kategoriler,
+        yeniKatKayit: yeniKatKayit
       }
     });
+    console.log(yeniKatKayit)
     this.urunDialogRef.afterClosed().subscribe(d => {
       if (d) {
         d.UrunFoto = "urun.jpg"
         d.UyeId = this.UyeId
+        console.log(d)
+        //kat id almayı başardık
         this.apiServis.UrunEkle(d).subscribe((s: Sonuc) => {
           this.alert.AlertUygula(s);
           if (s.islem) {
             this.KayitListele();
+            d.UrunId=s.id
+            console.log(d.UrunId)
+            this.apiServis.KategoriUrunEkle(d).subscribe((s: Sonuc) => {
+              this.alert.AlertUygula(s);
+              if (s.islem) {
+              }
+            });
           }
         });
+        
+
+
       }
     });
   }
 
 
-  IletisimEkle(secUye:string) {
+  IletisimEkle(secUye: string) {
     var secIletisim: Iletisim = new Iletisim();
-    
+
     this.dialogIletisimRef = this.matDialog.open(IletisimDialogComponent, {
       width: '400px',
       data: {
         secIletisim: secIletisim,
         islem: "ekle",
-        secUye:secUye
+        secUye: secUye
       }
     });
     this.dialogIletisimRef.afterClosed().subscribe(d => {
-    
-     
+
+
       if (d) {
         this.apiServis.IletisimEkle(d).subscribe((s: Sonuc) => {
-  
+
           this.alert.AlertUygula(s);
           if (s.islem) {
             this.IletisimGetir();
@@ -217,7 +240,7 @@ export class HesabimComponent implements OnInit {
 
 
   iletisimDuzenle(secIletisim: Iletisim) {
-   
+
     this.dialogIletisimRef = this.matDialog.open(IletisimDialogComponent, {
       width: '400px',
       data: {
@@ -225,9 +248,9 @@ export class HesabimComponent implements OnInit {
         islem: "duzenle"
       }
     });
-    
+
     this.dialogIletisimRef.afterClosed().subscribe(d => {
-      
+
       if (d) {
 
         secIletisim.Ad = d.Ad
@@ -236,7 +259,7 @@ export class HesabimComponent implements OnInit {
         secIletisim.Telefon = d.Telefon
         secIletisim.UyeId = d.UyeId
 
-          this.apiServis.IletisimDuzenle(secIletisim).subscribe((s: Sonuc) => {
+        this.apiServis.IletisimDuzenle(secIletisim).subscribe((s: Sonuc) => {
           this.alert.AlertUygula(s);
           if (s.islem) {
             this.IletisimGetir();
@@ -252,7 +275,7 @@ export class HesabimComponent implements OnInit {
     this.confirmDialogRef = this.matDialog.open(ConfirmDialogComponent, {
       width: '400px'
     });
-    this.confirmDialogRef.componentInstance.dialogMesaj = kayit.Ad +" "+ kayit.Soyad + " Adlı Kişinin İletişim Bilgileri Silinecektir Onaylıyor Musunuz?";
+    this.confirmDialogRef.componentInstance.dialogMesaj = kayit.Ad + " " + kayit.Soyad + " Adlı Kişinin İletişim Bilgileri Silinecektir Onaylıyor Musunuz?";
     this.confirmDialogRef.afterClosed().subscribe(d => {
       if (d) {
         this.apiServis.IletisimSil(kayit.iletisimId).subscribe((s: Sonuc) => {
@@ -285,7 +308,7 @@ export class HesabimComponent implements OnInit {
       data: {
         kayit: kayit,
         islem: "Hesabimduzenle",
-        hesabim:false
+        hesabim: false
       }
     });
 
