@@ -9,10 +9,10 @@
             </button>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item [routerLink]="['/uye']">Üyeler</button>
-                <button mat-menu-item [matMenuTriggerFor]="altmenu">
-                    Item 2
+                <button mat-menu-item [routerLink]="['/urun']">
+                    Ürünler
                 </button>
-                <button mat-menu-item>Item 3</button>
+                <button mat-menu-item [routerLink]="['/kategoriler']">Kategori</button>
             </mat-menu>
             <mat-menu #altmenu="matMenu">
                 <button mat-menu-item>Alt Item 1</button>
@@ -20,7 +20,6 @@
             </mat-menu>
 
 
-            <a mat-list-item [routerLink]="['/urun']">Ürünler</a>
 
         </mat-nav-list>
 

@@ -5,13 +5,13 @@
     <div *ngIf="secUye">
         <h3><b>Uye Mail : </b>{{secUye.Email}}</h3>
         <h3><b>Uye Kullanıcı Adı : </b>{{secUye.KullaniciAdi}}</h3>
-        <img [src]="apiServis.siteUrl+'/Dosyalar/'+secUye.UyeFoto" alt="" style="width: 200px; height: 200px;">
+        <img [src]="apiServis.siteUrl+'/Dosyalar/'+secUye.UyeFoto" alt="" style="width: 200px; height: 200px;"> &nbsp;
+        <img [src]="secilenFoto" style="width: 200px; height: 200px;">
     </div>
     <input type="file" hidden="true" #foto (change)="FotoSec($event)" onclick="this.value=null">
     <button mat-raised-button color="primary" (click)="foto.click()" accept=".jpg,.png">Fotoğraf Seç</button>
     <p>&nbsp;
     </p>
-    <img [src]="secilenFoto" style="width: 200px; height: 200px;">
     <p>&nbsp;
     </p>
     <button mat-raised-button color="accent" (click)="dialogRef.close(UyeFoto)" [disabled]="!secilenFoto">Kaydet</button> &nbsp;

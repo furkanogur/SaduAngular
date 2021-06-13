@@ -115,8 +115,8 @@
             <p>&nbsp;</p>
             <mat-card>
                 <div class="containerFoto">
-                    <img [src]="apiServis.siteUrl+'/Dosyalar/'+secUye?.UyeFoto" alt="" class="imageFoto">
-                    <div class="overlayFoto">
+                    <img [src]="apiServis.siteUrl+'/Dosyalar/'+secUye?.UyeFoto" alt="" class="imageFoto" (click)="UyeFotoGuncelle(secUye)">
+                    <div class="overlayFoto" (click)="UyeFotoGuncelle(secUye)">
                         <div class="text">Resmi Değiştirmek için Tıklayın</div>
                     </div>
                 </div>

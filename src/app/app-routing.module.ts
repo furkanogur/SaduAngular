@@ -1,3 +1,4 @@
+import { KategorilerComponent } from './components/kategoriler/kategoriler.component';
 import { HesabimComponent } from './components/hesabim/hesabim.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
@@ -11,35 +12,50 @@ import { UrunListeComponent } from './components/urunListe/urunListe.component';
 
 
 const routes: Routes = [
+  //herkes
   {
     path: '',
     component: HomeComponent
   },
+  //admin
   {
     path: 'uye',
     component: UyeComponent
-  },{
+  },
+  //admin
+  {
     path: 'urun',
     component: UrunComponent
-  },{
+  },
+  //herkes
+  {
     path: 'urunlistele/:uyeId',
     component: UrunListeComponent
   },
+  //herkes
   {
     path: 'uyelistele/:urunId',
     component: UyeListeComponent
   },
+  //herkes
   {
     path: 'login',
     component: LoginComponent
   },
+  //herkes
   {
     path: 'register',
     component: RegisterComponent
   },
+  //herkes
   {
     path: 'hesabim',
     component: HesabimComponent
+  },
+  //admin
+  {
+    path: 'kategoriler',
+    component: KategorilerComponent
   },
 ];
 

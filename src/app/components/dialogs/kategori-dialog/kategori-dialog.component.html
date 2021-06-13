@@ -1,0 +1,29 @@
+<mat-toolbar color="primary" class="mat-elevation-z8">
+    <span>{{dialogBaslik}}</span>
+</mat-toolbar>
+<div class="container">
+    <form [formGroup]="frm">
+        <mat-form-field appearance="outline">
+            <mat-label>Kategori Adı</mat-label>
+            <input matInput placeholder="KatAdi" formControlName="KatAdi" name="KatAdi" required type="text">
+        </mat-form-field>
+        <!-- <mat-form-field appearance="outline">
+            <mat-label>Üst Kategori Id</mat-label>
+            <input matInput placeholder="ustKategoriId" formControlName="ustKategoriId" name="ustKategoriId" type="text">
+        </mat-form-field> -->
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="ustKategoriId" name="ustKategoriId">
+                <mat-option [value]="Kategori.UstKategoriBilgi?.kategoriId" *ngFor="let Kategori of ustKategori">{{Kategori.UstKategoriBilgi?.KatAdi}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Aktiflik</mat-label>
+            <input matInput placeholder="Aktiflik" formControlName="Aktiflik" name="Aktiflik" type="text">
+        </mat-form-field>
+    </form>
+
+    <button mat-raised-button color="accent" [disabled]="frm.invalid" (click)="dialogRef.close(frm.value)">Kaydet</button>&nbsp;
+    <button mat-raised-button color="warn" (click)="dialogRef.close()">İptal</button>
+
+</div>

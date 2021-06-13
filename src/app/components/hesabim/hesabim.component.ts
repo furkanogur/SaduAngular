@@ -16,6 +16,7 @@ import { IletisimDialogComponent } from '../dialogs/iletisim-dialog/iletisim-dia
 import { TedarikDialogComponent } from '../dialogs/tedarik-dialog/tedarik-dialog.component';
 import { UrunDialogComponent } from '../dialogs/urun-dialog/urun-dialog.component';
 import { UrunfotoDialogComponent } from '../dialogs/urunfoto-dialog/urunfoto-dialog.component';
+import { FotoyukleDialogComponent } from '../dialogs/fotoyukle-dialog/fotoyukle-dialog.component';
 
 @Component({
   selector: 'app-hesabim',
@@ -38,6 +39,7 @@ export class HesabimComponent implements OnInit {
   urunDialogRef: MatDialogRef<UrunDialogComponent>
   uyeDialogRef: MatDialogRef<UyeDialogComponent>
   fotoDialogRef: MatDialogRef<UrunfotoDialogComponent>;
+  uyeFotoDialogRef: MatDialogRef<FotoyukleDialogComponent>;
   confirmDialogRef: MatDialogRef<ConfirmDialogComponent>
   dialogIletisimRef: MatDialogRef<IletisimDialogComponent>
   constructor(
@@ -111,6 +113,24 @@ export class HesabimComponent implements OnInit {
           this.alert.AlertUygula(s);
           if (s.islem) {
             this.KayitListele();
+          }
+        })
+      }
+    })
+  }
+
+  UyeFotoGuncelle(kayit:Uye) {
+    this.uyeFotoDialogRef = this.matDialog.open(FotoyukleDialogComponent, {
+      width: '400',
+      data:kayit
+    });
+    this.uyeFotoDialogRef.afterClosed().subscribe(d => {
+      if (d) {
+        d.uyeId = kayit.uyeId;
+        this.apiServis.UyeFotoGuncelle(d).subscribe((s: Sonuc) => {
+          this.alert.AlertUygula(s);
+          if (s.islem) {
+            this.UyeGetir();
           }
         })
       }

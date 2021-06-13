@@ -1,3 +1,4 @@
+import { KategorilerComponent } from './components/kategoriler/kategoriler.component';
 import { HesabimComponent } from './components/hesabim/hesabim.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
@@ -27,6 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { UyeDialogComponent } from './components/dialogs/uye-dialog/uye-dialog.component';
 import { UrunListeComponent } from './components/urunListe/urunListe.component';
+import { KategoriDialogComponent } from './components/dialogs/kategori-dialog/kategori-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { UrunListeComponent } from './components/urunListe/urunListe.component';
     LoginComponent,
     RegisterComponent,
     HesabimComponent,
+    KategorilerComponent,
 
 
     //Dialoglar
@@ -51,6 +54,7 @@ import { UrunListeComponent } from './components/urunListe/urunListe.component';
     FotoyukleDialogComponent,
     UrunfotoDialogComponent,
     UrunDialogComponent,
+    KategoriDialogComponent
 
 
   ],
@@ -70,7 +74,8 @@ import { UrunListeComponent } from './components/urunListe/urunListe.component';
     IletisimDialogComponent,
     IletisimDialogComponent,
     UrunfotoDialogComponent,
-    UrunDialogComponent
+    UrunDialogComponent,
+    KategoriDialogComponent
 
 
   ],
