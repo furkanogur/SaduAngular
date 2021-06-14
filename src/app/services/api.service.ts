@@ -1,3 +1,7 @@
+import { SiparisDurum } from './../models/SiparisDurum';
+import { Kargo } from './../models/Kargo';
+import { Siparis } from 'src/app/models/siparis';
+import { Odeme } from './../models/Odeme';
 import { KategoriUrun } from './../models/KategoriUrun';
 import { Kategoriler } from './../models/Kategori';
 import { UrunFoto } from './../models/UrunFoto';
@@ -164,5 +168,83 @@ export class ApiService {
   KategoriUrunSil(katUrunId: string) {
     return this.http.delete(this.apiUrl + "kategoriurunsil/" + katUrunId);
   }
+
+
+  //Odeme Yontemi
+
+  OdemeListe() {
+    return this.http.get(this.apiUrl + "odemeliste");
+  }
+  OdemeById(odemeId: string) {
+    return this.http.get(this.apiUrl + "odemebyid/" + odemeId);
+  }
+  OdemEekle(Odeme: Odeme) {
+    return this.http.post(this.apiUrl + "odemeekle", Odeme);
+  }
+  OdemeDuzenle(Odeme: Odeme) {
+    return this.http.put(this.apiUrl + "odemeduzenle", Odeme);
+  }
+  OdemeSil(odemeId: string) {
+    return this.http.delete(this.apiUrl + "odemesil/" + odemeId);
+  }
+//Siparis Durumu
+  SiparisDurumListe() {
+    return this.http.get(this.apiUrl + "siparisdurumliste");
+  }
+  SiparisDurumById(siparisdurumId: string) {
+    return this.http.get(this.apiUrl + "siparisdurumbyid/" + siparisdurumId);
+  }
+  SiparisDurumEkle(siparisDurum: SiparisDurum) {
+    return this.http.post(this.apiUrl + "siparisdurumekle", siparisDurum);
+  }
+  SiparisDurumuDuzenle(siparisDurum: SiparisDurum) {
+    return this.http.put(this.apiUrl + "siparisdurumuduzenle", siparisDurum);
+  }
+  SiparisDurumuSil(siparisId: string) {
+    return this.http.delete(this.apiUrl + "siparisdurumusil/" + siparisId);
+  }
+
+//Kargo
+
+KargoListe() {
+    return this.http.get(this.apiUrl + "kargoliste");
+  }
+  kargobyid(kargoId: string) {
+    return this.http.get(this.apiUrl + "kargobyid/" + kargoId);
+  }
+  KargoEkle(kargo: Kargo) {
+    return this.http.post(this.apiUrl + "kargoekle", kargo);
+  }
+  KargoDuzenle(kargo: Kargo) {
+    return this.http.put(this.apiUrl + "kargoduzenle", kargo);
+  }
+  KargoSil(kargoId: string) {
+    return this.http.delete(this.apiUrl + "kargosil/" + kargoId);
+  }
+
+  //Siparis İslemleri
+  SiparisListe() {
+    return this.http.get(this.apiUrl + "siparisliste");
+  }
+  SiparisById(siparisId: string) {
+    return this.http.get(this.apiUrl + "urunbyid/" + siparisId);
+  }
+  SiparisEkle(siparis: Siparis) {
+    return this.http.post(this.apiUrl + "siparisekle", siparis);
+  }
+  SiparisDuzenle(siparis: Siparis) {
+    return this.http.put(this.apiUrl + "siparisduzenle", siparis);
+  }
+  SiparisSil(siparisId: string) {
+    return this.http.delete(this.apiUrl + "siparissil/" + siparisId);
+  }
+
+  SiparisVerenById(uyeId:string) {
+    return this.http.get(this.apiUrl + "siparisverenbyid/"+uyeId);
+  }
+  SiparisalanUById(uyeId:string) {
+    return this.http.get(this.apiUrl + "siparisalanbyid/"+uyeId);
+  }
+
 
 }

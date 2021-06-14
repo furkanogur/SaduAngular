@@ -3,7 +3,7 @@
     <form [formGroup]="frm">
         <mat-form-field appearance="outline">
             <mat-select formControlName="kategoriId">
-                <mat-option [value]="Kategori.kategoriId" *ngFor="let Kategori of kategoriler" (click)="KategoriUrunById(Kategori.kategoriId)">
+                <mat-option [value]="Kategori.kategoriId" *ngFor="let Kategori of kategoriler" [routerLink]="['/kategorilistele',Kategori.kategoriId,Kategori.KatAdi]">
                     {{Kategori.KatAdi}}
                 </mat-option>
             </mat-select>

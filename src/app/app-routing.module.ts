@@ -1,3 +1,6 @@
+import { SiparisComponent } from './components/Siparis/Siparis.component';
+import { UrunAraComponent } from './components/urunAra/urunAra.component';
+import { KategoriListeleComponent } from './components/KategoriListele/KategoriListele.component';
 import { KategorilerComponent } from './components/kategoriler/kategoriler.component';
 import { HesabimComponent } from './components/hesabim/hesabim.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -36,6 +39,21 @@ const routes: Routes = [
   {
     path: 'uyelistele/:urunId',
     component: UyeListeComponent
+  },
+  //herkes
+  {
+    path: 'kategorilistele/:katId/:KatAdi',
+    component: KategoriListeleComponent
+  },
+  //herkes
+  {
+    path: 'siparis/:urunId',
+    component: SiparisComponent
+  },
+  //herkes
+  {
+    path: 'urunAra/:katId',
+    component: UrunAraComponent
   },
   //herkes
   {

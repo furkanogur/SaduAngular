@@ -1,3 +1,10 @@
+import { UyeDetaylarComponent } from './components/dialogs/uye-detaylar/uye-detaylar.component';
+import { TedarikciDetayComponent } from './components/dialogs/tedarikci-detay/tedarikci-detay.component';
+import { SiparisduzenleDialogComponent } from './components/dialogs/siparisduzenle-dialog/siparisduzenle-dialog.component';
+import { SiparisDialogComponent } from './components/dialogs/siparis-dialog/siparis-dialog.component';
+import { SiparisComponent } from './components/Siparis/Siparis.component';
+import { UrunAraComponent } from './components/urunAra/urunAra.component';
+import { KategoriListeleComponent } from './components/KategoriListele/KategoriListele.component';
 import { KategorilerComponent } from './components/kategoriler/kategoriler.component';
 import { HesabimComponent } from './components/hesabim/hesabim.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -43,6 +50,9 @@ import { KategoriDialogComponent } from './components/dialogs/kategori-dialog/ka
     RegisterComponent,
     HesabimComponent,
     KategorilerComponent,
+    KategoriListeleComponent,
+    UrunAraComponent,
+    SiparisComponent,
 
 
     //Dialoglar
@@ -54,7 +64,11 @@ import { KategoriDialogComponent } from './components/dialogs/kategori-dialog/ka
     FotoyukleDialogComponent,
     UrunfotoDialogComponent,
     UrunDialogComponent,
-    KategoriDialogComponent
+    KategoriDialogComponent,
+    SiparisDialogComponent,
+    SiparisduzenleDialogComponent,
+    TedarikciDetayComponent,
+    UyeDetaylarComponent
 
 
   ],
@@ -75,7 +89,11 @@ import { KategoriDialogComponent } from './components/dialogs/kategori-dialog/ka
     IletisimDialogComponent,
     UrunfotoDialogComponent,
     UrunDialogComponent,
-    KategoriDialogComponent
+    KategoriDialogComponent,
+    SiparisDialogComponent,
+    SiparisduzenleDialogComponent,
+    TedarikciDetayComponent,
+    UyeDetaylarComponent
 
 
   ],

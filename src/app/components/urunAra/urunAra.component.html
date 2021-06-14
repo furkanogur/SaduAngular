@@ -1,0 +1,40 @@
+<div class="container">
+    <mat-form-field appearance="outline">
+        <input matInput placeholder="Aranacak Bir Değer Giriniz" (keyup)="UrunFiltrele($event)">
+    </mat-form-field>
+    <p>&nbsp;</p>
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+        <ng-container matColumnDef="UrunFoto">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> UrunFoto
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> <img mat-card-image [src]="apiServis.siteUrl+'/Dosyalar/'+kayit?.urunBilgi?.UrunFoto" style="width: 200px; height: 150px;" /> </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Adi">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Ürün Adı
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit?.urunBilgi?.Adi}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Aciklama">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Aciklama
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit">{{kayit?.urunBilgi?.Aciklama}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Fiyat">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Fiyat
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit?.urunBilgi?.Fiyat | currency : '₺'}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="islemler">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> İslemler
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> <button mat-raised-button color="accent" [routerLink]="['/siparis',kayit.urunBilgi.urunId]">satın al</button></mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[1,2,3, 10, 25, 100]" showFirstLastButtons>
+    </mat-paginator>
+
+</div>

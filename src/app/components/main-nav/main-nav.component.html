@@ -30,9 +30,19 @@
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
             <img src="../../../assets/logo.png" alt="">
-            <span class="spacer"></span>
+            <span class="spacer" style="width: 50%;">
 
-
+            <form [formGroup]="frm"  color="accent" style="width: 50%; font-size: 75%; margin-top: 2%; float: left; padding-left: 25%; ">
+                <mat-form-field appearance="outline" color="accent">
+                    <mat-label>Kategoriler</mat-label>
+                    <mat-select formControlName="kategoriId" color="accent">
+                        <mat-option [value]="Kategori.kategoriId" *ngFor="let Kategori of kategoriler" [routerLink]="['/kategorilistele',Kategori.kategoriId,Kategori.KatAdi]">
+                            {{Kategori.KatAdi}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+        </span>
 
             <button mat-button [matMenuTriggerFor]="menuUst">
                 <mat-icon>settings</mat-icon>

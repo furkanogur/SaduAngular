@@ -1,0 +1,27 @@
+<mat-toolbar color="primary" class="mat-elevation-z8">
+    <span>{{dialogBaslik}}</span>
+</mat-toolbar>
+<div class="container">
+    <img [src]="apiServis.siteUrl+'/Dosyalar/'+secUrun.UrunFoto" alt="" style="width: 200px; height: 200px;">&nbsp;
+    <p><b>Ürünün Adı : </b> {{secUrun?.Adi}}</p>
+    <p><b>Ürünün Fiyatı : </b> {{secUrun?.Fiyat | currency: '₺'}}</p>
+    <p><b>Ürünün Açıklaması : </b> {{secUrun?.Aciklama}}</p>
+</div>
+<div class="container">
+    <form [formGroup]="frm">
+        <mat-form-field appearance="outline">
+            <mat-label>Adres</mat-label>
+            <input matInput placeholder="Adres" formControlName="Adres" type="text">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="OdemeId">
+                <mat-option [value]="odeme.odemeTuruId" *ngFor="let odeme of secOdeme">{{odeme?.OdemeCesiti}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+
+    <button mat-raised-button color="accent" [disabled]="frm.invalid" (click)="dialogRef.close(frm.value)">Kaydet</button>&nbsp;
+    <button mat-raised-button color="warn" (click)="dialogRef.close()">İptal</button>
+
+</div>

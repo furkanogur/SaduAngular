@@ -1,3 +1,7 @@
+import { TedarikciDetayComponent } from './../dialogs/tedarikci-detay/tedarikci-detay.component';
+import { Kargo } from './../../models/Kargo';
+import { SiparisDurum } from './../../models/SiparisDurum';
+import { SiparisduzenleDialogComponent } from './../dialogs/siparisduzenle-dialog/siparisduzenle-dialog.component';
 import { Kategoriler } from './../../models/Kategori';
 import { UyeDialogComponent } from './../dialogs/uye-dialog/uye-dialog.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -18,6 +22,7 @@ import { TedarikDialogComponent } from '../dialogs/tedarik-dialog/tedarik-dialog
 import { UrunDialogComponent } from '../dialogs/urun-dialog/urun-dialog.component';
 import { UrunfotoDialogComponent } from '../dialogs/urunfoto-dialog/urunfoto-dialog.component';
 import { FotoyukleDialogComponent } from '../dialogs/fotoyukle-dialog/fotoyukle-dialog.component';
+import { Siparis } from 'src/app/models/siparis';
 
 @Component({
   selector: 'app-hesabim',
@@ -27,24 +32,33 @@ import { FotoyukleDialogComponent } from '../dialogs/fotoyukle-dialog/fotoyukle-
 export class HesabimComponent implements OnInit {
   kayitlar: Urunler[];
   UyeId: string = localStorage.getItem("uyeId");
-  UrunId:string;
+  UrunId: string;
   urunler: Urunler[];
   kategoriler: Kategoriler[];
+  siparisDurum: SiparisDurum[];
+  kargo: Kargo[];
   secUye: Uye;
   secUrun: Urunler;
+  kayit:Siparis;
 
   secIletisim: Iletisim;
   dataSource: any;
+  SiparislerimdataSource: any;
+  GonderilecekdataSource: any;
   displayedColumns = ['UrunFoto', 'Adi', 'Aciklama', 'Fiyat', 'Aktiflik', 'islemler']
+  SiparislerimdisplayedColumns = ['SiparisUrun', 'SiparisUrun2', 'SiparisUrun3', 'Fiyat', 'SiparisDurum', 'islemler']
+  GonderilecekdisplayedColumns = ['SiparisUrun', 'SiparisUrun2', 'SiparisUrun3', 'Fiyat', 'SiparisDurum', 'SiparisUye', 'islemler']
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   dialogRef: MatDialogRef<TedarikDialogComponent>
+  TedarikciDetayGorDialogRef: MatDialogRef<TedarikciDetayComponent>
   urunDialogRef: MatDialogRef<UrunDialogComponent>
   uyeDialogRef: MatDialogRef<UyeDialogComponent>
   fotoDialogRef: MatDialogRef<UrunfotoDialogComponent>;
   uyeFotoDialogRef: MatDialogRef<FotoyukleDialogComponent>;
   confirmDialogRef: MatDialogRef<ConfirmDialogComponent>
   dialogIletisimRef: MatDialogRef<IletisimDialogComponent>
+  dialogSiparisDuzenleRef: MatDialogRef<SiparisduzenleDialogComponent>
   constructor(
     public apiServis: ApiService,
     public route: ActivatedRoute,
@@ -61,6 +75,10 @@ export class HesabimComponent implements OnInit {
         this.KayitListele();
         this.IletisimGetir();
         this.KategoriListele();
+        this.SiparisVerenListele();
+        this.SiparisAlanListele();
+        this.SiparisDurumListe();
+        this.KargoListe();
       }
     })
   }
@@ -93,8 +111,32 @@ export class HesabimComponent implements OnInit {
       this.dataSource = new MatTableDataSource(d);
       this.dataSource.sort = this.sort
       this.dataSource.paginator = this.paginator
+
     })
   }
+
+  //Sipariş alan
+  SiparisAlanListele() {
+    this.apiServis.SiparisalanUById(this.UyeId).subscribe((d: Urunler[]) => {
+      this.kayitlar = d;
+      this.GonderilecekdataSource = new MatTableDataSource(d);
+      this.GonderilecekdataSource.sort = this.sort
+      this.GonderilecekdataSource.paginator = this.paginator
+      console.log(this.GonderilecekdataSource)
+    })
+  }
+ 
+  //Sipariş veren
+  SiparisVerenListele() {
+    this.apiServis.SiparisVerenById(this.UyeId).subscribe((d: Urunler[]) => {
+      this.kayitlar = d;
+      this.SiparislerimdataSource = new MatTableDataSource(d);
+      this.SiparislerimdataSource.sort = this.sort
+      this.SiparislerimdataSource.paginator = this.paginator
+      console.log(this.SiparislerimdataSource)
+    })
+  }
+
   // tüm ürünler
   UrunListele() {
     this.apiServis.UrunListe().subscribe((d: Urunler[]) => {
@@ -140,6 +182,25 @@ export class HesabimComponent implements OnInit {
       }
     })
   }
+  
+  DetayGor(TedarikUyeId:string){
+    this.apiServis.UyeById(TedarikUyeId).subscribe((d: Uye) => {
+      this.secUye = d;
+    })
+    this.apiServis.IletisimById(TedarikUyeId).subscribe((d: Iletisim) => {
+      this.secIletisim = d;
+    })
+    this.TedarikciDetayGorDialogRef = this.matDialog.open(TedarikciDetayComponent, {
+      width: '400px',
+      data: {
+        iletisim:this.secIletisim,
+        uyedetay:this.secUye,
+        kayit:this.kayit,
+        tedarikUyeId:TedarikUyeId
+      }
+    });   
+  }
+
 
   Duzenle(kayit: Urunler) {
     this.apiServis.KategoriListe().subscribe((d: any = Kategoriler) => {
@@ -166,7 +227,7 @@ export class HesabimComponent implements OnInit {
         this.apiServis.UrunDuzenle(kayit).subscribe((s: Sonuc) => {
           this.alert.AlertUygula(s);
           if (s.islem) {
-            d.UrunId=kayit.urunId
+            d.UrunId = kayit.urunId
             console.log(d.UrunId)
             this.apiServis.KategoriUrunEkle(d).subscribe((s: Sonuc) => {
               this.alert.AlertUygula(s);
@@ -180,12 +241,63 @@ export class HesabimComponent implements OnInit {
     });
 
   }
+  SiparisDurumListe() {
+    this.apiServis.SiparisDurumListe().subscribe((d: SiparisDurum[]) => {
+      this.siparisDurum = d;
+    })
+  }
+  KargoListe() {
+    this.apiServis.KargoListe().subscribe((d: Kargo[]) => {
+      this.kargo = d
+    })
+  }
+
+  SiparisDuzenle(kayit: Siparis) {
+    this.apiServis.SiparisDurumListe().subscribe((d: SiparisDurum[]) => {
+      this.siparisDurum = d;
+    })
+
+    this.apiServis.KargoListe().subscribe((d: Kargo[]) => {
+      this.kargo = d
+    })
+
+    this.dialogSiparisDuzenleRef = this.matDialog.open(SiparisduzenleDialogComponent, {
+      width: '400px',
+      data: {
+        secSiparis: kayit,
+        islem: "duzenle",
+        secUrun: this.secUrun,
+        secSiparisDurum: this.siparisDurum,
+        secKargo: this.kargo,
+
+      }
+    });
+
+    this.dialogSiparisDuzenleRef.afterClosed().subscribe(d => {
+
+      if (d) {
+        kayit.KargoId = d.KargoId
+        kayit.KargoUcreti = d.KargoUcreti
+        kayit.SiparisDurumuId = d.SiparisDurumuId
+        console.log(d.UrunId)
+        console.log(d)
+        this.apiServis.SiparisDuzenle(kayit).subscribe((s: Sonuc) => {
+          this.alert.AlertUygula(s);
+          if (s.islem) {
+           
+            this.SiparisAlanListele()
+          }
+        });
+      }
+    });
+
+  }
 
 
 
 
   KategoriListele() {
-    this.apiServis.KategoriListe().subscribe((d:any= Kategoriler) => {
+    this.apiServis.KategoriListe().subscribe((d: any = Kategoriler) => {
       this.kategoriler = d;
     })
   }
@@ -217,7 +329,7 @@ export class HesabimComponent implements OnInit {
           this.alert.AlertUygula(s);
           if (s.islem) {
             this.KayitListele();
-            d.UrunId=s.id
+            d.UrunId = s.id
             console.log(d.UrunId)
             this.apiServis.KategoriUrunEkle(d).subscribe((s: Sonuc) => {
               this.alert.AlertUygula(s);
@@ -226,7 +338,7 @@ export class HesabimComponent implements OnInit {
             });
           }
         });
-        
+
 
 
       }
@@ -327,9 +439,9 @@ export class HesabimComponent implements OnInit {
             this.KayitListele();
           });
         });
-        
-        
-       
+
+
+
       }
     });
   }

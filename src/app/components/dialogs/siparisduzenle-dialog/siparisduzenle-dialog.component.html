@@ -1,0 +1,34 @@
+<mat-toolbar color="primary" class="mat-elevation-z8">
+    <span>{{dialogBaslik}}</span>
+</mat-toolbar>
+<div class="container">
+    <img [src]="apiServis.siteUrl+'/Dosyalar/'+secSiparis?.SiparisUrun.UrunFoto" alt="" style="width: 200px; height: 200px;">&nbsp;
+    <p><b>Ürünün Adı : </b> {{secSiparis?.SiparisUrun.Adi}}</p>
+    <p><b>Ürünün Fiyatı : </b> {{secSiparis?.Fiyat | currency: '₺'}}</p>
+    <p><b>Ürünün Açıklaması : </b> {{secSiparis?.SiparisUrun?.Aciklama}}</p>
+    <p><b>Gönderilecek Adres : </b> {{secSiparis?.Adres}}</p>
+</div>
+<div class="container">
+    <form [formGroup]="frm">
+        <mat-form-field appearance="outline">
+            <mat-label>Kargo Ücreti</mat-label>
+            <input matInput placeholder="KargoUcreti" formControlName="KargoUcreti" type="text">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="KargoId">
+                <mat-option [value]="kargo.kargoId" *ngFor="let kargo of secKargo">{{kargo?.FirmaAdi}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="SiparisDurumuId">
+                <mat-option [value]="durum.siparisDurumId" *ngFor="let durum of secSiparisDurum">{{durum?.SiparisDurumu1}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+
+    <button mat-raised-button color="accent" [disabled]="frm.invalid" (click)="dialogRef.close(frm.value)">Kaydet</button>&nbsp;
+    <button mat-raised-button color="warn" (click)="dialogRef.close()">İptal</button>
+
+</div>
