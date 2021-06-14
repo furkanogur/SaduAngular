@@ -4,7 +4,7 @@
         <mat-nav-list>
             <a mat-list-item [routerLink]="['/']">Anasayfa</a>
 
-            <button mat-button [matMenuTriggerFor]="menu" *ngIf="servis.oturumKontrolAdmin()">
+            <button mat-button [matMenuTriggerFor]="menu" *ngIf="apiServis.oturumKontrolAdmin()">
                 <mat-icon>settings</mat-icon> Admin
             </button>
             <mat-menu #menu="matMenu">
@@ -38,13 +38,13 @@
                 <mat-icon>settings</mat-icon>
             </button>
             <mat-menu #menuUst="matMenu">
-                <button mat-menu-item [routerLink]="['/login']" *ngIf="!servis.oturumKontrol()">Oturum Aç</button>
-                <button mat-menu-item [routerLink]="['/register']" *ngIf="!servis.oturumKontrol()">Kayıt Ol</button>
-                <button mat-menu-item [matMenuTriggerFor]="altmenuUst" *ngIf="servis.oturumKontrol()">
+                <button mat-menu-item [routerLink]="['/login']" *ngIf="!apiServis.oturumKontrol()">Oturum Aç</button>
+                <button mat-menu-item [routerLink]="['/register']" *ngIf="!apiServis.oturumKontrol()">Kayıt Ol</button>
+                <button mat-menu-item [matMenuTriggerFor]="altmenuUst" *ngIf="apiServis.oturumKontrol()">
                     Item 2
                 </button>
-                <button mat-menu-item [routerLink]="['/hesabim']" *ngIf="servis.oturumKontrol()">Hesabım</button>
-                <button mat-menu-item (click)="OturumKapat()" *ngIf="servis.oturumKontrol()">Oturum Kapat</button>
+                <button mat-menu-item [routerLink]="['/hesabim']" *ngIf="apiServis.oturumKontrol()">Hesabım</button>
+                <button mat-menu-item (click)="OturumKapat()" *ngIf="apiServis.oturumKontrol()">Oturum Kapat</button>
             </mat-menu>
             <mat-menu #altmenuUst="matMenu">
                 <button mat-menu-item>Alt Item 1</button>
@@ -53,8 +53,8 @@
         </mat-toolbar>
 
 
-
         <!-- Add Content Here -->
+
 
         <router-outlet></router-outlet>
     </mat-sidenav-content>

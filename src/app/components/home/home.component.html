@@ -1,5 +1,39 @@
 <div class="container">
-    <button mat-raised-button color="primary" (click)="AlertAc(true)">Alert Test Olumlu</button>&nbsp;
-    <button mat-raised-button color="warn" (click)="AlertAc(false)">Alert Test Olumsuz</button>&nbsp;
-    <button mat-raised-button color="accent" (click)="ConfirmAc()">Confirm Test</button>&nbsp;
+
+    <form [formGroup]="frm">
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="kategoriId">
+                <mat-option [value]="Kategori.kategoriId" *ngFor="let Kategori of kategoriler" (click)="KategoriUrunById(Kategori.kategoriId)">
+                    {{Kategori.KatAdi}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+
+    <mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="Adi">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Ürünün Adı
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.urunBilgi.Adi}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Aciklama">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Açıklama
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.urunBilgi.Aciklama}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Fiyat">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Fiyat
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.urunBilgi.Fiyat | currency: '₺'}} </mat-cell>
+        </ng-container>
+
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5,10,25,100]" showFirstLastButtons>
+    </mat-paginator>
+
+
 </div>
