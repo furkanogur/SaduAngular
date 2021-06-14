@@ -1,3 +1,4 @@
+import { Kategoriler } from './../../models/Kategori';
 import { UyeDialogComponent } from './../dialogs/uye-dialog/uye-dialog.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -17,7 +18,6 @@ import { TedarikDialogComponent } from '../dialogs/tedarik-dialog/tedarik-dialog
 import { UrunDialogComponent } from '../dialogs/urun-dialog/urun-dialog.component';
 import { UrunfotoDialogComponent } from '../dialogs/urunfoto-dialog/urunfoto-dialog.component';
 import { FotoyukleDialogComponent } from '../dialogs/fotoyukle-dialog/fotoyukle-dialog.component';
-import { Kategoriler } from 'src/app/models/Kategori';
 
 @Component({
   selector: 'app-hesabim',
@@ -142,11 +142,17 @@ export class HesabimComponent implements OnInit {
   }
 
   Duzenle(kayit: Urunler) {
+    this.apiServis.KategoriListe().subscribe((d: any = Kategoriler) => {
+      this.kategoriler = d;
+    })
+    var yeniKatKayit: Kategoriler = new Kategoriler();
     this.dialogRef = this.matDialog.open(TedarikDialogComponent, {
       width: '400px',
       data: {
         kayit: kayit,
-        islem: "duzenle"
+        islem: "duzenle",
+        katbilgi: this.kategoriler,
+        yeniKatKayit: yeniKatKayit
       }
     });
 
@@ -160,6 +166,13 @@ export class HesabimComponent implements OnInit {
         this.apiServis.UrunDuzenle(kayit).subscribe((s: Sonuc) => {
           this.alert.AlertUygula(s);
           if (s.islem) {
+            d.UrunId=kayit.urunId
+            console.log(d.UrunId)
+            this.apiServis.KategoriUrunEkle(d).subscribe((s: Sonuc) => {
+              this.alert.AlertUygula(s);
+              if (s.islem) {
+              }
+            });
             this.KayitListele();
           }
         });
@@ -297,16 +310,26 @@ export class HesabimComponent implements OnInit {
   }
 
   UrunSil(kayit: Urunler) {
+    this.apiServis.KategoriListe().subscribe((d: any = Kategoriler) => {
+      this.kategoriler = d;
+    })
+
     this.confirmDialogRef = this.matDialog.open(ConfirmDialogComponent, {
       width: '400px'
     });
     this.confirmDialogRef.componentInstance.dialogMesaj = kayit.Adi + " Ürün Silinecektir Onaylıyor Musunuz?";
     this.confirmDialogRef.afterClosed().subscribe(d => {
       if (d) {
-        this.apiServis.UrunSil(kayit.urunId).subscribe((s: Sonuc) => {
+        this.apiServis.KategoriUrunSil(kayit.urunId).subscribe((s: Sonuc) => {
           console.log(s);
-          this.KayitListele();
+          this.apiServis.UrunSil(kayit.urunId).subscribe((s: Sonuc) => {
+            console.log(s);
+            this.KayitListele();
+          });
         });
+        
+        
+       
       }
     });
   }

@@ -43,7 +43,7 @@ export class KategoriDialogComponent implements OnInit {
   FormOlustur() {
     return this.frmBuild.group({
       KatAdi: [this.yeniKayit.KatAdi],
-      ustKategoriId: [this.yeniKayit.ustKategoriId],
+      ustKategoriId: [this.yeniKayit.kategoriId],
       Aktiflik: [this.yeniKayit.Aktiflik]
     })
   }

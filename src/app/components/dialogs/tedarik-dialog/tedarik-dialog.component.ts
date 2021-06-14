@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Kategoriler } from 'src/app/models/Kategori';
 import { TedarikciUrunler } from 'src/app/models/TedarikciUrunler';
 import { Urunler } from 'src/app/models/Urunler';
 import { ApiService } from 'src/app/services/api.service';
@@ -12,44 +13,53 @@ import { MyAlertService } from 'src/app/services/myAlert.service';
   styleUrls: ['./tedarik-dialog.component.css']
 })
 export class TedarikDialogComponent implements OnInit {
-  dialogBaslik:string; 
-  yeniKayit:Urunler;
-  islem:string;
-  frm:FormGroup;
+  dialogBaslik: string;
+  yeniKayit: Urunler;
+  islem: string;
+  frm: FormGroup;
+  katbilgi: Kategoriler;
+  uyeId: string;
+  yeniKatKayit: Kategoriler;
+
+
   constructor(
-    public dialogRef:MatDialogRef<TedarikDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data:any,
-    public frmBuild:FormBuilder,
+    public dialogRef: MatDialogRef<TedarikDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public frmBuild: FormBuilder,
     public apiServis: ApiService,
     public matDialog: MatDialog,
     public alert: MyAlertService,
-   
-  ) {this.islem=data.islem;
-    this.yeniKayit=data.kayit;
-    if(this.islem=='ekle'){
-        this.dialogBaslik="Urun Ekle"
+
+  ) {
+    this.yeniKatKayit = data.yeniKatKayit;
+    this.katbilgi = data.katbilgi;
+    this.islem = data.islem;
+    this.yeniKayit = data.kayit;
+    if (this.islem == 'ekle') {
+      this.dialogBaslik = "Urun Ekle"
 
     }
 
-    if(this.islem=='duzenle'){
-      this.dialogBaslik="Urun Düzenle"
+    if (this.islem == 'duzenle') {
+      this.dialogBaslik = "Urun Düzenle"
 
+    }
+    this.frm = this.FormOlustur();
   }
-this.frm=this.FormOlustur();
-   }
 
   ngOnInit() {
 
   }
 
-  FormOlustur(){
+  FormOlustur() {
     return this.frmBuild.group({
-      Aktiflik:[this.yeniKayit.Aktiflik],
-      Adi:[this.yeniKayit.Adi],
-      Aciklama:[this.yeniKayit.Aciklama],
-      Fiyat:[this.yeniKayit.Fiyat],
-    
+      Aktiflik: [this.yeniKayit.Aktiflik],
+      Adi: [this.yeniKayit.Adi],
+      Aciklama: [this.yeniKayit.Aciklama],
+      Fiyat: [this.yeniKayit.Fiyat],
+      kategoriId: [this.yeniKatKayit.kategoriId],
+
     })
   }
-  
+
 }

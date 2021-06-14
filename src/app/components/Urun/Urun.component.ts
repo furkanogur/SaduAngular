@@ -10,6 +10,7 @@ import { Sonuc } from 'src/app/models/Sonuc';
 import { MyAlertService } from 'src/app/services/myAlert.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { Kategoriler } from 'src/app/models/Kategori';
 
 @Component({
   selector: 'app-Urun',
@@ -17,6 +18,7 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./Urun.component.scss']
 })
 export class UrunComponent implements OnInit {
+  kategoriler: Kategoriler[];
   UyeId: string = localStorage.getItem("uyeId");
   urunler: Urunler[];
   urunId:string;
@@ -37,6 +39,7 @@ export class UrunComponent implements OnInit {
   ngOnInit() {
     this.UyeId = localStorage.getItem("uyeId");
     this.UrunListele();
+    this.KategoriListele();
   }
 
   UrunFiltrele(e) {
@@ -81,35 +84,97 @@ export class UrunComponent implements OnInit {
   // }
 
 //üye ürün ekle olabilir test !!!
+  // UyeUrunEkle() {
+  //   this.apiServis.KategoriListe().subscribe((d: any = Kategoriler) => {
+  //     this.kategoriler = d;
+  //   })
+  //   var yeniKayit: Urunler = new Urunler();
+  //   var yeniKayit: Urunler = new Urunler();
+  //   var yeniKatKayit: Kategoriler = new Kategoriler();
+  //   this.dialogRef = this.matDialog.open(UrunDialogComponent, {
+  //     width: '400px',
+  //     data: {
+  //       kayit: yeniKayit,
+  //       islem: "ekle",
+  //       katbilgi: this.kategoriler,
+  //       yeniKatKayit: yeniKatKayit
+  //     }
+  //   });
+  //   this.dialogRef.afterClosed().subscribe(d => {
+  //     if (d) {
+  //       d.UrunFoto = "urun.jpg"
+  //       d.UyeId = this.UyeId
+  //       this.apiServis.UrunEkle(d).subscribe((s: Sonuc) => {
+  //         this.alert.AlertUygula(s);
+  //         if (s.islem) {
+  //           this.UrunListele();
+  //           d.UrunId=s.id
+  //           console.log(d.UrunId)
+  //           this.apiServis.KategoriUrunEkle(d).subscribe((s: Sonuc) => {
+  //             this.alert.AlertUygula(s);
+  //             if (s.islem) {
+  //             }
+  //           });
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
+
+  KategoriListele() {
+    this.apiServis.KategoriListe().subscribe((d:any= Kategoriler) => {
+      this.kategoriler = d;
+    })
+  }
+
   UyeUrunEkle() {
+    this.apiServis.KategoriListe().subscribe((d: any = Kategoriler) => {
+      this.kategoriler = d;
+    })
     var yeniKayit: Urunler = new Urunler();
+    var yeniKatKayit: Kategoriler = new Kategoriler();
     this.dialogRef = this.matDialog.open(UrunDialogComponent, {
       width: '400px',
       data: {
         kayit: yeniKayit,
-        islem: "ekle"
+        islem: "ekle",
+        katbilgi: this.kategoriler,
+        yeniKatKayit: yeniKatKayit
       }
     });
+    console.log(yeniKatKayit)
     this.dialogRef.afterClosed().subscribe(d => {
       if (d) {
         d.UrunFoto = "urun.jpg"
         d.UyeId = this.UyeId
+        console.log(d)
+        //kat id almayı başardık
         this.apiServis.UrunEkle(d).subscribe((s: Sonuc) => {
           this.alert.AlertUygula(s);
           if (s.islem) {
             this.UrunListele();
+            d.UrunId=s.id
+            console.log(d.UrunId)
+            this.apiServis.KategoriUrunEkle(d).subscribe((s: Sonuc) => {
+              this.alert.AlertUygula(s);
+              if (s.islem) {
+              }
+            });
           }
-        });
+        });        
       }
     });
   }
 
   UrunDuzenle(kayit: Urunler) {
+    var yeniKatKayit: Kategoriler = new Kategoriler();
     this.dialogRef = this.matDialog.open(UrunDialogComponent, {
       width: '400px',
       data: {
         kayit: kayit,
-        islem: "duzenle"
+        islem: "duzenle",
+        katbilgi: this.kategoriler,
+        yeniKatKayit: yeniKatKayit
       }
     });
 
@@ -124,6 +189,13 @@ export class UrunComponent implements OnInit {
         this.apiServis.UrunDuzenle(kayit).subscribe((s: Sonuc) => {
           this.alert.AlertUygula(s);
           if (s.islem) {
+            d.UrunId=kayit.urunId
+            console.log(d.UrunId)
+            this.apiServis.KategoriUrunEkle(d).subscribe((s: Sonuc) => {
+              this.alert.AlertUygula(s);
+              if (s.islem) {
+              }
+            });
             this.UrunListele();
           }
         });
@@ -133,15 +205,21 @@ export class UrunComponent implements OnInit {
   }
 
   UrunSil(kayit: Urunler) {
+    this.apiServis.KategoriListe().subscribe((d: any = Kategoriler) => {
+      this.kategoriler = d;
+    })
     this.confirmDialogRef = this.matDialog.open(ConfirmDialogComponent, {
       width: '400px'
     });
     this.confirmDialogRef.componentInstance.dialogMesaj = kayit.Adi + " Ürünü Silinecektir Onaylıyor Musunuz?";
     this.confirmDialogRef.afterClosed().subscribe(d => {
       if (d) {
-        this.apiServis.UrunSil(kayit.urunId).subscribe((s: Sonuc) => {
+        this.apiServis.KategoriUrunSil(kayit.urunId).subscribe((s: Sonuc) => {
           console.log(s);
-          this.UrunListele();
+          this.apiServis.UrunSil(kayit.urunId).subscribe((s: Sonuc) => {
+            console.log(s);
+            this.UrunListele();
+          });
         });
       }
     });

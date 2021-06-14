@@ -2,7 +2,8 @@ import { Kategoriler } from 'src/app/models/Kategori';
 import { Urunler } from './../../../models/Urunler';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MyAlertService } from 'src/app/services/myAlert.service';
 
 @Component({
   selector: 'app-urun-dialog',
@@ -19,14 +20,19 @@ export class UrunDialogComponent implements OnInit {
   islem: string;
   frm: FormGroup;
   constructor(
-    public dialogRef: MatDialogRef<UrunDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public frmBuild: FormBuilder,
+    public matDialog: MatDialog,
+    public alert: MyAlertService,
+    public dialogRef: MatDialogRef<UrunDialogComponent>,
+ 
+   
   ) { 
     this.katbilgi = data.katbilgi;
     this.islem = data.islem;
     this.yeniKayit = data.kayit;
     this.yeniKatKayit=data.yeniKatKayit;
+
 
     if (this.islem == 'ekle') {
       this.dialogBaslik = "Ürün Ekle"
