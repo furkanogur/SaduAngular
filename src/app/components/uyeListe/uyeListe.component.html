@@ -1,11 +1,5 @@
 <div class="container">
     <h1>{{secUrun?.Adi}}</h1>
-    <button mat-fab color="primary" [routerLink]="['/urun']">
-        <mat-icon aria-label="label">arrow_back</mat-icon>
-    </button>&nbsp;
-    <p></p>
-
-
 
     <mat-card class="example-card">
         <mat-card-header>
@@ -24,7 +18,7 @@
             <p></p>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="accent">Satın Al</button>
+            <button mat-raised-button color="accent" [routerLink]="['/siparis',secUrun.urunId]">Satın Al</button>
             <button mat-raised-button color="warn">Beğen (!! Test Aşamasında !!)</button>
         </mat-card-actions>
     </mat-card>

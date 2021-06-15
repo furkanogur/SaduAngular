@@ -115,6 +115,11 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit"> {{kayit.SiparisDurum?.SiparisDurumu1}} </mat-cell>
         </ng-container>
+        <ng-container matColumnDef="FirmaAdi">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Kargo Durumu
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.SiparisKargo?.FirmaAdi}} </mat-cell>
+        </ng-container>
         <ng-container matColumnDef="islemler">
             <mat-header-cell *matHeaderCellDef> Detaylar
             </mat-header-cell>

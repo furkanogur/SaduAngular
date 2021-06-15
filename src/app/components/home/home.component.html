@@ -43,9 +43,7 @@
             <mat-header-cell *matHeaderCellDef> İşlemler
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit">
-                <button mat-icon-button matTooltip="Detaylar" [routerLink]="['/uyelistele',kayit.urunId]">
-                    <mat-icon aria-label="label">info</mat-icon>
-                </button>
+                <button mat-raised-button [routerLink]="['/siparis',kayit.urunId]" color="accent">Detaylar</button>
             </mat-cell>
         </ng-container>
 

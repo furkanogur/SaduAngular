@@ -54,7 +54,7 @@ export class HesabimComponent implements OnInit {
   SiparislerimdataSource: any;
   GonderilecekdataSource: any;
   displayedColumns = ['UrunFoto', 'Adi', 'Aciklama', 'Fiyat', 'Aktiflik', 'islemler']
-  SiparislerimdisplayedColumns = ['SiparisUrun', 'SiparisUrun2', 'SiparisUrun3', 'Fiyat', 'SiparisDurum', 'islemler']
+  SiparislerimdisplayedColumns = ['SiparisUrun', 'SiparisUrun2', 'SiparisUrun3', 'Fiyat', 'SiparisDurum','FirmaAdi', 'islemler']
   GonderilecekdisplayedColumns = ['SiparisUrun', 'SiparisUrun2', 'SiparisUrun3', 'Fiyat', 'SiparisDurum', 'SiparisUye', 'islemler']
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;

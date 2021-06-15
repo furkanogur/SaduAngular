@@ -1,18 +1,43 @@
 <div class="container">
-    <mat-card class="example-card" style="float: left;">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image"><img [src]="apiServis.siteUrl+'/Dosyalar/'+secUye?.UyeFoto" alt="" style="width: 50px; height: 50px;  border-radius: 50%;"></div>
-            <mat-card-title>{{secUrun?.Adi}}</mat-card-title>
-            <mat-card-subtitle>{{secIletisim?.Ad}} {{secIletisim?.Soyad}}</mat-card-subtitle>
-        </mat-card-header>
-        <img [src]="apiServis.siteUrl+'/Dosyalar/'+secUrun?.UrunFoto" style="width: 400px; height: auto;">
-        <mat-card-content>
-            <p>
-                {{secUrun?.Aciklama}}
-            </p>
-            <p>Fiyat : {{secUrun?.Fiyat |currency : '₺'}}</p>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-raised-button color="accent" (click)="SiparisEkle()">Satın Al</button>
-        </mat-card-actions>
-    </mat-card>
+
+    <div style="width: 100%;">
+
+
+        <div style="width: 50%px; float: left;">
+            <mat-card class="example-card" style="float: left;">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"><img [src]="apiServis.siteUrl+'/Dosyalar/'+secUye?.UyeFoto" alt="" style="width: 50px; height: 50px;  border-radius: 50%;"></div>
+                    <mat-card-title>{{secUrun?.Adi}}</mat-card-title>
+                    <mat-card-subtitle>{{secIletisim?.Ad}} {{secIletisim?.Soyad}}</mat-card-subtitle>
+                </mat-card-header>
+                <img [src]="apiServis.siteUrl+'/Dosyalar/'+secUrun?.UrunFoto" style="width: 400px; height: auto;">
+                <mat-card-content>
+                    <p>
+                        {{secUrun?.Aciklama}}
+                    </p>
+                    <p>Fiyat : {{secUrun?.Fiyat |currency : '₺'}}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="SiparisEkle()">Satın Al</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+        <div style="width: 20%;float: left; margin-left: 1%;">
+            <mat-card class="example-card" style="float: left;">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"><img [src]="apiServis.siteUrl+'/Dosyalar/'+secUye?.UyeFoto" alt="" style="width: 50px; height: 50px;  border-radius: 50%;"></div>
+                    <mat-card-title>{{secUrun?.Adi}}</mat-card-title>
+                    <mat-card-subtitle>{{secIletisim?.Ad}} {{secIletisim?.Soyad}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>
+                        <b>Satıcı Adı Soyadı :</b> {{secIletisim?.Ad}} {{secIletisim?.Soyad}}
+                    </p>
+                    <p>
+                        <b>Satıcı Adresi :</b> {{secIletisim?.Adres}}
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+    </div>

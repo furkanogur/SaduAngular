@@ -99,7 +99,7 @@ export class SiparisComponent implements OnInit {
         d.KargoUcreti = 15
         d.SiparisDurumuId="1851b696-d421-4cf0-b53d-a18428490c53"
         d.KargoId ="7f3d3bd3-40ec-43f8-810e-5c02a71b0b0c"
-        d.SiparisTarihi ="2021-06-14"
+        d.SiparisTarihi ="2021-06-15T11:43:54.738Z"
         this.apiServis.SiparisEkle(d).subscribe((s: Sonuc) => {
           this.alert.AlertUygula(s);
           console.log(d)
