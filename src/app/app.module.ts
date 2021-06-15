@@ -1,3 +1,4 @@
+import { AdminSiparislerComponent } from './components/admin-siparisler/admin-siparisler.component';
 import { UyeDetaylarComponent } from './components/dialogs/uye-detaylar/uye-detaylar.component';
 import { TedarikciDetayComponent } from './components/dialogs/tedarikci-detay/tedarikci-detay.component';
 import { SiparisduzenleDialogComponent } from './components/dialogs/siparisduzenle-dialog/siparisduzenle-dialog.component';
@@ -53,6 +54,7 @@ import { KategoriDialogComponent } from './components/dialogs/kategori-dialog/ka
     KategoriListeleComponent,
     UrunAraComponent,
     SiparisComponent,
+    AdminSiparislerComponent,
 
 
     //Dialoglar

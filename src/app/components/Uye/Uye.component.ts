@@ -1,8 +1,9 @@
+import { Siparis } from 'src/app/models/siparis';
+import { Sonuc } from 'src/app/models/Sonuc';
 import { UyeFoto } from './../../models/UyeFoto';
 import { FotoyukleDialogComponent } from './../dialogs/fotoyukle-dialog/fotoyukle-dialog.component';
 import { ConfirmDialogComponent } from './../dialogs/confirm-dialog/confirm-dialog.component';
 import { MyAlertService } from './../../services/myAlert.service';
-import { Sonuc } from './../../models/Sonuc';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ApiService } from './../../services/api.service';
 import { Uye } from './../../models/Uye';
@@ -21,8 +22,10 @@ import { Iletisim } from 'src/app/models/Iletisim';
 export class UyeComponent implements OnInit {
   //UyeId: string = localStorage.getItem("uyeId");
   uyeId: string;
+  siparisId: string;
   uyeler: Uye[];
   secIletisim: Iletisim;
+  secSiparis: Siparis;
   dialogRef: MatDialogRef<UyeDialogComponent>
   confirmDialogRef: MatDialogRef<ConfirmDialogComponent>
   fotoDialogRef: MatDialogRef<FotoyukleDialogComponent>
@@ -41,6 +44,8 @@ export class UyeComponent implements OnInit {
 
   ngOnInit() {
     this.UyeListele();
+    this.SiparisGetir();
+    this.SiparisListele();
   }
 
   UyeListele() {
@@ -78,7 +83,7 @@ export class UyeComponent implements OnInit {
     });
     this.dialogRef.afterClosed().subscribe(d => {
       if (d) {
-        d.UyeFoto= "profil.jpg"
+        d.UyeFoto = "profil.jpg"
         this.apiServis.UyeEkle(d).subscribe((s: Sonuc) => {
           this.alert.AlertUygula(s);
           if (s.islem) {
@@ -96,7 +101,7 @@ export class UyeComponent implements OnInit {
       data: {
         kayit: kayit,
         islem: "duzenle",
-        hesabim:true
+        hesabim: true
       }
     });
 
@@ -117,25 +122,42 @@ export class UyeComponent implements OnInit {
     });
 
   }
+  SiparisGetir() {
+    this.apiServis.SiparisalanUById(this.uyeId).subscribe((d: Siparis) => {
+      this.secSiparis = d;
+    })
+  }
+  SiparisListele() {
+    this.apiServis.SiparisListe().subscribe((d: Siparis) => {
+      this.secSiparis = d;
+    })
+  }
 
   Sil(kayit: Uye) {
     this.confirmDialogRef = this.matDialog.open(ConfirmDialogComponent, {
       width: '500px',
 
     })
-
-    this.confirmDialogRef.componentInstance.dialogMesaj = kayit.Email + "  - Emaili de belirtilen üye silinecektir Onaylıyor musunuz?"
-
-    this.confirmDialogRef.afterClosed().subscribe(d => {
-      if (d) {
-        this.apiServis.UyeSil(kayit.uyeId).subscribe((s: Sonuc) => {
-          this.alert.AlertUygula(s);
-          this.UyeListele();
-        })
-      }
+    this.apiServis.SiparisVerenById(kayit.uyeId).subscribe((d: Siparis) => {
+      this.secSiparis = d;
+      this.siparisId = d.siparisId;
+      this.confirmDialogRef.componentInstance.dialogMesaj = kayit.Email + "  - Emaili de belirtilen üye silinecektir Onaylıyor musunuz?"
+      this.confirmDialogRef.afterClosed().subscribe(d => {
+        if (d) {
+          this.apiServis.SiparisSil(this.siparisId).subscribe((s: Sonuc) => {
+            console.log(s);
+            console.log(this.siparisId);
+            this.alert.AlertUygula(s);
+          this.apiServis.UyeSil(kayit.uyeId).subscribe((s: Sonuc) => {
+            this.alert.AlertUygula(s);
+            this.UyeListele();
+          });
+        });
+        }
+      })
     })
-
   }
+
 
   FotoGuncelle(kayit: Uye) {
     this.fotoDialogRef = this.matDialog.open(FotoyukleDialogComponent, {

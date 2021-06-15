@@ -1,3 +1,4 @@
+import { UyeDetaylarComponent } from './../dialogs/uye-detaylar/uye-detaylar.component';
 import { TedarikciDetayComponent } from './../dialogs/tedarikci-detay/tedarikci-detay.component';
 import { Kargo } from './../../models/Kargo';
 import { SiparisDurum } from './../../models/SiparisDurum';
@@ -38,10 +39,17 @@ export class HesabimComponent implements OnInit {
   siparisDurum: SiparisDurum[];
   kargo: Kargo[];
   secUye: Uye;
+  TedarikUye: Uye;
+  Siparislerveren: Siparis;
+  AliciUye: Uye;
   secUrun: Urunler;
   kayit:Siparis;
+  siparisdurum:boolean =false;
 
   secIletisim: Iletisim;
+  TedariksecIletisim: Iletisim;
+  UyesecIletisim: Iletisim;
+  secSiparis: Siparis;
   dataSource: any;
   SiparislerimdataSource: any;
   GonderilecekdataSource: any;
@@ -52,6 +60,7 @@ export class HesabimComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   dialogRef: MatDialogRef<TedarikDialogComponent>
   TedarikciDetayGorDialogRef: MatDialogRef<TedarikciDetayComponent>
+  UyeDetayGorDialogRef: MatDialogRef<UyeDetaylarComponent>
   urunDialogRef: MatDialogRef<UrunDialogComponent>
   uyeDialogRef: MatDialogRef<UyeDialogComponent>
   fotoDialogRef: MatDialogRef<UrunfotoDialogComponent>;
@@ -118,18 +127,19 @@ export class HesabimComponent implements OnInit {
   //Sipariş alan
   SiparisAlanListele() {
     this.apiServis.SiparisalanUById(this.UyeId).subscribe((d: Urunler[]) => {
-      this.kayitlar = d;
+      this.kayitlar = d;  
       this.GonderilecekdataSource = new MatTableDataSource(d);
       this.GonderilecekdataSource.sort = this.sort
       this.GonderilecekdataSource.paginator = this.paginator
-      console.log(this.GonderilecekdataSource)
+      
     })
+    
   }
  
   //Sipariş veren
   SiparisVerenListele() {
     this.apiServis.SiparisVerenById(this.UyeId).subscribe((d: Urunler[]) => {
-      this.kayitlar = d;
+      this.kayitlar = d; 
       this.SiparislerimdataSource = new MatTableDataSource(d);
       this.SiparislerimdataSource.sort = this.sort
       this.SiparislerimdataSource.paginator = this.paginator
@@ -182,23 +192,72 @@ export class HesabimComponent implements OnInit {
       }
     })
   }
+  SiparisGetir(kayit: Siparis){
+    this.apiServis.SiparisById(kayit.siparisId).subscribe((d:Siparis)=>{
+      this.secSiparis = d;
+    })
+  }
+
+  SiparisSil(kayit: Siparis) {
+    console.log(kayit.SiparisDurum.SiparisDurumu1)
+    if(kayit.SiparisDurum.SiparisDurumu1 == "Sipariş Tamamlandı"){
+      this.siparisdurum=true;
+    }
+
+    this.apiServis.IletisimById(kayit.UyeId).subscribe((d:Iletisim)=>{
+      this.secIletisim = d;
+    })
+    this.confirmDialogRef = this.matDialog.open(ConfirmDialogComponent, {
+      width: '400px'
+    });
+    this.confirmDialogRef.componentInstance.dialogMesaj = kayit.SiparisUrun.Adi + " Adlı Ürün " + this.secIletisim.Ad+" "+this.secIletisim.Soyad + " Adlı Kişiye Teslim Edildiyse Sipariş Silinecektir Onaylıyormusunuz??";
+    this.confirmDialogRef.afterClosed().subscribe(d => {
+      if (d) {
+        this.apiServis.SiparisSil(kayit.siparisId).subscribe((s: Sonuc) => {
+          this.SiparisGetir(kayit)
+        });
+      }
+    });
+  }
   
   DetayGor(TedarikUyeId:string){
     this.apiServis.UyeById(TedarikUyeId).subscribe((d: Uye) => {
-      this.secUye = d;
+      this.TedarikUye = d;
+      this.apiServis.IletisimById(this.TedarikUye.uyeId).subscribe((d: Iletisim) => {
+        this.TedariksecIletisim = d;
+        this.TedarikciDetayGorDialogRef = this.matDialog.open(TedarikciDetayComponent, {
+          width: '400px',
+          data: {
+            iletisim:this.TedariksecIletisim,
+            uyedetay:this.TedarikUye,
+            kayit:this.kayit,
+            tedarikUyeId:TedarikUyeId
+          }
+        });   
+
+      })
     })
-    this.apiServis.IletisimById(TedarikUyeId).subscribe((d: Iletisim) => {
-      this.secIletisim = d;
+   
+    
+  }
+
+  AliciGor(UyeId:string){
+    this.apiServis.UyeById(UyeId).subscribe((d: Uye) => {
+      this.AliciUye = d;
+      this.apiServis.IletisimById(this.AliciUye.uyeId).subscribe((d: Iletisim) => {
+        this.UyesecIletisim = d;
+        this.UyeDetayGorDialogRef = this.matDialog.open(UyeDetaylarComponent, {
+          width: '400px',
+          data: {
+            iletisim:this.secIletisim,
+            uyedetay:this.AliciUye,
+            kayit:this.kayit,
+          }
+        }); 
+      })
     })
-    this.TedarikciDetayGorDialogRef = this.matDialog.open(TedarikciDetayComponent, {
-      width: '400px',
-      data: {
-        iletisim:this.secIletisim,
-        uyedetay:this.secUye,
-        kayit:this.kayit,
-        tedarikUyeId:TedarikUyeId
-      }
-    });   
+    
+      
   }
 
 

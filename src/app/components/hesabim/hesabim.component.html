@@ -184,14 +184,14 @@
             <mat-header-cell *matHeaderCellDef> İşlemler
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit">
-                <button mat-icon-button matTooltip="Detaylar" [routerLink]="['/uyelistele',kayit.urunId]">
+                <button mat-icon-button matTooltip="Detaylar" (click)="DetayGor(kayit.UyeId)">
                 <mat-icon aria-label="label">info</mat-icon>
             </button>
                 <button mat-icon-button color="accent">
                   <mat-icon aria-label="label" (click)="SiparisDuzenle(kayit)">edit</mat-icon>
                 </button>
                 <button mat-icon-button color="warn">
-        <mat-icon aria-label="label" (click)="UrunSil(kayit)">delete</mat-icon>
+        <mat-icon aria-label="label" (click)="SiparisSil(kayit)" *ngIf="siparisdurum">delete</mat-icon>
       </button>
             </mat-cell>
 

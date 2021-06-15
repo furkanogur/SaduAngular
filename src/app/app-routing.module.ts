@@ -1,3 +1,4 @@
+import { AdminSiparislerComponent } from './components/admin-siparisler/admin-siparisler.component';
 import { SiparisComponent } from './components/Siparis/Siparis.component';
 import { UrunAraComponent } from './components/urunAra/urunAra.component';
 import { KategoriListeleComponent } from './components/KategoriListele/KategoriListele.component';
@@ -74,6 +75,10 @@ const routes: Routes = [
   {
     path: 'kategoriler',
     component: KategorilerComponent
+  },//admin
+  {
+    path: 'admsiparis',
+    component: AdminSiparislerComponent
   },
 ];
 

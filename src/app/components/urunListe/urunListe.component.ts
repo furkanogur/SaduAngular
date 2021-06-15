@@ -199,6 +199,7 @@ export class UrunListeComponent implements OnInit {
       }
     });
   }
+  
 
 
 }

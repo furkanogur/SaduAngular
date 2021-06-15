@@ -1,30 +1,52 @@
-<div class="container">
-
-    <form [formGroup]="frm">
-        <mat-form-field appearance="outline">
-            <mat-select formControlName="kategoriId">
-                <mat-option [value]="Kategori.kategoriId" *ngFor="let Kategori of kategoriler" [routerLink]="['/kategorilistele',Kategori.kategoriId,Kategori.KatAdi]">
-                    {{Kategori.KatAdi}}
-                </mat-option>
-            </mat-select>
+<div class="container" style="width: 100%;">
+    <div>
+        <mat-form-field appearance="outline" style="width: 45%; float: left;" color="accent">
+            <mat-label color="accent">Ara</mat-label>
+            <input matInput placeholder="Aranacak Bir Değer Giriniz" (keyup)="UrunFiltrele($event)" color="accent">
         </mat-form-field>
-    </form>
 
-    <mat-table [dataSource]="dataSource" matSort>
-        <ng-container matColumnDef="Adi">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Ürünün Adı
+        <form [formGroup]="frm" style="margin-left: 10%; width: 45%; float: left;" color="accent">
+            <mat-form-field appearance="outline" color="accent">
+                <mat-label color="accent">Kategoriler</mat-label>
+                <mat-select formControlName="kategoriId" color="accent">
+                    <mat-option color="accent" [value]="Kategori.kategoriId" *ngFor="let Kategori of kategoriler" [routerLink]="['/kategorilistele',Kategori.kategoriId,Kategori.KatAdi]">
+                        {{Kategori.KatAdi}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+    </div>
+    <div>&nbsp;</div>
+
+    <mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="UrunFoto">
+            <mat-header-cell *matHeaderCellDef> Fotoğraf
             </mat-header-cell>
-            <mat-cell *matCellDef="let kayit"> {{kayit.urunBilgi.Adi}} </mat-cell>
+            <mat-cell *matCellDef="let kayit"> <img [src]="apiServis.siteUrl+'/Dosyalar/'+kayit.UrunFoto" alt="" style="width: 100px;"> </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Adi">
+            <mat-header-cell *matHeaderCellDef> Ürünün Adı
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.Adi}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="Aciklama">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Açıklama
+            <mat-header-cell *matHeaderCellDef> Açıklama
             </mat-header-cell>
-            <mat-cell *matCellDef="let kayit"> {{kayit.urunBilgi.Aciklama}} </mat-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.Aciklama}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="Fiyat">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Fiyat
+            <mat-header-cell *matHeaderCellDef> Fiyat
             </mat-header-cell>
-            <mat-cell *matCellDef="let kayit"> {{kayit.urunBilgi.Fiyat | currency: '₺'}} </mat-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.Fiyat | currency: '₺'}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="islemler">
+            <mat-header-cell *matHeaderCellDef> İşlemler
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit">
+                <button mat-icon-button matTooltip="Detaylar" [routerLink]="['/uyelistele',kayit.urunId]">
+                    <mat-icon aria-label="label">info</mat-icon>
+                </button>
+            </mat-cell>
         </ng-container>
 
 
@@ -32,8 +54,5 @@
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
-    <mat-paginator [pageSizeOptions]="[5,10,25,100]" showFirstLastButtons>
-    </mat-paginator>
-
 
 </div>

@@ -1,3 +1,11 @@
-<p>
-  uye-detaylar works!
-</p>
+<mat-toolbar color="primary" class="mat-elevation-z8">
+    <span>{{iletisim?.Ad}} {{iletisim?.Soyad}}</span>
+</mat-toolbar>
+<img [src]="apiServis.siteUrl+'/Dosyalar/'+uyedetay?.UyeFoto" alt="" style="width: 200px; height: 200px;">&nbsp;
+<p><b>Adı Soyadı : </b>{{iletisim?.Ad}} {{iletisim?.Soyad}}</p>
+<p><b>Adres : </b>{{iletisim?.Adres}}</p>
+<p><b>Telefon : </b>{{iletisim?.Telefon}}</p>
+<p><b>E-mail : </b>{{uyedetay?.Email}}</p>
+
+
+<button mat-raised-button color="warn" (click)="dialogRef.close()">İptal</button>
