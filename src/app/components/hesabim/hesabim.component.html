@@ -6,9 +6,7 @@
     <mat-form-field appearance="outline">
         <input matInput placeholder="Aranacak Bir Değer Giriniz" (keyup)="UrunFiltrele($event)">
     </mat-form-field>
-    <button mat-fab color="primary" [routerLink]="['/uye']">
-  <mat-icon aria-label="label">arrow_back</mat-icon>
-</button>&nbsp;
+    &nbsp;
     <button mat-fab color="accent">
   <mat-icon aria-label="label" matTooltip="Ürün Ekle" (click)="UyeUrunEkle()">add_shopping_cart</mat-icon>
 </button>
@@ -116,7 +114,7 @@
             <mat-cell *matCellDef="let kayit"> {{kayit.SiparisDurum?.SiparisDurumu1}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="FirmaAdi">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Kargo Durumu
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Kargo Firması
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit"> {{kayit.SiparisKargo?.FirmaAdi}} </mat-cell>
         </ng-container>

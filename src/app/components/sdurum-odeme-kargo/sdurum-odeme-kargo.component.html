@@ -1,0 +1,78 @@
+<div class="container">
+    <h3>Siparis Durumları</h3>
+    <button mat-fab color="primary">
+        <mat-icon aria-label="label" matTooltip="Siparis Durumu Ekle" (click)="sdEkle()">add</mat-icon>
+      </button>
+    <p></p>
+    <mat-table [dataSource]="sdurumdataSource">
+        <ng-container matColumnDef="SiparisDurumu1">
+            <mat-header-cell *matHeaderCellDef> Sipariş durumları
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.SiparisDurumu1}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="islemler">
+            <mat-header-cell *matHeaderCellDef> İşlemler
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit">
+                <button mat-raised-button (click)="SdurumDuzenle(kayit)" color="accent">Düzenle</button> &nbsp;&nbsp;
+                <button mat-raised-button [routerLink]="['/siparis',kayit.urunId]" color="warn">Sil</button>
+            </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="sdurumdisplayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: sdurumdisplayedColumns;"></mat-row>
+    </mat-table>
+
+    &nbsp;
+
+    <h3>Kargo</h3>
+    <button mat-fab color="primary">
+        <mat-icon aria-label="label" matTooltip="Kargo Ekle" (click)="kargoEkle()">add</mat-icon>
+      </button>
+    <p></p>
+    <mat-table [dataSource]="kargodataSource">
+        <ng-container matColumnDef="FirmaAdi">
+            <mat-header-cell *matHeaderCellDef> Firma Adı
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.FirmaAdi}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Telefon">
+            <mat-header-cell *matHeaderCellDef> Firma Telefonu
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.Telefon}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="islemler">
+            <mat-header-cell *matHeaderCellDef> İşlemler
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit">
+                <button mat-raised-button (click)="KargoDuzenle(kayit)" color="accent">Duzenle</button> &nbsp;&nbsp;
+                <button mat-raised-button [routerLink]="['/siparis',kayit.urunId]" color="warn">Sil</button>
+            </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="kargodisplayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: kargodisplayedColumns;"></mat-row>
+    </mat-table>
+    &nbsp;
+
+    <h3>Ödeme Çeşiti</h3>
+    <button mat-fab color="primary">
+        <mat-icon aria-label="label" matTooltip="Odeme Ekle" (click)="OdemeEkle()">add</mat-icon>
+      </button>
+    <p></p>
+    <mat-table [dataSource]="odemedataSource">
+        <ng-container matColumnDef="OdemeCesiti">
+            <mat-header-cell *matHeaderCellDef> Ödeme Çeşiti
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.OdemeCesiti}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="islemler">
+            <mat-header-cell *matHeaderCellDef> İşlemler
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit">
+                <button mat-raised-button (click)="OdemeDuzenle(kayit)" color="accent">Düzenle</button> &nbsp;&nbsp;
+                <button mat-raised-button [routerLink]="['/siparis',kayit.urunId]" color="warn">Sil</button>
+            </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="odemedisplayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: odemedisplayedColumns;"></mat-row>
+    </mat-table>
+</div>

@@ -1,0 +1,55 @@
+<mat-toolbar color="primary" class="mat-elevation-z8">
+    <span>{{dialogBaslik}}</span>
+</mat-toolbar>
+<div class="container" *ngIf="acKapa==1">
+    <form [formGroup]="frm">
+        <mat-form-field appearance="outline">
+            <mat-label>Siparis Durumu</mat-label>
+            <input matInput placeholder="SiparisDurumu1" formControlName="SiparisDurumu1" name="SiparisDurumu1" required type="text">
+        </mat-form-field>
+    </form>
+
+    <button mat-raised-button color="accent" [disabled]="frm.invalid" (click)="dialogRef.close(frm.value)">Kaydet</button>&nbsp;
+    <button mat-raised-button color="warn" (click)="dialogRef.close()">İptal</button>
+
+</div>
+
+
+
+
+
+
+<div class="container" *ngIf="acKapa == 2">
+    <form [formGroup]="frm">
+        <mat-form-field appearance="outline">
+            <mat-label>Firma Adı</mat-label>
+            <input matInput placeholder="FirmaAdi" formControlName="FirmaAdi" name="FirmaAdi" required type="text">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Telefon</mat-label>
+            <input matInput placeholder="Telefon" formControlName="Telefon" name="Telefon" required type="text">
+        </mat-form-field>
+    </form>
+
+    <button mat-raised-button color="accent" [disabled]="frm.invalid" (click)="dialogRef.close(frm.value)">Kaydet</button>&nbsp;
+    <button mat-raised-button color="warn" (click)="dialogRef.close()">İptal</button>
+
+</div>
+
+
+
+
+
+
+<div class="container" *ngIf="acKapa==3">
+    <form [formGroup]="frm">
+        <mat-form-field appearance="outline">
+            <mat-label>Ödeme Çeşiti</mat-label>
+            <input matInput placeholder="OdemeCesiti" formControlName="OdemeCesiti" name="OdemeCesiti" required type="text">
+        </mat-form-field>
+    </form>
+
+    <button mat-raised-button color="accent" [disabled]="frm.invalid" (click)="dialogRef.close(frm.value)">Kaydet</button>&nbsp;
+    <button mat-raised-button color="warn" (click)="dialogRef.close()">İptal</button>
+
+</div>

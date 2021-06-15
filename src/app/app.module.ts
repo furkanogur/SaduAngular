@@ -1,3 +1,5 @@
+import { SdurumKargoOdemeDialogComponent } from './components/dialogs/sdurumKargoOdeme-dialog/sdurumKargoOdeme-dialog.component';
+import { SdurumOdemeKargoComponent } from './components/sdurum-odeme-kargo/sdurum-odeme-kargo.component';
 import { AdminSiparislerComponent } from './components/admin-siparisler/admin-siparisler.component';
 import { UyeDetaylarComponent } from './components/dialogs/uye-detaylar/uye-detaylar.component';
 import { TedarikciDetayComponent } from './components/dialogs/tedarikci-detay/tedarikci-detay.component';
@@ -31,12 +33,14 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { UyeDialogComponent } from './components/dialogs/uye-dialog/uye-dialog.component';
 import { UrunListeComponent } from './components/urunListe/urunListe.component';
 import { KategoriDialogComponent } from './components/dialogs/kategori-dialog/kategori-dialog.component';
+import { AuthGuard } from './services/AuthGuard';
+import { AuthInterceptor } from './services/AuthInterceptor';
 
 @NgModule({
   declarations: [
@@ -55,6 +59,7 @@ import { KategoriDialogComponent } from './components/dialogs/kategori-dialog/ka
     UrunAraComponent,
     SiparisComponent,
     AdminSiparislerComponent,
+    SdurumOdemeKargoComponent,
 
 
     //Dialoglar
@@ -70,7 +75,8 @@ import { KategoriDialogComponent } from './components/dialogs/kategori-dialog/ka
     SiparisDialogComponent,
     SiparisduzenleDialogComponent,
     TedarikciDetayComponent,
-    UyeDetaylarComponent
+    UyeDetaylarComponent,
+    SdurumKargoOdemeDialogComponent
 
 
   ],
@@ -95,11 +101,13 @@ import { KategoriDialogComponent } from './components/dialogs/kategori-dialog/ka
     SiparisDialogComponent,
     SiparisduzenleDialogComponent,
     TedarikciDetayComponent,
-    UyeDetaylarComponent
+    UyeDetaylarComponent,
+    SdurumKargoOdemeDialogComponent
 
 
   ],
-  providers: [MyAlertService, ApiService],
+  providers: [MyAlertService, ApiService, AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

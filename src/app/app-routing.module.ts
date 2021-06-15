@@ -1,3 +1,4 @@
+import { SdurumOdemeKargoComponent } from './components/sdurum-odeme-kargo/sdurum-odeme-kargo.component';
 import { AdminSiparislerComponent } from './components/admin-siparisler/admin-siparisler.component';
 import { SiparisComponent } from './components/Siparis/Siparis.component';
 import { UrunAraComponent } from './components/urunAra/urunAra.component';
@@ -13,6 +14,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UrunListeComponent } from './components/urunListe/urunListe.component';
+import { AuthGuard } from './services/AuthGuard';
 
 
 const routes: Routes = [
@@ -24,12 +26,22 @@ const routes: Routes = [
   //admin
   {
     path: 'uye',
-    component: UyeComponent
+    component: UyeComponent,
+    canActivate: [AuthGuard],
+    data: {
+      yetkiler: ["Admin"],
+      gerigit: "/"
+    }
   },
   //admin
   {
     path: 'urun',
-    component: UrunComponent
+    component: UrunComponent,
+    canActivate: [AuthGuard],
+    data: {
+      yetkiler: ["Admin"],
+      gerigit: "/"
+    }
   },
   //herkes
   {
@@ -74,11 +86,32 @@ const routes: Routes = [
   //admin
   {
     path: 'kategoriler',
-    component: KategorilerComponent
-  },//admin
+    component: KategorilerComponent,
+    canActivate: [AuthGuard],
+    data: {
+      yetkiler: ["Admin"],
+      gerigit: "/"
+    }
+  },
+  //admin
   {
     path: 'admsiparis',
-    component: AdminSiparislerComponent
+    component: AdminSiparislerComponent,
+    canActivate: [AuthGuard],
+    data: {
+      yetkiler: ["Admin"],
+      gerigit: "/"
+    }
+  },
+  //admin
+  {
+    path: 'sdurumodemekargo',
+    component: SdurumOdemeKargoComponent,
+    canActivate: [AuthGuard],
+    data: {
+      yetkiler: ["Admin"],
+      gerigit: "/"
+    }
   },
 ];
 
