@@ -28,11 +28,11 @@ import { SiparisDialogComponent } from '../dialogs/siparis-dialog/siparis-dialog
 export class HomeComponent implements OnInit {
   uyeAdi: string;
   kategoriler: Kategoriler[];
-  kategoriById:string;
+  kategoriById: string;
   urunler: Urunler[];
   secKategori: Kategoriler[];
-  kategoriId:string;
-  frm:FormGroup;
+  kategoriId: string;
+  frm: FormGroup;
   dataSource: any;
   @ViewChild(MatSort) sort: MatSort;
   odeme: Odeme[];
@@ -40,12 +40,12 @@ export class HomeComponent implements OnInit {
   UrunId: string;
   secUrun: Urunler;
   UyeId: string;
-  Fiyat:number;
+  Fiyat: number;
   secUye: Uye;
   secIletisim: Iletisim;
   secSiparis: Siparis;
-  TedarikUyeId:string;
-  urunFoto:string;
+  TedarikUyeId: string;
+  urunFoto: string;
   dialogRef: MatDialogRef<SiparisDialogComponent>
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns = ['UrunFoto', 'Adi', 'Aciklama', 'Fiyat', 'islemler']
@@ -90,14 +90,14 @@ export class HomeComponent implements OnInit {
 
 
 
-  
+
   KategoriListele() {
     this.apiServis.KategoriListe().subscribe((d: any = Kategoriler) => {
       this.kategoriler = d;
     })
   }
-  KategoriUrunById(akategoriId:string) {
-    this.apiServis.KategoriUrunListe(akategoriId).subscribe((d:any=Kategoriler) =>{
+  KategoriUrunById(akategoriId: string) {
+    this.apiServis.KategoriUrunListe(akategoriId).subscribe((d: any = Kategoriler) => {
       this.secKategori = d;
       this.dataSource = new MatTableDataSource(d);
       this.dataSource.sort = this.sort
@@ -106,7 +106,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  katıdgetir(kategoriId:string){
+  katıdgetir(kategoriId: string) {
     console.log(kategoriId);
   }
 
@@ -129,7 +129,7 @@ export class HomeComponent implements OnInit {
   }
 
   OdemeListele() {
-    this.apiServis.OdemeListe().subscribe((d:any= Odeme) => {
+    this.apiServis.OdemeListe().subscribe((d: any = Odeme) => {
       this.odeme = d;
     })
   }
@@ -145,10 +145,10 @@ export class HomeComponent implements OnInit {
       data: {
         kayit: yeniKayit,
         islem: "ekle",
-        secUrun:this.secUrun,
-        secUye:this.secUye,
-        secOdeme:this.odeme
-      
+        secUrun: this.secUrun,
+        secUye: this.secUye,
+        secOdeme: this.odeme
+
 
 
       }
@@ -160,11 +160,11 @@ export class HomeComponent implements OnInit {
         d.UyeId = this.uyeId
         d.UrunId = this.UrunId
         d.Fiyat = this.Fiyat
-        d.TedarikUyeId =this.TedarikUyeId
+        d.TedarikUyeId = this.TedarikUyeId
         d.KargoUcreti = 15
-        d.SiparisDurumuId="1851b696-d421-4cf0-b53d-a18428490c53"
-        d.KargoId ="7f3d3bd3-40ec-43f8-810e-5c02a71b0b0c"
-        d.SiparisTarihi ="2021-06-14"
+        d.SiparisDurumuId = "1851b696-d421-4cf0-b53d-a18428490c53"
+        d.KargoId = "7f3d3bd3-40ec-43f8-810e-5c02a71b0b0c"
+        d.SiparisTarihi = "2021-06-14"
         this.apiServis.SiparisEkle(d).subscribe((s: Sonuc) => {
           this.alert.AlertUygula(s);
           console.log(d)

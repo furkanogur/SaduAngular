@@ -20,7 +20,6 @@ import { Iletisim } from 'src/app/models/Iletisim';
   styleUrls: ['./Uye.component.scss']
 })
 export class UyeComponent implements OnInit {
-  //UyeId: string = localStorage.getItem("uyeId");
   uyeId: string;
   siparisId: string;
   uyeler: Uye[];
@@ -31,9 +30,7 @@ export class UyeComponent implements OnInit {
   fotoDialogRef: MatDialogRef<FotoyukleDialogComponent>
   dataSource: any;
   displayedColumns = ['UyeFoto', 'KullaniciAdi', 'Sifre', 'Email', 'UyeUrunSayisi', 'admin', 'islemler']
-  //sıralama
   @ViewChild(MatSort) sort: MatSort;
-  //sayfalama
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
@@ -78,7 +75,8 @@ export class UyeComponent implements OnInit {
       width: '400px',
       data: {
         kayit: yeniKayit,
-        islem: "ekle"
+        islem: "ekle",
+        hesabim:true
       }
     });
     this.dialogRef.afterClosed().subscribe(d => {
@@ -148,11 +146,11 @@ export class UyeComponent implements OnInit {
             console.log(s);
             console.log(this.siparisId);
             this.alert.AlertUygula(s);
-          this.apiServis.UyeSil(kayit.uyeId).subscribe((s: Sonuc) => {
-            this.alert.AlertUygula(s);
-            this.UyeListele();
+            this.apiServis.UyeSil(kayit.uyeId).subscribe((s: Sonuc) => {
+              this.alert.AlertUygula(s);
+              this.UyeListele();
+            });
           });
-        });
         }
       })
     })

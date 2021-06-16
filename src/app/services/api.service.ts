@@ -72,20 +72,6 @@ export class ApiService {
     return this.http.get(this.apiUrl + "tedarikuyeliste/" + uyeTedId);
   }
 
-  // UrunTedarikListe(urunTedId:string){
-  //   return this.http.get(this.apiUrl+"tedarikurunliste/"+urunTedId);
-  // }
-  // TedarikciEkle(kayit:TedarikciUrunler){
-  //   return this.http.post(this.apiUrl+"tedarikciekle",kayit)
-  // }
-  // TedarikUrunSil(tuId:string){
-  //   return this.http.delete(this.apiUrl+"tedarikurunsil/"+tuId)
-  // }
-  // TedarikUrunDuzenle(urun:Urunler){
-  //   return this.http.put(this.apiUrl+"urunduzenle",urun);
-  // }
-
-
 
   //iletisim
 
@@ -153,11 +139,11 @@ export class ApiService {
   }
 
   //kategoriUrun (ARA TABLO)
-  UrunKategoriListe(urunKatId:string) {
-    return this.http.get(this.apiUrl + "urunkategoriliste/"+urunKatId);
+  UrunKategoriListe(urunKatId: string) {
+    return this.http.get(this.apiUrl + "urunkategoriliste/" + urunKatId);
   }
-  KategoriUrunListe(katUrunId:string) {
-    return this.http.get(this.apiUrl + "kategoriurunliste/"+katUrunId);
+  KategoriUrunListe(katUrunId: string) {
+    return this.http.get(this.apiUrl + "kategoriurunliste/" + katUrunId);
   }
   KategoriUrunEkle(kategoriUrun: KategoriUrun) {
     return this.http.post(this.apiUrl + "kategoriurunekle", kategoriUrun);
@@ -187,7 +173,7 @@ export class ApiService {
   OdemeSil(odemeId: string) {
     return this.http.delete(this.apiUrl + "odemesil/" + odemeId);
   }
-//Siparis Durumu
+  //Siparis Durumu
   SiparisDurumListe() {
     return this.http.get(this.apiUrl + "siparisdurumliste");
   }
@@ -204,9 +190,9 @@ export class ApiService {
     return this.http.delete(this.apiUrl + "siparisdurumusil/" + siparisId);
   }
 
-//Kargo
+  //Kargo
 
-KargoListe() {
+  KargoListe() {
     return this.http.get(this.apiUrl + "kargoliste");
   }
   kargobyid(kargoId: string) {
@@ -239,11 +225,11 @@ KargoListe() {
     return this.http.delete(this.apiUrl + "siparissil/" + siparisId);
   }
 
-  SiparisVerenById(uyeId:string) {
-    return this.http.get(this.apiUrl + "siparisverenbyid/"+uyeId);
+  SiparisVerenById(uyeId: string) {
+    return this.http.get(this.apiUrl + "siparisverenbyid/" + uyeId);
   }
-  SiparisalanUById(uyeId:string) {
-    return this.http.get(this.apiUrl + "siparisalanbyid/"+uyeId);
+  SiparisalanUById(uyeId: string) {
+    return this.http.get(this.apiUrl + "siparisalanbyid/" + uyeId);
   }
 
 

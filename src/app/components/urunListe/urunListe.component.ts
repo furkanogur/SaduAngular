@@ -24,11 +24,11 @@ export class UrunListeComponent implements OnInit {
   uyeId: string;
   urunler: Urunler[];
   secUye: Uye;
-  secUrun:Urunler;
+  secUrun: Urunler;
 
-  secIletisim:Iletisim;
+  secIletisim: Iletisim;
   dataSource: any;
-  displayedColumns = ['UrunFoto','Adi', 'Aciklama','Fiyat','Aktiflik', 'islemler']
+  displayedColumns = ['UrunFoto', 'Adi', 'Aciklama', 'Fiyat', 'Aktiflik', 'islemler']
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   dialogRef: MatDialogRef<TedarikDialogComponent>
@@ -39,7 +39,7 @@ export class UrunListeComponent implements OnInit {
     public route: ActivatedRoute,
     public matDialog: MatDialog,
     public alert: MyAlertService,
-  
+
   ) { }
 
   ngOnInit() {
@@ -68,7 +68,7 @@ export class UrunListeComponent implements OnInit {
 
   //tedarik
   KayitListele() {
-      this.apiServis.TedarikUrunListe(this.uyeId).subscribe((d: Urunler[]) => {
+    this.apiServis.TedarikUrunListe(this.uyeId).subscribe((d: Urunler[]) => {
       this.kayitlar = d;
       this.dataSource = new MatTableDataSource(d);
       this.dataSource.sort = this.sort
@@ -93,7 +93,6 @@ export class UrunListeComponent implements OnInit {
 
     this.dialogRef.afterClosed().subscribe(d => {
       if (d) {
-
         kayit.Aktiflik = d.Aktiflik
         kayit.Adi = d.Adi
         kayit.Aciklama = d.Aciklama
@@ -106,27 +105,23 @@ export class UrunListeComponent implements OnInit {
         });
       }
     });
-
   }
 
 
-  IletisimEkle(secUye:string) {
+  IletisimEkle(secUye: string) {
     var secIletisim: Iletisim = new Iletisim();
-    
+
     this.dialogIletisimRef = this.matDialog.open(IletisimDialogComponent, {
       width: '400px',
       data: {
         secIletisim: secIletisim,
         islem: "ekle",
-        secUye:secUye
+        secUye: secUye
       }
     });
     this.dialogIletisimRef.afterClosed().subscribe(d => {
-    
-     
       if (d) {
         this.apiServis.IletisimEkle(d).subscribe((s: Sonuc) => {
-  
           this.alert.AlertUygula(s);
           if (s.islem) {
             this.IletisimGetir();
@@ -139,7 +134,6 @@ export class UrunListeComponent implements OnInit {
 
 
   iletisimDuzenle(secIletisim: Iletisim) {
-   
     this.dialogIletisimRef = this.matDialog.open(IletisimDialogComponent, {
       width: '400px',
       data: {
@@ -147,18 +141,14 @@ export class UrunListeComponent implements OnInit {
         islem: "duzenle"
       }
     });
-    
     this.dialogIletisimRef.afterClosed().subscribe(d => {
-      
       if (d) {
-
         secIletisim.Ad = d.Ad
         secIletisim.Adres = d.Adres
         secIletisim.Soyad = d.Soyad
         secIletisim.Telefon = d.Telefon
         secIletisim.UyeId = d.UyeId
-
-          this.apiServis.IletisimDuzenle(secIletisim).subscribe((s: Sonuc) => {
+        this.apiServis.IletisimDuzenle(secIletisim).subscribe((s: Sonuc) => {
           this.alert.AlertUygula(s);
           if (s.islem) {
             this.IletisimGetir();
@@ -174,7 +164,7 @@ export class UrunListeComponent implements OnInit {
     this.confirmDialogRef = this.matDialog.open(ConfirmDialogComponent, {
       width: '400px'
     });
-    this.confirmDialogRef.componentInstance.dialogMesaj = kayit.Ad +" "+ kayit.Soyad + " Adlı Kişinin İletişim Bilgileri Silinecektir Onaylıyor Musunuz?";
+    this.confirmDialogRef.componentInstance.dialogMesaj = kayit.Ad + " " + kayit.Soyad + " Adlı Kişinin İletişim Bilgileri Silinecektir Onaylıyor Musunuz?";
     this.confirmDialogRef.afterClosed().subscribe(d => {
       if (d) {
         this.apiServis.IletisimSil(kayit.iletisimId).subscribe((s: Sonuc) => {
@@ -199,7 +189,7 @@ export class UrunListeComponent implements OnInit {
       }
     });
   }
-  
+
 
 
 }

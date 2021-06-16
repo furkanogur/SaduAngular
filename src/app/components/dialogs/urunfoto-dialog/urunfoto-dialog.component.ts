@@ -20,7 +20,7 @@ export class UrunfotoDialogComponent implements OnInit {
   ) {
     this.secUrun = this.data
     this.secUrun.UyeId = "02df47e6-693b-4a08-afd7-3ffa6a707b96"
-   }
+  }
 
   ngOnInit() {
   }

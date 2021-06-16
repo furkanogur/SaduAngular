@@ -19,17 +19,17 @@ import { Sonuc } from 'src/app/models/Sonuc';
   styleUrls: ['./sdurum-odeme-kargo.component.scss']
 })
 export class SdurumOdemeKargoComponent implements OnInit {
-  sdurumdisplayedColumns = ['SiparisDurumu1','islemler']
-  kargodisplayedColumns = ['FirmaAdi', 'Telefon','islemler']
-  odemedisplayedColumns = ['OdemeCesiti','islemler']
+  sdurumdisplayedColumns = ['SiparisDurumu1', 'islemler']
+  kargodisplayedColumns = ['FirmaAdi', 'Telefon', 'islemler']
+  odemedisplayedColumns = ['OdemeCesiti', 'islemler']
   sdurumdataSource: any;
   kargodataSource: any;
   odemedataSource: any;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  sDurum:SiparisDurum[];
-  kargo:Kargo[];
-  odeme:Odeme[];
+  sDurum: SiparisDurum[];
+  kargo: Kargo[];
+  odeme: Odeme[];
   sDurumdialogRef: MatDialogRef<SdurumKargoOdemeDialogComponent>
   KargodialogRef: MatDialogRef<SdurumKargoOdemeDialogComponent>
   OdemedialogRef: MatDialogRef<SdurumKargoOdemeDialogComponent>
@@ -42,11 +42,11 @@ export class SdurumOdemeKargoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-this.KargoListele();
-this.OdemeListele();
-this.SiparisDurumListele();
+    this.KargoListele();
+    this.OdemeListele();
+    this.SiparisDurumListele();
 
-    
+
 
   }
 
@@ -160,7 +160,7 @@ this.SiparisDurumListele();
       data: {
         kayit: yeniKayit,
         islem: "sdekle",
-        acKapa:1
+        acKapa: 1
       }
     });
     this.sDurumdialogRef.afterClosed().subscribe(d => {
@@ -182,7 +182,7 @@ this.SiparisDurumListele();
       data: {
         kayit: yeniKayit,
         islem: "kekle",
-        acKapa:2
+        acKapa: 2
       }
     });
     this.sDurumdialogRef.afterClosed().subscribe(d => {
@@ -204,7 +204,7 @@ this.SiparisDurumListele();
       data: {
         kayit: yeniKayit,
         islem: "oekle",
-        acKapa:3
+        acKapa: 3
       }
     });
     this.sDurumdialogRef.afterClosed().subscribe(d => {

@@ -22,7 +22,8 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-select formControlName="SiparisDurumuId">
-                <mat-option [value]="durum.siparisDurumId" *ngFor="let durum of secSiparisDurum">{{durum?.SiparisDurumu1}}
+                <mat-option [value]="durum.siparisDurumId" *ngFor="let durum of secSiparisDurum">
+                    {{durum?.SiparisDurumu1}}
                 </mat-option>
             </mat-select>
         </mat-form-field>

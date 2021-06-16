@@ -10,9 +10,9 @@ import { KategorilerComponent } from '../../kategoriler/kategoriler.component';
   styleUrls: ['./kategori-dialog.component.scss']
 })
 export class KategoriDialogComponent implements OnInit {
-  ustKategori:Kategoriler;
+  ustKategori: Kategoriler;
   dialogBaslik: string;
-  uyeId:string;
+  uyeId: string;
   yeniKayit: Kategoriler;
   islem: string;
   kategoriId: number;
@@ -25,7 +25,7 @@ export class KategoriDialogComponent implements OnInit {
     this.islem = data.islem;
     this.yeniKayit = data.kayit;
     this.ustKategori = data.ustKategori
-  
+
     if (this.islem == 'ekle') {
       this.dialogBaslik = "Kategori Ekle"
     }
@@ -35,7 +35,7 @@ export class KategoriDialogComponent implements OnInit {
     }
     this.frm = this.FormOlustur();
 
-   }
+  }
 
   ngOnInit() {
   }

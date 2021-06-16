@@ -10,15 +10,15 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./tedarikci-detay.component.css']
 })
 export class TedarikciDetayComponent implements OnInit {
-  iletisim:Iletisim
-  uyedetay:Uye
-  tedarikUyeId:String;
-  constructor(public dialogRef: MatDialogRef<TedarikciDetayComponent>,public apiServis: ApiService,
+  iletisim: Iletisim
+  uyedetay: Uye
+  tedarikUyeId: String;
+  constructor(public dialogRef: MatDialogRef<TedarikciDetayComponent>, public apiServis: ApiService,
     @Inject(MAT_DIALOG_DATA) public data: any,) {
     this.iletisim = data.iletisim;
     this.uyedetay = data.uyedetay;
-    this.tedarikUyeId=data.tedarikUyeId;
-   }
+    this.tedarikUyeId = data.tedarikUyeId;
+  }
 
   ngOnInit() {
   }

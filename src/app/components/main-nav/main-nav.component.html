@@ -40,17 +40,19 @@
             <img src="../../../assets/logo.png" alt="">
             <span class="spacer" style="width: 50%;">
 
-            <form [formGroup]="frm"  color="accent" style="width: 50%; font-size: 75%; margin-top: 2%; float: left; padding-left: 25%; ">
-                <mat-form-field appearance="outline" color="accent">
-                    <mat-label>Kategoriler</mat-label>
-                    <mat-select formControlName="kategoriId" color="accent">
-                        <mat-option [value]="Kategori.kategoriId" *ngFor="let Kategori of kategoriler" [routerLink]="['/kategorilistele',Kategori.kategoriId,Kategori.KatAdi]">
-                            {{Kategori.KatAdi}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </form>
-        </span>
+                <form [formGroup]="frm" color="accent"
+                    style="width: 50%; font-size: 75%; margin-top: 2%; float: left; padding-left: 25%; ">
+                    <mat-form-field appearance="outline" color="accent">
+                        <mat-label>Kategoriler</mat-label>
+                        <mat-select formControlName="kategoriId" color="accent">
+                            <mat-option [value]="Kategori.kategoriId" *ngFor="let Kategori of kategoriler"
+                                [routerLink]="['/kategorilistele',Kategori.kategoriId,Kategori.KatAdi]">
+                                {{Kategori.KatAdi}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </form>
+            </span>
 
             <button mat-button [matMenuTriggerFor]="menuUst">
                 <mat-icon>settings</mat-icon>
@@ -58,15 +60,8 @@
             <mat-menu #menuUst="matMenu">
                 <button mat-menu-item [routerLink]="['/login']" *ngIf="!apiServis.oturumKontrol()">Oturum Aç</button>
                 <button mat-menu-item [routerLink]="['/register']" *ngIf="!apiServis.oturumKontrol()">Kayıt Ol</button>
-                <button mat-menu-item [matMenuTriggerFor]="altmenuUst" *ngIf="apiServis.oturumKontrol()">
-                    Item 2
-                </button>
                 <button mat-menu-item [routerLink]="['/hesabim']" *ngIf="apiServis.oturumKontrol()">Hesabım</button>
                 <button mat-menu-item (click)="OturumKapat()" *ngIf="apiServis.oturumKontrol()">Oturum Kapat</button>
-            </mat-menu>
-            <mat-menu #altmenuUst="matMenu">
-                <button mat-menu-item>Alt Item 1</button>
-                <button mat-menu-item>asdasdas</button>
             </mat-menu>
         </mat-toolbar>
 

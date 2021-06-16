@@ -4,73 +4,57 @@
         <input matInput placeholder="Aranacak Bir Değer Giriniz" (keyup)="UyeFiltrele($event)">
     </mat-form-field>
     <button mat-fab color="primary">
-      <mat-icon aria-label="label" matTooltip="Üye Ekle" (click)="Ekle()">person_add</mat-icon>
+        <mat-icon aria-label="label" matTooltip="Üye Ekle" (click)="Ekle()">person_add</mat-icon>
     </button>
     <p>&nbsp;</p>
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-
         <ng-container matColumnDef="UyeFoto">
             <mat-header-cell *matHeaderCellDef> Fotoğraf
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit">
-
                 <img [src]="apiServis.siteUrl+'/Dosyalar/'+kayit.UyeFoto" alt="" style="width: 100px;" matTooltip="Fotoğrafı Güncellemek İçin Tıklayınız..." (click)="FotoGuncelle(kayit)">
-
             </mat-cell>
         </ng-container>
-
         <ng-container matColumnDef="KullaniciAdi">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Kullanıcı Adı
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit"> {{kayit.KullaniciAdi}} </mat-cell>
         </ng-container>
-
         <ng-container matColumnDef="Sifre">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Şifre
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit"> {{kayit.Sifre}} </mat-cell>
         </ng-container>
-
         <ng-container matColumnDef="Email">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Email
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit"> {{kayit.Email}} </mat-cell>
         </ng-container>
-
         <ng-container matColumnDef="UyeUrunSayisi">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Üyenin Ürünleri
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit"> {{kayit.UyeUrunSayisi}} </mat-cell>
         </ng-container>
-
         <ng-container matColumnDef="admin">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Admin
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit"> {{kayit.admin}} </mat-cell>
         </ng-container>
-
         <ng-container matColumnDef="islemler">
             <mat-header-cell *matHeaderCellDef> İşlemler
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit">
-
                 <button mat-icon-button matTooltip="Detaylar" [routerLink]="['/urunlistele',kayit.uyeId]">
-                <mat-icon aria-label="label" >info</mat-icon>
-              </button>
+                    <mat-icon aria-label="label">info</mat-icon>
+                </button>
                 <button mat-icon-button matTooltip="Üye Düzenle" (click)="Duzenle(kayit)">
-                <mat-icon aria-label="label"  color="accent">manage_accounts</mat-icon>
-              </button>
+                    <mat-icon aria-label="label" color="accent">manage_accounts</mat-icon>
+                </button>
                 <button mat-icon-button matTooltip="Üye Sil" (click)="Sil(kayit)">
-                <mat-icon aria-label="label"  color="warn">person_remove</mat-icon>
-              </button>
-
+                    <mat-icon aria-label="label" color="warn">person_remove</mat-icon>
+                </button>
             </mat-cell>
         </ng-container>
-
-
-
-
-
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>

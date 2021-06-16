@@ -62,7 +62,7 @@ export class AdminSiparislerComponent implements OnInit {
         console.log(this.secIletisim)
         console.log(d)
       })
-      
+
       this.apiServis.KargoListe().subscribe((d: Kargo[]) => {
         this.kargo = d
       })

@@ -49,15 +49,12 @@
             <mat-header-cell *matHeaderCellDef> İşlemler
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit">
-                <button mat-icon-button matTooltip="Detaylar">
-                <mat-icon aria-label="label">info</mat-icon>
-            </button>
                 <button mat-icon-button color="accent">
-                  <mat-icon aria-label="label" (click)="SiparisDuzenle(kayit)">edit</mat-icon>
+                    <mat-icon aria-label="label" (click)="SiparisDuzenle(kayit)">edit</mat-icon>
                 </button>
                 <button mat-icon-button color="warn">
-        <mat-icon aria-label="label" (click)="SiparisSil(kayit)">delete</mat-icon>
-      </button>
+                    <mat-icon aria-label="label" (click)="SiparisSil(kayit)">delete</mat-icon>
+                </button>
             </mat-cell>
 
         </ng-container>

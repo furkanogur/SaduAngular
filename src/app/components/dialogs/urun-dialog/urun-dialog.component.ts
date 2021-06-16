@@ -11,12 +11,12 @@ import { MyAlertService } from 'src/app/services/myAlert.service';
   styleUrls: ['./urun-dialog.component.scss']
 })
 export class UrunDialogComponent implements OnInit {
-  
+
   dialogBaslik: string;
-  katbilgi:Kategoriler;
-  uyeId:string;
+  katbilgi: Kategoriler;
+  uyeId: string;
   yeniKayit: Urunler;
-  yeniKatKayit:Kategoriler;
+  yeniKatKayit: Kategoriler;
   islem: string;
   frm: FormGroup;
   constructor(
@@ -25,13 +25,13 @@ export class UrunDialogComponent implements OnInit {
     public matDialog: MatDialog,
     public alert: MyAlertService,
     public dialogRef: MatDialogRef<UrunDialogComponent>,
- 
-   
-  ) { 
+
+
+  ) {
     this.katbilgi = data.katbilgi;
     this.islem = data.islem;
     this.yeniKayit = data.kayit;
-    this.yeniKatKayit=data.yeniKatKayit;
+    this.yeniKatKayit = data.yeniKatKayit;
 
 
     if (this.islem == 'ekle') {

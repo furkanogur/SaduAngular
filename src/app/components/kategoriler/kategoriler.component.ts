@@ -19,10 +19,10 @@ export class KategorilerComponent implements OnInit {
 
   kategoriler: Kategoriler[];
   dataSource: any;
-  displayedColumns = ['KatAdi','UstKategoriBilgi', 'Aktiflik', 'islemler']
+  displayedColumns = ['KatAdi', 'UstKategoriBilgi', 'Aktiflik', 'islemler']
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  dialogRef:MatDialogRef<KategoriDialogComponent>
+  dialogRef: MatDialogRef<KategoriDialogComponent>
   confirmDialogRef: MatDialogRef<ConfirmDialogComponent>
 
   constructor(
@@ -50,7 +50,7 @@ export class KategorilerComponent implements OnInit {
       data: {
         kayit: yeniKayit,
         islem: "ekle",
-        ustKategori:this.kategoriler
+        ustKategori: this.kategoriler
       }
     });
     this.dialogRef.afterClosed().subscribe(d => {
@@ -67,7 +67,7 @@ export class KategorilerComponent implements OnInit {
 
 
   KategoriListele() {
-    this.apiServis.KategoriListe().subscribe((d:any= Kategoriler) => {
+    this.apiServis.KategoriListe().subscribe((d: any = Kategoriler) => {
       this.kategoriler = d;
       console.log(d)
       console.log(d.UstKategoriBilgi)
@@ -83,7 +83,7 @@ export class KategorilerComponent implements OnInit {
       data: {
         kayit: kayit,
         islem: "duzenle",
-        ustKategori:this.kategoriler
+        ustKategori: this.kategoriler
       }
     });
 

@@ -12,7 +12,7 @@ export class IletisimDialogComponent implements OnInit {
   dialogBaslik: string;
   yeniKayit: Iletisim;
   islem: string;
-  secUye:string;
+  secUye: string;
   frm: FormGroup;
   constructor(
     public dialogRef: MatDialogRef<IletisimDialogComponent>,
@@ -20,7 +20,7 @@ export class IletisimDialogComponent implements OnInit {
     public frmBuild: FormBuilder,
   ) {
     this.islem = data.islem;
-    this.secUye= data.secUye;
+    this.secUye = data.secUye;
     this.yeniKayit = data.secIletisim;
     if (this.islem == 'ekle') {
       this.dialogBaslik = "İletişim Ekle"

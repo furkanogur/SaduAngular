@@ -2,7 +2,7 @@
     <h3>Siparis Durumları</h3>
     <button mat-fab color="primary">
         <mat-icon aria-label="label" matTooltip="Siparis Durumu Ekle" (click)="sdEkle()">add</mat-icon>
-      </button>
+    </button>
     <p></p>
     <mat-table [dataSource]="sdurumdataSource">
         <ng-container matColumnDef="SiparisDurumu1">
@@ -21,13 +21,11 @@
         <mat-header-row *matHeaderRowDef="sdurumdisplayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: sdurumdisplayedColumns;"></mat-row>
     </mat-table>
-
     &nbsp;
-
     <h3>Kargo</h3>
     <button mat-fab color="primary">
         <mat-icon aria-label="label" matTooltip="Kargo Ekle" (click)="kargoEkle()">add</mat-icon>
-      </button>
+    </button>
     <p></p>
     <mat-table [dataSource]="kargodataSource">
         <ng-container matColumnDef="FirmaAdi">
@@ -56,7 +54,7 @@
     <h3>Ödeme Çeşiti</h3>
     <button mat-fab color="primary">
         <mat-icon aria-label="label" matTooltip="Odeme Ekle" (click)="OdemeEkle()">add</mat-icon>
-      </button>
+    </button>
     <p></p>
     <mat-table [dataSource]="odemedataSource">
         <ng-container matColumnDef="OdemeCesiti">

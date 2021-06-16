@@ -1,39 +1,29 @@
 <div class="container">
     <h1>Üye Liste</h1>
-
     <h3><b>Üye Kullanıcı Adı : </b>{{secUye?.KullaniciAdi}}</h3>
     <h3><b>Üye Kullanıcı Adı : </b>{{secUye?.Email}}</h3>
-
     <button mat-fab color="primary" [routerLink]="['/uye']">
-    <mat-icon aria-label="label">arrow_back</mat-icon>
-  </button>&nbsp;
+        <mat-icon aria-label="label">arrow_back</mat-icon>
+    </button>&nbsp;
     <p></p>
-
-
-
     <mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="Adi">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Ürünün Adı
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit"> {{kayit.Adi}} </mat-cell>
         </ng-container>
-
         <ng-container matColumnDef="UrunFoto">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Fotoğraf
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit">
-
                 <img [src]="apiServis.siteUrl+'/Dosyalar/'+kayit.UrunFoto" alt="" style="width: 100px;">
-
             </mat-cell>
         </ng-container>
-
         <ng-container matColumnDef="Aciklama">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Açıklama
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit"> {{kayit.Aciklama}} </mat-cell>
         </ng-container>
-
         <ng-container matColumnDef="Fiyat">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Fiyat
             </mat-header-cell>
@@ -44,24 +34,18 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit"> {{kayit.Aktiflik}} </mat-cell>
         </ng-container>
-
-
         <ng-container matColumnDef="islemler">
             <mat-header-cell *matHeaderCellDef> İşlemler
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit">
                 <button mat-icon-button color="accent">
                     <mat-icon aria-label="label" (click)="Duzenle(kayit)">edit</mat-icon>
-                  </button>
+                </button>
                 <button mat-icon-button color="warn">
-          <mat-icon aria-label="label" (click)="UrunSil(kayit)">delete</mat-icon>
-        </button>
+                    <mat-icon aria-label="label" (click)="UrunSil(kayit)">delete</mat-icon>
+                </button>
             </mat-cell>
-
         </ng-container>
-
-
-
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
@@ -79,7 +63,7 @@
                     <mat-card-subtitle>{{secUye?.Email}} </mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
-                    <p><b>İsim : </b > {{secIletisim?.Ad}}</p>
+                    <p><b>İsim : </b> {{secIletisim?.Ad}}</p>
                     <p><b>Soy isim : </b>{{secIletisim?.Soyad}}</p>
                     <p><b>Adres : </b>{{secIletisim?.Adres}}</p>
                     <p><b>telefon : </b>{{secIletisim?.Telefon}}</p>
@@ -87,16 +71,15 @@
                 <mat-card-actions>
                     <button mat-icon-button color="primary">
                         <mat-icon aria-label="label" (click)="IletisimEkle(secUye?.uyeId)">add</mat-icon>
-                      </button>&nbsp;
+                    </button>&nbsp;
                     <button mat-icon-button color="accent">
                         <mat-icon aria-label="label" (click)="iletisimDuzenle(secIletisim)">edit</mat-icon>
-                      </button>&nbsp;
+                    </button>&nbsp;
                     <button mat-icon-button color="warn">
                         <mat-icon aria-label="label" (click)="iletisimSil(secIletisim)">delete</mat-icon>
-                      </button>
+                    </button>
                 </mat-card-actions>
             </mat-card>
         </div>
     </div>
-
 </div>

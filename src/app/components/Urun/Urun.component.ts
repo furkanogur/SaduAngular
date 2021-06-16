@@ -21,10 +21,10 @@ export class UrunComponent implements OnInit {
   kategoriler: Kategoriler[];
   UyeId: string = localStorage.getItem("uyeId");
   urunler: Urunler[];
-  urunId:string;
+  urunId: string;
   dataSource: any;
   fotoDialogRef: MatDialogRef<UrunfotoDialogComponent>;
-  dialogRef:MatDialogRef<UrunDialogComponent>
+  dialogRef: MatDialogRef<UrunDialogComponent>
   confirmDialogRef: MatDialogRef<ConfirmDialogComponent>
   displayedColumns = ['UrunFoto', 'Adi', 'Aciklama', 'Fiyat', 'islemler']
   @ViewChild(MatSort) sort: MatSort;
@@ -33,7 +33,7 @@ export class UrunComponent implements OnInit {
     public apiServis: ApiService,
     public matDialog: MatDialog,
     public alert: MyAlertService,
-    
+
   ) { }
 
   ngOnInit() {
@@ -59,70 +59,9 @@ export class UrunComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     })
   }
-//Ürün Ekle Sıkıntılı çükü üyeid lazım üyelik gelene kadar hata verecek [admin için olabilir bu]
-  // UrunEkle() {
-  //   var yeniKayit: Urunler = new Urunler();
-  //   this.dialogRef = this.matDialog.open(UrunDialogComponent, {
-  //     width: '400px',
-  //     data: {
-  //       kayit: yeniKayit,
-  //       islem: "ekle"
-  //     }
-  //   });
-  //   this.dialogRef.afterClosed().subscribe(d => {
-  //     if (d) {
-  //       d.UrunFoto = "urun.jpg"
-  //       d.UyeId = "02df47e6-693b-4a08-afd7-3ffa6a707b96"
-  //       this.apiServis.UrunEkle(d).subscribe((s: Sonuc) => {
-  //         this.alert.AlertUygula(s);
-  //         if (s.islem) {
-  //           this.UrunListele();
-  //         }
-  //       });
-  //     }
-  //   });
-  // }
-
-//üye ürün ekle olabilir test !!!
-  // UyeUrunEkle() {
-  //   this.apiServis.KategoriListe().subscribe((d: any = Kategoriler) => {
-  //     this.kategoriler = d;
-  //   })
-  //   var yeniKayit: Urunler = new Urunler();
-  //   var yeniKayit: Urunler = new Urunler();
-  //   var yeniKatKayit: Kategoriler = new Kategoriler();
-  //   this.dialogRef = this.matDialog.open(UrunDialogComponent, {
-  //     width: '400px',
-  //     data: {
-  //       kayit: yeniKayit,
-  //       islem: "ekle",
-  //       katbilgi: this.kategoriler,
-  //       yeniKatKayit: yeniKatKayit
-  //     }
-  //   });
-  //   this.dialogRef.afterClosed().subscribe(d => {
-  //     if (d) {
-  //       d.UrunFoto = "urun.jpg"
-  //       d.UyeId = this.UyeId
-  //       this.apiServis.UrunEkle(d).subscribe((s: Sonuc) => {
-  //         this.alert.AlertUygula(s);
-  //         if (s.islem) {
-  //           this.UrunListele();
-  //           d.UrunId=s.id
-  //           console.log(d.UrunId)
-  //           this.apiServis.KategoriUrunEkle(d).subscribe((s: Sonuc) => {
-  //             this.alert.AlertUygula(s);
-  //             if (s.islem) {
-  //             }
-  //           });
-  //         }
-  //       });
-  //     }
-  //   });
-  // }
 
   KategoriListele() {
-    this.apiServis.KategoriListe().subscribe((d:any= Kategoriler) => {
+    this.apiServis.KategoriListe().subscribe((d: any = Kategoriler) => {
       this.kategoriler = d;
     })
   }
@@ -153,7 +92,7 @@ export class UrunComponent implements OnInit {
           this.alert.AlertUygula(s);
           if (s.islem) {
             this.UrunListele();
-            d.UrunId=s.id
+            d.UrunId = s.id
             console.log(d.UrunId)
             this.apiServis.KategoriUrunEkle(d).subscribe((s: Sonuc) => {
               this.alert.AlertUygula(s);
@@ -161,7 +100,7 @@ export class UrunComponent implements OnInit {
               }
             });
           }
-        });        
+        });
       }
     });
   }
@@ -184,12 +123,12 @@ export class UrunComponent implements OnInit {
         kayit.Adi = d.Adi
         kayit.Aciklama = d.Aciklama
         kayit.Fiyat = d.Fiyat
-        kayit.Aktiflik =d.Aktiflik
+        kayit.Aktiflik = d.Aktiflik
 
         this.apiServis.UrunDuzenle(kayit).subscribe((s: Sonuc) => {
           this.alert.AlertUygula(s);
           if (s.islem) {
-            d.UrunId=kayit.urunId
+            d.UrunId = kayit.urunId
             console.log(d.UrunId)
             this.apiServis.KategoriUrunEkle(d).subscribe((s: Sonuc) => {
               this.alert.AlertUygula(s);
@@ -229,7 +168,7 @@ export class UrunComponent implements OnInit {
   FotoGuncelle(kayit: Urunler,) {
     this.fotoDialogRef = this.matDialog.open(UrunfotoDialogComponent, {
       width: '400',
-      data:kayit
+      data: kayit
     });
     this.fotoDialogRef.afterClosed().subscribe(d => {
       if (d) {

@@ -22,12 +22,12 @@ export class SiparisComponent implements OnInit {
   UrunId: string;
   secUrun: Urunler;
   UyeId: string;
-  Fiyat:number;
+  Fiyat: number;
   secUye: Uye;
   secIletisim: Iletisim;
   secSiparis: Siparis;
-  TedarikUyeId:string;
-  urunFoto:string;
+  TedarikUyeId: string;
+  urunFoto: string;
   dialogRef: MatDialogRef<SiparisDialogComponent>
   constructor(
     public apiServis: ApiService,
@@ -51,10 +51,10 @@ export class SiparisComponent implements OnInit {
       this.secUrun = d;
       this.UyeId = this.secUrun.UyeId
       this.Fiyat = this.secUrun.Fiyat
-      this.urunFoto=this.secUrun.UrunFoto
+      this.urunFoto = this.secUrun.UrunFoto
       this.apiServis.UyeById(this.UyeId).subscribe((d: Uye) => {
         this.secUye = d;
-        this.TedarikUyeId =this.secUye.uyeId
+        this.TedarikUyeId = this.secUye.uyeId
       });
       this.apiServis.IletisimById(this.UyeId).subscribe((d: Iletisim) => {
         this.secIletisim = d;
@@ -64,7 +64,7 @@ export class SiparisComponent implements OnInit {
   }
 
   OdemeListele() {
-    this.apiServis.OdemeListe().subscribe((d:any= Odeme) => {
+    this.apiServis.OdemeListe().subscribe((d: any = Odeme) => {
       this.odeme = d;
     })
   }
@@ -80,12 +80,9 @@ export class SiparisComponent implements OnInit {
       data: {
         kayit: yeniKayit,
         islem: "ekle",
-        secUrun:this.secUrun,
-        secUye:this.secUye,
-        secOdeme:this.odeme
-      
-
-
+        secUrun: this.secUrun,
+        secUye: this.secUye,
+        secOdeme: this.odeme
       }
     });
 
@@ -95,11 +92,11 @@ export class SiparisComponent implements OnInit {
         d.UyeId = this.uyeId
         d.UrunId = this.UrunId
         d.Fiyat = this.Fiyat
-        d.TedarikUyeId =this.TedarikUyeId
+        d.TedarikUyeId = this.TedarikUyeId
         d.KargoUcreti = 15
-        d.SiparisDurumuId="1851b696-d421-4cf0-b53d-a18428490c53"
-        d.KargoId ="7f3d3bd3-40ec-43f8-810e-5c02a71b0b0c"
-        d.SiparisTarihi ="2021-06-15T11:43:54.738Z"
+        d.SiparisDurumuId = "1851b696-d421-4cf0-b53d-a18428490c53"
+        d.KargoId = "7f3d3bd3-40ec-43f8-810e-5c02a71b0b0c"
+        d.SiparisTarihi = "2021-06-15T11:43:54.738Z"
         this.apiServis.SiparisEkle(d).subscribe((s: Sonuc) => {
           this.alert.AlertUygula(s);
           console.log(d)

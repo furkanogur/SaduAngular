@@ -20,7 +20,7 @@ export class UrunAraComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   dataSource: any;
   @ViewChild(MatSort) sort: MatSort;
-  displayedColumns = ['UrunFoto', 'Adi', 'Aciklama', 'Fiyat','islemler']
+  displayedColumns = ['UrunFoto', 'Adi', 'Aciklama', 'Fiyat', 'islemler']
   constructor(
     public apiServis: ApiService,
     public route: ActivatedRoute,
@@ -33,12 +33,11 @@ export class UrunAraComponent implements OnInit {
 
     this.route.params.subscribe(p => {
       if (p) {
-        this.katId = p.katId; 
+        this.katId = p.katId;
       }
       this.UrunListele()
     })
   }
-
 
   UrunListele() {
     this.apiServis.KategoriUrunListe(this.katId).subscribe((d: KategoriUrun[]) => {
@@ -55,7 +54,6 @@ export class UrunAraComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
 
+    }
   }
-
-}
 }

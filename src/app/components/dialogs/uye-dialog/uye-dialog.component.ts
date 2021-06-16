@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class UyeDialogComponent implements OnInit {
   dialogBaslik: string;
-  hesabim:boolean;
+  hesabim: boolean;
   yeniKayit: Uye;
   islem: string;
   frm: FormGroup;
@@ -37,7 +37,7 @@ export class UyeDialogComponent implements OnInit {
     if (this.islem == 'Hesabimduzenle') {
       this.dialogBaslik = "Üye Düzenle"
       this.hesabim = data.hesabim
-      
+
     }
     this.frm = this.FormOlustur();
   }

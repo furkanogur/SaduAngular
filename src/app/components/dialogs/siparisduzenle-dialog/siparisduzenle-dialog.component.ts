@@ -14,14 +14,14 @@ import { MyAlertService } from 'src/app/services/myAlert.service';
   styleUrls: ['./siparisduzenle-dialog.component.css']
 })
 export class SiparisduzenleDialogComponent implements OnInit {
-  uyeId:string=localStorage.getItem("uyeId")
+  uyeId: string = localStorage.getItem("uyeId")
   dialogBaslik: string;
   islem: string;
-  secUrun:Urunler;
+  secUrun: Urunler;
   frm: FormGroup;
-  secSiparis:Siparis
-  secKargo:Kargo
-  secSiparisDurum:SiparisDurum
+  secSiparis: Siparis
+  secKargo: Kargo
+  secSiparisDurum: SiparisDurum
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public frmBuild: FormBuilder,
@@ -29,36 +29,36 @@ export class SiparisduzenleDialogComponent implements OnInit {
     public alert: MyAlertService,
     public dialogRef: MatDialogRef<SiparisduzenleDialogComponent>,
     public apiServis: ApiService
- 
+
   ) {
 
-  this.islem = data.islem;
-  this.secSiparis=data.secSiparis;
-  this.secUrun = data.secUrun;
-  this.secSiparisDurum=data.secSiparisDurum;
-  this.secKargo=data.secKargo;
-  console.log(this.secSiparis)
-  console.log(this.secUrun)
-  
+    this.islem = data.islem;
+    this.secSiparis = data.secSiparis;
+    this.secUrun = data.secUrun;
+    this.secSiparisDurum = data.secSiparisDurum;
+    this.secKargo = data.secKargo;
+    console.log(this.secSiparis)
+    console.log(this.secUrun)
 
 
 
-  if (this.islem == 'ekle') {
-    this.dialogBaslik = "Ürün Ekle"
+
+    if (this.islem == 'ekle') {
+      this.dialogBaslik = "Ürün Ekle"
+    }
+
+    this.frm = this.FormOlustur();
+
   }
 
-  this.frm = this.FormOlustur();
+  ngOnInit() {
+  }
 
-}
-
-ngOnInit() {
-}
-
-FormOlustur() {
-  return this.frmBuild.group({
-    KargoId: [this.secSiparis.KargoId],
-    SiparisDurumuId: [this.secSiparis.SiparisDurumuId],
-    KargoUcreti: [this.secSiparis.KargoUcreti],
-  })
-}
+  FormOlustur() {
+    return this.frmBuild.group({
+      KargoId: [this.secSiparis.KargoId],
+      SiparisDurumuId: [this.secSiparis.SiparisDurumuId],
+      KargoUcreti: [this.secSiparis.KargoUcreti],
+    })
+  }
 }

@@ -10,13 +10,13 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./uye-detaylar.component.css']
 })
 export class UyeDetaylarComponent implements OnInit {
-  iletisim:Iletisim
-  uyedetay:Uye
-  constructor(public dialogRef: MatDialogRef<UyeDetaylarComponent>,public apiServis: ApiService,
+  iletisim: Iletisim
+  uyedetay: Uye
+  constructor(public dialogRef: MatDialogRef<UyeDetaylarComponent>, public apiServis: ApiService,
     @Inject(MAT_DIALOG_DATA) public data: any,) {
     this.iletisim = data.iletisim;
     this.uyedetay = data.uyedetay;
-   }
+  }
 
   ngOnInit() {
   }

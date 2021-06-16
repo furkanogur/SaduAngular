@@ -15,7 +15,7 @@ import { MatPaginator } from '@angular/material/paginator';
 export class KategoriListeleComponent implements OnInit {
   KatUrun: KategoriUrun[];
   katId: string;
-  KatAdi:string;
+  KatAdi: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     public apiServis: ApiService,
@@ -30,10 +30,10 @@ export class KategoriListeleComponent implements OnInit {
     this.route.params.subscribe(p => {
       if (p) {
         this.katId = p.katId;
-        this.KatAdi=p.KatAdi;
-        this.UrunListele();   
-        console.log(this.KatAdi)  
-       
+        this.KatAdi = p.KatAdi;
+        this.UrunListele();
+        console.log(this.KatAdi)
+
       }
     })
   }
@@ -41,8 +41,8 @@ export class KategoriListeleComponent implements OnInit {
   UrunListele() {
     this.apiServis.KategoriUrunListe(this.katId).subscribe((d: KategoriUrun[]) => {
       this.KatUrun = d;
-      
-      console.log(this.KatUrun)  
+
+      console.log(this.KatUrun)
     })
   }
 

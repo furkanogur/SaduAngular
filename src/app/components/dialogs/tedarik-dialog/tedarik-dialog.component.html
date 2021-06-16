@@ -13,7 +13,8 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-select formControlName="kategoriId" name="kategoriId">
-                <mat-option [value]="Kategori.kategoriId" name="kategoriId" *ngFor="let Kategori of katbilgi">{{Kategori?.KatAdi}}
+                <mat-option [value]="Kategori.kategoriId" name="kategoriId" *ngFor="let Kategori of katbilgi">
+                    {{Kategori?.KatAdi}}
                 </mat-option>
             </mat-select>
         </mat-form-field>

@@ -8,7 +8,6 @@
     <mat-icon aria-label="label" matTooltip="Ürün Ekle" (click)="KategoriEkle()">add_shopping_cart</mat-icon><P>&nbsp;</P>
   </button>
     <mat-table [dataSource]="dataSource">
-
         <ng-container matColumnDef="KatAdi">
             <mat-header-cell *matHeaderCellDef> Kategori Adı
             </mat-header-cell>
@@ -28,9 +27,6 @@
             <mat-header-cell *matHeaderCellDef> İşlemler
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit">
-                <button mat-icon-button matTooltip="Detaylar" [routerLink]="['/uyelistele',kayit.urunId]">
-                  <mat-icon aria-label="label">info</mat-icon>
-              </button>
                 <button mat-icon-button color="accent" matTooltip="Ürün Düzenle">
                   <mat-icon aria-label="label" (click)="KategoriDuzenle(kayit)">edit</mat-icon>
               </button>
@@ -39,9 +35,6 @@
               </button>
             </mat-cell>
         </ng-container>
-
-
-
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>

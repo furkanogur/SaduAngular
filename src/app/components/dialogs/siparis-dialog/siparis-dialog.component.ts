@@ -14,14 +14,14 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./siparis-dialog.component.css']
 })
 export class SiparisDialogComponent implements OnInit {
-  uyeId:string=localStorage.getItem("uyeId")
+  uyeId: string = localStorage.getItem("uyeId")
   dialogBaslik: string;
   islem: string;
-  yeniKayit:Siparis;
+  yeniKayit: Siparis;
   frm: FormGroup;
-  secUrun:Urunler
-  secUye:Uye
-  secOdeme:Odeme
+  secUrun: Urunler
+  secUye: Uye
+  secOdeme: Odeme
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public frmBuild: FormBuilder,
@@ -29,35 +29,35 @@ export class SiparisDialogComponent implements OnInit {
     public alert: MyAlertService,
     public dialogRef: MatDialogRef<SiparisDialogComponent>,
     public apiServis: ApiService
- 
+
   ) {
 
-  this.islem = data.islem;
-  this.secUrun=data.secUrun;
-  this.secUye=data.secUye;
-  this.yeniKayit = data.kayit;
-  this.secOdeme=data.secOdeme;
-  console.log(this.secOdeme)
-  
+    this.islem = data.islem;
+    this.secUrun = data.secUrun;
+    this.secUye = data.secUye;
+    this.yeniKayit = data.kayit;
+    this.secOdeme = data.secOdeme;
+    console.log(this.secOdeme)
 
 
 
-  if (this.islem == 'ekle') {
-    this.dialogBaslik = "Ürün Ekle"
+
+    if (this.islem == 'ekle') {
+      this.dialogBaslik = "Ürün Ekle"
+    }
+
+    this.frm = this.FormOlustur();
+
   }
 
-  this.frm = this.FormOlustur();
+  ngOnInit() {
+  }
 
-}
-
-ngOnInit() {
-}
-
-FormOlustur() {
-  return this.frmBuild.group({
-    Adres: [this.yeniKayit.Adres],
-    OdemeId: [this.yeniKayit.OdemeId],
-  })
-}
+  FormOlustur() {
+    return this.frmBuild.group({
+      Adres: [this.yeniKayit.Adres],
+      OdemeId: [this.yeniKayit.OdemeId],
+    })
+  }
 }
 

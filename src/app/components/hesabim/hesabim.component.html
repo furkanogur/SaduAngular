@@ -8,8 +8,8 @@
     </mat-form-field>
     &nbsp;
     <button mat-fab color="accent">
-  <mat-icon aria-label="label" matTooltip="Ürün Ekle" (click)="UyeUrunEkle()">add_shopping_cart</mat-icon>
-</button>
+        <mat-icon aria-label="label" matTooltip="Ürün Ekle" (click)="UyeUrunEkle()">add_shopping_cart</mat-icon>
+    </button>
     <p></p>
 
     <!-- Ürünlerim -->
@@ -58,14 +58,14 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit">
                 <button mat-icon-button matTooltip="Detaylar" [routerLink]="['/uyelistele',kayit.urunId]">
-                <mat-icon aria-label="label">info</mat-icon>
-            </button>
+                    <mat-icon aria-label="label">info</mat-icon>
+                </button>
                 <button mat-icon-button color="accent">
-                  <mat-icon aria-label="label" (click)="Duzenle(kayit)">edit</mat-icon>
+                    <mat-icon aria-label="label" (click)="Duzenle(kayit)">edit</mat-icon>
                 </button>
                 <button mat-icon-button color="warn">
-        <mat-icon aria-label="label" (click)="UrunSil(kayit)">delete</mat-icon>
-      </button>
+                    <mat-icon aria-label="label" (click)="UrunSil(kayit)">delete</mat-icon>
+                </button>
             </mat-cell>
 
         </ng-container>
@@ -123,8 +123,8 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit">
                 <button mat-icon-button matTooltip="Detaylar" (click)="DetayGor(kayit.TedarikUyeId)">
-                <mat-icon aria-label="label">info</mat-icon>
-            </button>
+                    <mat-icon aria-label="label">info</mat-icon>
+                </button>
             </mat-cell>
 
         </ng-container>
@@ -188,14 +188,14 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let kayit">
                 <button mat-icon-button matTooltip="Detaylar" (click)="DetayGor(kayit.UyeId)">
-                <mat-icon aria-label="label">info</mat-icon>
-            </button>
+                    <mat-icon aria-label="label">info</mat-icon>
+                </button>
                 <button mat-icon-button color="accent">
-                  <mat-icon aria-label="label" (click)="SiparisDuzenle(kayit)">edit</mat-icon>
+                    <mat-icon aria-label="label" (click)="SiparisDuzenle(kayit)">edit</mat-icon>
                 </button>
                 <button mat-icon-button color="warn">
-        <mat-icon aria-label="label" (click)="SiparisSil(kayit)" *ngIf="siparisdurum">delete</mat-icon>
-      </button>
+                    <mat-icon aria-label="label" (click)="SiparisSil(kayit)" *ngIf="siparisdurum">delete</mat-icon>
+                </button>
             </mat-cell>
 
         </ng-container>
@@ -221,20 +221,20 @@
                     <mat-card-subtitle>{{secUye?.Email}} </mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
-                    <p><b>İsim : </b > {{secIletisim?.Ad}}</p>
-                  <p><b>Soy isim : </b>{{secIletisim?.Soyad}}</p>
+                    <p><b>İsim : </b> {{secIletisim?.Ad}}</p>
+                    <p><b>Soy isim : </b>{{secIletisim?.Soyad}}</p>
                     <p><b>Adres : </b>{{secIletisim?.Adres}}</p>
                     <p><b>telefon : </b>{{secIletisim?.Telefon}}</p>
                 </mat-card-content>
                 <mat-card-actions>
                     <button mat-icon-button color="primary">
-                      <mat-icon aria-label="label" (click)="IletisimEkle(secUye?.uyeId)">add</mat-icon>
+                        <mat-icon aria-label="label" (click)="IletisimEkle(secUye?.uyeId)">add</mat-icon>
                     </button>&nbsp;
                     <button mat-icon-button color="accent">
-                      <mat-icon aria-label="label" (click)="iletisimDuzenle(secIletisim)">edit</mat-icon>
+                        <mat-icon aria-label="label" (click)="iletisimDuzenle(secIletisim)">edit</mat-icon>
                     </button>&nbsp;
                     <button mat-icon-button color="warn">
-                      <mat-icon aria-label="label" (click)="iletisimSil(secIletisim)">delete</mat-icon>
+                        <mat-icon aria-label="label" (click)="iletisimSil(secIletisim)">delete</mat-icon>
                     </button>
                 </mat-card-actions>
             </mat-card>
@@ -256,14 +256,14 @@
                     <mat-card-title>Hesap Bilgileri</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                    <p><b>Kullanıcı Adı : </b > {{secUye?.KullaniciAdi}}</p>
-                <p><b>Email: </b>{{secUye?.Email}}</p>
+                    <p><b>Kullanıcı Adı : </b> {{secUye?.KullaniciAdi}}</p>
+                    <p><b>Email: </b>{{secUye?.Email}}</p>
                     <p><b>Şifre : </b>{{secUye?.Sifre}}</p>
                 </mat-card-content>
                 <mat-card-actions>
                     <button mat-icon-button color="accent">
-                    <mat-icon aria-label="label" (click)="UyeDuzenle(secUye)">edit</mat-icon>
-                  </button>
+                        <mat-icon aria-label="label" (click)="UyeDuzenle(secUye)">edit</mat-icon>
+                    </button>
                 </mat-card-actions>
             </mat-card>
         </div>

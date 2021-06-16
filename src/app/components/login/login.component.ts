@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("uyeId", d.uyeId);
       localStorage.setItem("uyeadi", d.uyeadi);
       localStorage.setItem("uyeYetkileri", d.uyeYetkileri);
-      
+
       if (localStorage.getItem("uyeYetkileri") == '["Admin"]') {
         location.href = ("/");
       }

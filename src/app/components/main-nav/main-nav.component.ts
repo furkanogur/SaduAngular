@@ -20,10 +20,10 @@ import { MatPaginator } from '@angular/material/paginator';
 export class MainNavComponent {
   uyeAdi: string;
   kategoriler: Kategoriler[];
-  kategoriById:string;
+  kategoriById: string;
   secKategori: Kategoriler[];
-  kategoriId:string;
-  frm:FormGroup;
+  kategoriId: string;
+  frm: FormGroup;
   dataSource: any;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -65,8 +65,8 @@ export class MainNavComponent {
       this.kategoriler = d;
     })
   }
-  KategoriUrunById(akategoriId:string) {
-    this.apiServis.KategoriUrunListe(akategoriId).subscribe((d:any=Kategoriler) =>{
+  KategoriUrunById(akategoriId: string) {
+    this.apiServis.KategoriUrunListe(akategoriId).subscribe((d: any = Kategoriler) => {
       this.secKategori = d;
       this.dataSource = new MatTableDataSource(d);
       this.dataSource.sort = this.sort
@@ -75,7 +75,7 @@ export class MainNavComponent {
     })
   }
 
-  katıdgetir(kategoriId:string){
+  katıdgetir(kategoriId: string) {
     console.log(kategoriId);
   }
 }

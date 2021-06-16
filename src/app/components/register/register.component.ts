@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
       localStorage.setItem("uyeId", d.uyeId);
       localStorage.setItem("uyeadi", d.uyeadi);
       localStorage.setItem("uyeYetkileri", d.uyeYetkileri);
-      location.href=("/");
+      location.href = ("/");
     });
   }
 
@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
     uye.Email = frmGroup.Email
     uye.Sifre = frmGroup.Sifre
     uye.admin = false
-    uye.UyeFoto= "profil.jpg"
+    uye.UyeFoto = "profil.jpg"
     if (uye) {
       this.apiServis.UyeEkle(uye).subscribe((s: Sonuc) => {
         console.log(s);
